@@ -1,6 +1,6 @@
 <header class="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5">
     <a href="index.html">
-        <img class="cursor-pointer sm:h-auto sm:w-auto" src="./assets/images/company-logo.svg" alt="company logo" />
+        <img class="cursor-pointer sm:h-auto sm:w-auto" src="{{ asset('storage/logoabal2.jpg') }}" alt="company logo" />
     </a>
 
     <div class="md:hidden">
@@ -13,17 +13,7 @@
     </div>
 
     <form class="hidden h-9 w-2/5 items-center border md:flex">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-            class="mx-3 h-4 w-4">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-        </svg>
 
-        <input class="hidden w-11/12 outline-none md:block" type="search" placeholder="Search" />
-
-        <button class="ml-auto h-full bg-amber-400 px-4 hover:bg-yellow-300">
-            Search
-        </button>
     </form>
 
     <div class="hidden gap-3 md:!flex"> 

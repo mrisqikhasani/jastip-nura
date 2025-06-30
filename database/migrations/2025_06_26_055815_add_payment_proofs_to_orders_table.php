@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carts', function (Blueprint $table) {
-            $table->id('id');
-            $table->foreignId('user_id')->constrained('users','id');
-            $table->decimal('total_price', 10, 0);
-            $table->timestamps();
+        Schema::table('orders', function (Blueprint $table) {
+            $table->string("payments_proofs")->nullable();
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carts');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn('payments_proofs');
+        });
     }
 };

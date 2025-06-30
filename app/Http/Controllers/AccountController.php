@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class AccountController extends Controller
@@ -15,12 +17,19 @@ class AccountController extends Controller
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Ambil user yang sedang login
         $user = Auth::user();
 
-        // Kirim ke view
-        return view('profile.account', compact('user'));
+        $lastOrder = Order::with(['orderLineItems.product'])
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        $shippingAddress = $user->address()->first();
+
+
+        return view('profile.account', compact('user', 'lastOrder', 'shippingAddress'));
     }
+
 
 
     public function profileForm()
@@ -75,5 +84,48 @@ class AccountController extends Controller
 
         return back()->with('success', 'Profile updated!');
 
+    }
+
+    public function changePasswordForm()
+    {
+
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        $user = Auth::user();
+
+
+        return view('profile.changepassword', compact('user'));
+    }
+
+
+    public function changePasswordUpdate(Request $request)
+    {
+        // Pastikan user login
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        $validated = $request->validate([
+            'current_password' => ['required'],
+            'new_password' => ['required', 'string', 'min:5', 'confirmed'],
+        ], [
+            'new_password.confirmed' => 'Konfirmasi password baru tidak cocok.',
+        ]);
+
+        $user = Auth::user();
+
+        // Cek current password dengan hash bawaan
+        if (!Hash::check($validated['current_password'], (string) $user->password)) {
+            return back()->withErrors(['current_password' => 'Password saat ini salah.'])->withInput();
+        }
+
+        $user->update([
+            'password' => Hash::make($validated['new_password']),
+        ]);
+
+
+        return redirect('/account/change-password')->with('success', 'Password berhasil diubah.');
     }
 }

@@ -18,6 +18,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Number;
+use Str;
 
 class ProductResource extends Resource
 {
@@ -74,7 +76,10 @@ class ProductResource extends Resource
                 TextColumn::make('name')->label('Product Name')->searchable()->sortable(),
                 ImageColumn::make('image')->label('Photo Product'),
                 TextColumn::make('quantity')->label('Quantity')->sortable(),
-                TextColumn::make('price')->prefix('Rp')->sortable(),
+                TextColumn::make('price')
+                ->sortable()
+                ->formatStateUsing(fn ($state) => Str::of(Number::currency($state, 'IDR', 'id'))->replace(',00', '')),
+
                 TextColumn::make('category')->label('Category')->searchable()->sortable(),
             ])
             ->filters([

@@ -27,7 +27,7 @@
     <section class="hidden w-[300px] flex-shrink-0 px-4 lg:block">
         <div class="border-b py-5">
             <div class="flex items-center">
-                <img width="40px" height="40px" class="rounded-full object-cover" src="./assets/images/avatar-photo.png"
+                <img width="40px" height="40px" class="rounded-full object-cover" src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('images/default-avatar.png') }}"
                     alt="Red woman portrait" />
                 <div class="ml-5">
                     <p class="font-medium text-gray-500">Hello,</p>
@@ -40,20 +40,19 @@
             <div class="w-full">
                 <div class="flex w-full">
                     <div class="flex flex-col gap-2">
-                        <a href="#" class="flex items-center gap-2 font-medium text-violet-900">
+                        <a href="{{ url('/account') }}" class="flex items-center gap-2 font-medium {{ request()->is('account') ? 'text-violet-900' : ' hover:text-violet-700' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="h-5 w-5">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
                             </svg>
                             Manage account</a>
-                        <a href="{{ url('/account/profile') }}"
-                            class="active:blue-900 text-gray-500 duration-100 hover:text-yellow-400">Profile
-                            information</a>
+                        <a href="{{ url('/account/profile') }}" class="active:blue-900  duration-100 hover:text-violet-700
+                        {{ request()->is('account/profile') ? 'text-violet-900' : 'text-gray-500 hover:text-violet-700' }}">Profile information</a>
                         <a href="{{ url('/account/address') }}"
-                            class="text-gray-500 duration-100 hover:text-yellow-400">Manage
+                            class="{{ request()->is('account/profile') ? 'text-violet-900' : 'text-gray-500 hover:text-violet-700 '}}">Manage
                             Addresses</a>
-                        <a href="change-password.html" class="text-gray-500 duration-100 hover:text-yellow-400">Change
+                        <a href="{{ url('/account/change-password') }}" class="{{ request()->is('account/profile') ? 'text-violet-900' : 'text-gray-500 hover:text-violet-700 '}}">Change
                             password</a>
                     </div>
                 </div>

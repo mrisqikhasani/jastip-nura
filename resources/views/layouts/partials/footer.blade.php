@@ -1,8 +1,8 @@
 <!-- Desktop Footer  -->
 
-<footer class="mx-auto w-full max-w-[1200px] justify-between pb-10 flex flex-col lg:flex-row">
+<footer class="mx-auto w-full max-w-[1200px] justify-between pb-10 flex flex-col lg:flex-row bottom-0">
     <div class="ml-5">
-        <img class="mt-10 mb-5" src="./assets/images/company-logo.svg" alt="company logo" />
+        <img class="mt-10 mb-5" src="{{ asset('storage/logoabal2.jpg') }}" alt="company logo" />
         <p class="pl-0">
             Lorem ipsum dolor sit amet consectetur <br />
             adipisicing elit.

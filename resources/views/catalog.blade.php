@@ -35,17 +35,17 @@
       <div class="w-full">
         <p class="mb-3 font-medium">CATEGORIES</p>
 
-       @foreach($categories as $category)
-        <div class="flex w-full justify-between">
-          <div class="flex justify-center items-center">
-              <input type="checkbox" id="{{ $category }}" value="{{ $category }}" />
-              <p class="ml-4">{{ ucfirst($category) }}</p>
-          </div>
-          <div>
-              <p class="text-gray-500">
-                  ({{ $categoryCounts[$category] ?? 0 }})
-              </p>
-          </div>
+        @foreach($categories as $category)
+      <div class="flex w-full justify-between">
+      <div class="flex justify-center items-center">
+        <input type="checkbox" id="{{ $category }}" value="{{ $category }}" />
+        <p class="ml-4">{{ ucfirst($category) }}</p>
+      </div>
+      <div>
+        <p class="text-gray-500">
+        ({{ $categoryCounts[$category] ?? 0 }})
+        </p>
+      </div>
       </div>
       @endforeach
 
@@ -76,26 +76,30 @@
       </button>
       </div>
 
-      <form class="hidden h-9 w-2/5 items-center border md:flex">
+      <form class="hidden h-9 flex-grow items-center border md:flex max-w-md">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-        class="mx-3 h-4 w-4">
+        class="mx-3 h-4 w-4 text-gray-500">
         <path stroke-linecap="round" stroke-linejoin="round"
         d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
       </svg>
-
-      <input class="hidden w-11/12 outline-none md:block" type="search" placeholder="Search" id="searchProduct" />
-
+      <input class="hidden w-full outline-none md:block" type="search" placeholder="Cari produk..."
+        id="searchProduct" />
       <button class="ml-auto h-full bg-amber-400 px-4 hover:bg-yellow-300">
-        Search
+        Cari
       </button>
       </form>
 
+
     </div>
 
-    <section class="mx-auto grid max-w-[1200px] min-h-[700px] grid-cols-2 gap-3 px-5 pb-10 lg:grid-cols-3"
+    <section class="mx-auto grid max-w-[1200px] min-h-[400px] grid-cols-2 gap-3 px-5 pb-10 lg:grid-cols-3"
       id="product-wrapper">
 
+
       <!-- catalog product -->
+      <div id="not-found" class="hidden col-span-full text-center text-gray-500 py-10">
+      <p>Tidak ditemukan produk yang sesuai.</p>
+      </div>
     </section>
     </div>
   </section>
@@ -107,7 +111,7 @@
     const products = @json($products);
 
     console.log(products);
-    
+
     const productWrapper = document.getElementById('product-wrapper');
     const filtersCategory = document.getElementById('filters-category');
     const checkboxes = filtersCategory.querySelectorAll('input[type="checkbox"]');
@@ -118,18 +122,23 @@
 
     const productElements = [];
 
+    // Format number to IDR currency
+    function formatIDR(amount) {
+    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+    }
+
     const createProductElement = (product) => {
     const productElement = document.createElement('div');
     productElement.className = 'item space-y-2';
 
     // GUNAKAN innerHTML agar HTML di-parse dengan benar
     productElement.innerHTML = `
-    <div class="flex flex-col">
+    <div class="flex flex-col shadow-xl hover:shadow-2xl rounded-2xl px-4 py-4">
       <div class="relative flex">
       <input type="hidden" value=${product.id}>
       <img class="" src="storage/${product.image}" alt="${product.name} image" />
       <div class="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100">
-      <a href="product-overview.html" class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400">
+      <a href="/product/${product.id}" class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
       stroke="currentColor" class="h-4 w-4">
       <path stroke-linecap="round" stroke-linejoin="round"
@@ -138,7 +147,7 @@
       </a>
       </div>
 
-      <div class="absolute right-1 mt-3 flex items-center justify-center bg-amber-400">
+      <div class="absolute right-1 mt-3 flex items-center justify-center bg-amber-400 rounded-sm">
       <p class="px-2 py-2 text-sm">${product.category}</p>
       </div>
       </div>
@@ -146,24 +155,11 @@
       <div>
       <p class="mt-2">${product.name.toUpperCase()}</p>
       <p class="font-medium text-violet-900">
-      $${product.price}
-      <span class="text-sm text-gray-500 line-through">$500.00</span>
+      ${formatIDR(product.price)}
       </p>
 
-      <!-- Stars + review count -->
-      <div class="flex items-center">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-      class="h-4 w-4 text-yellow-400">
-      <path fill-rule="evenodd"
-      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-      clip-rule="evenodd" />
-      </svg>
-      <!-- tambahkan lebih banyak bintang sesuai kebutuhan -->
-      <p class="text-sm text-gray-400">(38)</p>
-      </div>
-
       <div>
-      <button class="add-to-cart my-5 h-10 w-full bg-violet-900 text-white" data-product-id="${product.id}">Add to cart</button>
+      <button class="add-to-cart rounded-lg my-5 h-10 w-full bg-violet-900 hover:bg-violet-700 text-white" data-product-id="${product.id}">Add to cart</button>
       </div>
       </div>
     </div>
@@ -172,60 +168,48 @@
     return productElement;
     };
 
-    let hasValidProduct = false;
-
     products.forEach((product) => {
     if (!product.name) return;
     const productElement = createProductElement(product);
     productWrapper.appendChild(productElement);
-    productElements.push(productElement); 
-    hasValidProduct = true;
+    productElements.push(productElement);
     });
 
-
-    // if (!hasValidProduct) {
-    //     productWrapper.classList.add('hidden');
-    //     notFound.classList.remove('hidden');
-    // } else {
-    //     productWrapper.classList.remove('hidden');
-    //     notFound.classList.add('hidden');
-    // }
 
     filtersCategory.addEventListener('change', filterProducts);
     searchProduct.addEventListener('input', filterProducts);
 
-
     function filterProducts() {
-    // Get search term
     const searchTerm = searchProduct.value.trim().toLowerCase();
-    // Get checked categories
-
-    const categories = ['atasan', 'skincare', 'bodycare', 'flatshoes'];
-
     const checkedCategories = Array.from(checkboxes)
-      .filter((check) => check.checked && categories.includes(check.value))
+      .filter((check) => check.checked)
       .map((check) => check.value);
 
+    let hasVisible = false;
 
     productElements.forEach((productElement, index) => {
       const product = products[index];
+      const matchesSearch = product.name.toLowerCase().includes(searchTerm);
+      const matchesCategory = checkedCategories.length === 0 || checkedCategories.includes(product.category);
 
-      const matchesSearchTerm = product.name.toLowerCase().includes(searchTerm);
-      const matchesCategory = checkedCategories.length === 0 || checkedCategories.includes(product
-      .category);
-      // const matchesRegion = checkedRegions.length === 0 || checkedRegions.includes(product.region);
-
-      // if (matchesSearchTerm && matchesCategory && matchesRegion) {
-      if (matchesCategory && matchesSearchTerm) {
+      if (matchesSearch && matchesCategory) {
       productElement.classList.remove('hidden');
+      hasVisible = true;
       } else {
       productElement.classList.add('hidden');
       }
     });
+
+    const notFound = document.getElementById('not-found');
+    if (!hasVisible) {
+      notFound.classList.remove('hidden');
+    } else {
+      notFound.classList.add('hidden');
+    }
     }
 
-    
-  document.addEventListener('click', function(e) {
+
+    document.addEventListener('click', function (e) {
     if (e.target && e.target.classList.contains('add-to-cart')) {
       const button = e.target;
       const productId = button.dataset.productId;
@@ -235,15 +219,15 @@
       button.innerText = 'Adding...';
 
       fetch("{{ url('/cart') }}", {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({
-          product_id: productId,
-          quantity: 1  
-        })
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+      },
+      body: JSON.stringify({
+        product_id: productId,
+        quantity: 1
+      })
       })
       .then(response => response.json())
       .then(data => {
@@ -252,14 +236,14 @@
       })
       .catch(error => {
         console.error(error);
-        alert('Error adding to cart.');
+        alert('Error adding to cart.: ', error);
       })
       .finally(() => {
         button.disabled = false;
         button.innerText = 'Add to cart';
       });
     }
-  });
+    });
 
   </script>
 @endsection

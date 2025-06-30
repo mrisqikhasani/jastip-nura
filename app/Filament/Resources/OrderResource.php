@@ -18,6 +18,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Number;
+use Str;
 
 class OrderResource extends Resource
 {
@@ -52,9 +54,9 @@ class OrderResource extends Resource
                     ]),
 
                 TextInput::make('total_price')
-                ->label('Total Price')
-                ->numeric()
-                ->prefix('Rp'),
+                    ->label('Total Price')
+                    ->numeric()
+                    ->prefix('Rp'),
 
                 // order line items
                 Repeater::make('orderLineItems')
@@ -87,12 +89,17 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('user.name')->label('user')->sortable()->searchable(),
-                TextColumn::make('total_price')->label('Total Amount')->prefix('Rp')->sortable(),
+                TextColumn::make('user.name')->label('User')->sortable()->searchable(),
+                TextColumn::make('total_price')->label('Total Amount')
+                    ->sortable()
+                    ->formatStateUsing(fn($state) => Str::of(Number::currency($state, 'IDR', 'id'))->replace(',00', '')),
+
                 TextColumn::make('order_date')
-                ->label('Order Date')
-                ->date('j F Y'),
-                TextColumn::make('status')->label('Status')
+                    ->label('Order Date')
+                    ->date('j F Y'),
+                TextColumn::make('status')
+                ->label('Status')
+                ->badge(),
             ])
             ->filters([
                 //

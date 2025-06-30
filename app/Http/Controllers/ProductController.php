@@ -37,4 +37,24 @@ class ProductController extends Controller
         return view('catalog', compact('products', 'categories', 'categoryCounts'));
     }
 
+    public function productDetail($productId)
+    {
+        $product = Product::find($productId);
+
+        if (!$product) {
+            // Handle not found, you can redirect or show 404
+            abort(404, 'Product not found');
+        }
+
+        $relatedProducts = Product::where('category', $product->category)
+            ->where('id', '!=', $product->id)
+            ->limit(4)
+            ->get();
+
+        return view('productdetail', [
+            'product' => $product,
+            'relatedProducts' => $relatedProducts,
+        ]);
+    }
+
 }

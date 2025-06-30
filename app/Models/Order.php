@@ -17,14 +17,17 @@ class Order extends Model
         'status',
         'order_date',
         'shipping_address_id',
+        'payments_proofs',
     ];
+
+
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    
+
     public function shippingAddress(): BelongsTo
     {
         return $this->belongsTo(Address::class, 'shipping_address_id');

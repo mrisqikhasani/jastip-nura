@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Register card  -->
+    <!-- Kartu Daftar Akun -->
     <section class="mx-auto mt-10 w-full flex-grow mb-10 max-w-[1200px] px-5">
-        <div class="container mx-auto border px-5 py-5 shadow-sm md:w-1/2">
-            <div class="">
-                <p class="text-4xl font-bold">CREATE AN ACCOUNT</p>
-                <p>Register for new customer</p>
+        <div class="container mx-auto border px-10 py-10 rounded-lg shadow-sm md:w-1/2">
+            <div class="mb-6">
+                <p class="text-4xl font-bold mb-2 text-gray-700">Daftar Akun Baru</p>
+                <p class="text-gray-500">Silakan isi formulir di bawah ini untuk membuat akun Anda.</p>
             </div>
-
 
             @if ($errors->any())
                 <div class="mb-4 text-red-600">
@@ -18,37 +17,36 @@
                 </div>
             @endif
 
-
             <form class="mt-6 flex flex-col" method="POST" action="/signup">
                 @csrf
-                <label for="name">Full Name</label>
-                <input class="mb-3 mt-3 border px-4 py-2" type="text" name="name" placeholder="Bogdan Bulakh" />
 
-                <label class="mt-3" for="email">Email Address</label>
-                <input class="mt-3 border px-4 py-2" type="email" name="email" placeholder="user@mail.com" />
+                <label for="name" class="font-medium">Nama Lengkap</label>
+                <input class="mb-3 mt-2 border px-4 py-2 rounded-lg" type="text" name="name"
+                    placeholder="Contoh: Ahmad Fadli" />
 
-                <label class="mt-3" for="email">Phone Number</label>
-                <input class="mt-3 border px-4 py-2" type="text" name="phone_number" placeholder="08123456789" />
+                <label class="mt-3 font-medium" for="email">Alamat Email</label>
+                <input class="mt-2 border px-4 py-2 rounded-lg" type="email" name="email" placeholder="email@contoh.com" />
 
-                <label class="mt-5" for="email">Password</label>
-                <input class="mt-3 border px-4 py-2" type="password"
-                    placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" name="password" />
+                <label class="mt-3 font-medium" for="phone_number">Nomor Telepon</label>
+                <input class="mt-2 border px-4 py-2 rounded-lg" type="text" name="phone_number" placeholder="08xxxxxxxxxx" />
 
-                <label class="mt-5" for="email">Confirm password</label>
-                <input class="mt-3 border px-4 py-2" type="password"
-                    placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" name="confirmpassword" />
+                <label class="mt-5 font-medium" for="password">Kata Sandi</label>
+                <input class="mt-2 border px-4 py-2 rounded-lg" type="password" placeholder="********" name="password" />
 
-                <button class="my-5 w-full bg-violet-900 py-2 text-white">
-                    CREATE ACCOUNT
+                <label class="mt-5 font-medium" for="confirmpassword">Konfirmasi Kata Sandi</label>
+                <input class="mt-2 border px-4 py-2 rounded-lg" type="password" placeholder="********"
+                    name="confirmpassword" />
+
+                <button
+                    class="my-6 w-full bg-violet-900 py-2 text-white font-normal rounded-lg hover:bg-violet-700 transition">
+                    Daftar Sekarang
                 </button>
             </form>
 
-            <p class="text-center">
-                Already have an account?
-                <a href="{{ url('/login') }}" class="text-violet-900">Login now</a>
+            <p class="text-center text-sm">
+                Sudah punya akun?
+                <a href="{{ url('/login') }}" class="text-violet-900 font-medium hover:underline">Login di sini</a>
             </p>
         </div>
     </section>
-    <!-- /Register Card  -->
-
 @endsection

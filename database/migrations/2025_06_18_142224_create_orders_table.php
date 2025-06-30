@@ -13,9 +13,16 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users', 'id');
-            $table->decimal('total_price', 10, 2);
+            $table->decimal('total_price', 10, 0);
             $table->string('payment_method')->nullable();
-            $table->string('status');
+            $table->enum('status', [
+                'Menunggu',     // order dibuat, belum dibayar/diproses
+                'Diproses',     // admin sedang mengurus
+                'Dikirim',      // barang dalam pengiriman
+                'Selesai',      // diterima pelanggan
+                'Cancel',       // dibatalkan oleh user/admin
+                'Gagal'         // pembayaran gagal (jika ada sistem pembayaran otomatis)
+            ])->default('Menunggu');
             $table->date('order_date');
             $table->foreignId('shipping_address_id')->constrained('address', 'id')->nullable();
             $table->timestamps();
