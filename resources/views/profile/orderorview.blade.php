@@ -1,146 +1,178 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 @section('content')
-
   @include('layouts.partials.sidebarprofile')
 
-  <!-- Mobile product table  -->
-  <section class="container mx-auto my-3 flex w-full flex-col gap-3 px-4 md:hidden">
-    <!-- 1 -->
+  <div class="w-full grid-col-2">
+
+    @if (session()->has('success') || session()->has('error'))
+    <div class="mx-4 mb-4">
+    @if (session('success'))
+    <div class="rounded-lg bg-green-100 border border-green-300 text-green-800 px-4 py-3 text-sm font-medium">
+      {{ session('success') }}
+    </div>
+    @endif
+
+    @if (session('error'))
+    <div class="rounded-lg bg-red-100 border border-red-300 text-red-800 px-4 py-3 text-sm font-medium">
+      {{ session('error') }}
+    </div>
+    @endif
+    </div>
+    @endif
+
+
+    {{-- MOBILE: Card layout --}}
+    <section class="container mx-auto my-3 flex flex-col gap-3 px-4 md:hidden">
     @foreach ($order->orderLineItems as $item)
-
-    <div class="flex w-full border px-4 py-4">
-    <img class="self-start object-contain" width="90px"
+    <div class="flex w-full rounded-xl border bg-white px-4 py-4 shadow-sm">
+      <img class="object-contain self-start rounded-md" width="90"
       src="{{ $item->product->image ? asset('storage/' . $item->product->image) : asset('images/default-avatar.png') }}"
-      alt=" {{ $item->product->name }}" />
-    <div class="ml-3 flex w-full flex-col justify-center">
-      <div class="flex items-center justify-between">
-      <p class="text-xl font-bold">{{ $item->product->name }}</p>
-      </div>
-      <p class="py-3 text-xl font-bold text-violet-900">Rp {{ number_format($item->sub_price, 0, ',', '.') }}</p>
-      <div class="mt-2 flex w-full items-center justify-between">
-      <div class="flex items-center justify-center">
-      <div class="flex cursor-text items-center justify-center active:ring-gray-500">
-      Quantity: {{ $item->quantity }}
-      </div>
-      </div>
-      </div>
-    </div>
-    </div>
-    @endforeach
+      alt="{{ $item->product->name }}" />
 
-  </section>
-  <!-- /Mobile product table  -->
-
-  <!-- Product table  -->
-  <section class="w-full max-w-[1200px] gap-3 px-5 pb-10">
-    <table class="hidden w-full md:table">
-    <thead class="h-16 bg-neutral-100">
-      <tr>
-      <th>ITEM</th>
-      <th>PRICE</th>
-      <th>QUANTITY</th>
-      <th>TOTAL</th>
-      </tr>
-    </thead>
-    <tbody>
-
-
-      @foreach ($order->orderLineItems as $item)
-
-      <tr class="h-[100px] border-b">
-      <td class="align-middle">
-      <div class="flex">
-      <img class="w-[90px]" src="{{ asset('storage/'.$item->product->image) }}" alt="bedroom image" />
-      <div class="ml-3 flex flex-col justify-center">
-        <p class="text-xl font-bold">{{ $item->product->name }}</p>
-        <p class="text-sm text-gray-400">Kategori : {{ $item->product->category }}</p>
-      </div>
-      </div>
-      </td>
-      <td class="mx-auto text-center">Rp {{ number_format($item->product->price, 0, ',', '.') }}</td>
-      <td class="text-center align-middle">{{ $item->quantity }}</td>
-      <td class="mx-auto text-center">Rp {{ number_format($item->sub_price, 0, ',', '.') }}</td>
-      </tr>
-
-    @endforeach
-
-    </tbody>
-    </table>
-    <!-- /Product table  -->
-
-    <!-- Summary  -->
-
-    <section class="my-5 flex w-full flex-col gap-4 lg:flex-row">
-    <div class="lg:w-1/2">
-      <div class="border py-5 px-4 shadow-md">
-      <p class="font-bold">ORDER SUMMARY</p>
-
-      <div class="flex justify-between border-b py-5">
-        <p>Subtotal</p>
-        <p>Rp {{ number_format($order->total_price, 0, ',', '.') }}</p>
-      </div>
-
-      <div class="flex justify-between border-b py-5">
-        <p>Shipping</p>
-        <p>Free</p>
-      </div>
-
-      <div class="flex justify-between py-5">
-        <p>Total</p>
-        <p>Rp {{ number_format($order->total_price, 0, ',', '.') }}</p>
-      </div>
-      </div>
-    </div>
-
-    <!-- Address info  -->
-
-    <div class="lg:w-1/2">
-      <div class="border py-5 px-4 shadow-md">
-      <p class="font-bold">ORDER INFORMATION</p>
-
+      <div class="ml-4 flex flex-col justify-between w-full">
       <div>
-        <p>Order &num;{{ $order->id }}</p>
+      <p class="text-base font-bold text-gray-800">{{ $item->product->name }}</p>
+      <p class="text-sm text-gray-500">Kategori: {{ $item->product->category }}</p>
       </div>
-
-      <div class="flex flex-col border-b py-5">
-        <p>
-        Status:
-        @if ($order->status === 'completed')
-            <span class="font-bold text-green-600">{{ ucfirst($order->status) }}</span>
-        @elseif ($order->status === 'pending')
-            <span class="font-bold text-yellow-600">{{ ucfirst($order->status) }}</span>
-        @elseif ($order->status === 'cancelled')
-            <span class="font-bold text-red-600">{{ ucfirst($order->status) }}</span>
-        @else
-            <span class="font-bold text-gray-600">{{ ucfirst($order->status) }}</span>
-        @endif
-        </p>
-
-        <p>Date: {{ \Carbon\Carbon::parse($order->order_date)->translatedFormat('d F Y') }}</p>
-      </div>
-
-      <div></div>
-
-      <div class="flex flex-col border-b py-5">
-        <p class="font-bold">ADDRESS INFORMATION</p>
-        <p>Penerima: {{ $order->shippingAddress->receiver_name }}</p>
-        <p>Phone Number: {{ $order->shippingAddress->phone_number }}</p>
-        <p>Provinsi: {{ $order->shippingAddress->province }}</p>
-        <p>Kota: {{ $order->shippingAddress->city }}</p>
-        <p>Kode Pos: {{ $order->shippingAddress->postal_code }}</p>
-        <p>Detail: {{ $order->shippingAddress->detail }}</p>
-      </div>
-
-      <div class="flex flex-col py-5">
-        <p class="font-bold">PAYMENT INFORMATION</p>
-        <p>Payment method: {{ $order->payment_method }}</p>
+      <div class="mt-3 text-sm text-gray-600">
+      <p>Harga: <strong>Rp {{ number_format($item->product->price, 0, ',', '.') }}</strong></p>
+      <p>Qty: <strong>{{ $item->quantity }}</strong></p>
+      <p>Total: <strong class="text-violet-800">Rp {{ number_format($item->sub_price, 0, ',', '.') }}</strong></p>
       </div>
       </div>
     </div>
-
-    <!-- /Address info  -->
+    @endforeach
     </section>
-  </section>
 
+    {{-- DESKTOP: Table view --}}
+    <section class="hidden md:block px-4 mx-auto mt-6 col-span-1">
+    <div class="overflow-hidden rounded-xl shadow-md bg-white border">
+      <table class="w-full text-sm text-left text-gray-700">
+      <thead class="text-xs uppercase bg-gray-50 text-gray-600">
+        <tr>
+        <th scope="col" class="px-6 py-4 w-[40%]">Item</th>
+        <th scope="col" class="px-6 py-4 w-[20%]">Harga</th>
+        <th scope="col" class="px-6 py-4 w-[10%] text-center">Qty</th>
+        <th scope="col" class="px-6 py-4 w-[20%]">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($order->orderLineItems as $item)
+      <tr class="border-t">
+      <td class="px-6 py-5">
+        <div class="flex items-center gap-4">
+        <img class="w-16 h-16 rounded-md object-cover" src="{{ asset('storage/' . $item->product->image) }}"
+        alt="{{ $item->product->name }}">
+        <div>
+        <p class="font-semibold text-gray-800">{{ $item->product->name }}</p>
+        <p class="text-sm text-gray-500">Kategori: {{ $item->product->category }}</p>
+        </div>
+        </div>
+      </td>
+      <td class="px-6 py-5">Rp {{ number_format($item->product->price, 0, ',', '.') }}</td>
+      <td class="px-6 py-5 text-center">{{ $item->quantity }}</td>
+      <td class="px-6 py-5 text-violet-800 font-semibold">Rp {{ number_format($item->sub_price, 0, ',', '.') }}
+      </td>
+      </tr>
+      @endforeach
+      </tbody>
+      </table>
+    </div>
+    </section>
+
+    {{-- ORDER SUMMARY & INFORMATION (stacked below the table) --}}
+    <section class="mt-8 px-4 max-w-[1100px] mx-auto grid grid-cols-1 gap-6">
+
+    {{-- ORDER SUMMARY --}}
+    <div class="rounded-xl border bg-white py-5 px-6 shadow-md">
+      <h2 class="font-bold text-lg text-gray-800 mb-4">ORDER SUMMARY</h2>
+      <div class="flex justify-between border-b py-3 text-sm">
+      <p>Subtotal</p>
+      <p>Rp {{ number_format($order->total_price, 0, ',', '.') }}</p>
+      </div>
+      <div class="flex justify-between border-b py-3 text-sm">
+      <p>Shipping</p>
+      <p class="text-green-700">Gratis</p>
+      </div>
+      <div class="flex justify-between py-3 text-base font-bold">
+      <p>Total</p>
+      <p>Rp {{ number_format($order->total_price, 0, ',', '.') }}</p>
+      </div>
+    </div>
+
+    {{-- ORDER INFORMATION --}}
+    <div class="rounded-xl border bg-white py-5 px-6 shadow-md">
+      <h2 class="font-bold text-lg text-gray-800 mb-4">ORDER INFORMATION</h2>
+
+      <div class="mb-3 text-sm">
+      <p>Order &num;{{ $order->id }}</p>
+      </div>
+
+      <div class="border-b py-3 text-sm">
+      <p>
+        Status:
+        @php
+      $statusClass = match ($order->status) {
+      'Menunggu' => 'text-yellow-800',
+      'Diproses' => 'text-blue-800',
+      'Dikirim' => 'text-indigo-800',
+      'Selesai' => 'text-green-800',
+      'Cancel' => 'text-gray-600',
+      'Gagal' => 'text-red-800',
+      default => 'text-gray-600',
+      };
+      @endphp
+        <span class="font-bold {{ $statusClass }}">{{ ucfirst($order->status) }}</span>
+      </p>
+      <p>Tanggal: {{ \Carbon\Carbon::parse($order->order_date)->translatedFormat('d F Y') }}</p>
+      </div>
+
+      <div class="border-b py-3 text-sm">
+      <p class="font-bold">ADDRESS INFORMATION</p>
+      <p>Penerima: {{ $order->shippingAddress->receiver_name }}</p>
+      <p>Phone: {{ $order->shippingAddress->phone_number }}</p>
+      <p>Provinsi: {{ $order->shippingAddress->province }}</p>
+      <p>Kota: {{ $order->shippingAddress->city }}</p>
+      <p>Kode Pos: {{ $order->shippingAddress->postal_code }}</p>
+      <p>Detail: {{ $order->shippingAddress->detail }}</p>
+      </div>
+
+      <div class="py-3 text-sm">
+      <p class="font-bold">PAYMENT INFORMATION</p>
+      <p>Metode: {{ $order->payment_method }}</p>
+      </div>
+    </div>
+
+    {{-- Payment Proof Section --}}
+    @if ($order->payment_method !== 'cod')
+    <div class="w-full">
+      <div class="rounded-xl border bg-white py-5 px-6 shadow-md">
+      <h2 class="font-bold text-lg text-gray-800 mb-4">BUKTI PEMBAYARAN</h2>
+
+      @if (!$order->payments_proofs)
+      <div class="text-sm text-gray-600 mb-4">
+      <p class="mb-2">Anda belum mengunggah bukti pembayaran untuk pesanan ini.</p>
+      <a href="{{ url('/payment/upload/' . $order->id) }}"
+      class="inline-block px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-md text-sm font-medium transition">
+      Upload Bukti Pembayaran
+      </a>
+      </div>
+    @else
+      <div class="text-sm text-gray-700">
+      <p class="mb-2">Bukti pembayaran telah diunggah:</p>
+      <a href="{{ asset('storage/' . $order->payments_proofs) }}" target="_blank"
+      class="text-violet-600 hover:underline">
+      Lihat Bukti Pembayaran
+      </a>
+      </div>
+    @endif
+      </div>
+    </div>
+    @endif
+
+
+    </section>
+
+  </div>
 @endsection

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-  <section class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
-    <div class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8">
+<section class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
+  <div class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8">
 
     <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Upload Bukti Transfer</h2>
 
@@ -10,12 +10,13 @@
     <div class="bg-gray-100 rounded-lg p-4 mb-8">
       <h3 class="text-lg font-semibold text-gray-700 mb-3">🧾 Ringkasan Pesanan</h3>
       <ul class="text-sm text-gray-700 space-y-2">
-      <li><strong>ID Pesanan:</strong> #{{ $order->id }}</li>
-      <li><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($order->order_date)->format('d M Y ') }}</li>
-      <li><strong>Metode Pembayaran:</strong> {{ strtoupper($order->payment_method) }}</li>
-      <li><strong>Total Pembayaran:</strong> <span
-        class="text-violet-800 font-semibold">Rp{{ number_format($order->total_price, 0, ',', '.') }}</span></li>
-      <li><strong>Transfer ke:</strong> BCA 1234567890 a.n. PT Jastip Nara</li>
+        <li><strong>ID Pesanan:</strong> #{{ $order->id }}</li>
+        <li><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($order->order_date)->format('d M Y ') }}</li>
+        <li><strong>Metode Pembayaran:</strong> {{ strtoupper($order->payment_method) }}</li>
+        <li><strong>Total Pembayaran:</strong>
+          <span class="text-violet-800 font-semibold">Rp{{ number_format($order->total_price, 0, ',', '.') }}</span>
+        </li>
+        <li><strong>Transfer ke:</strong> BCA 1234567890 a.n. PT Jastip Nara</li>
       </ul>
     </div>
 
@@ -25,40 +26,73 @@
       @csrf
 
       <div>
-      <label for="proof" class="block text-sm font-medium text-gray-700 mb-2">Upload Bukti Transfer</label>
-      <div class="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-6 bg-white">
-        <div class="text-center">
-        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M7 16V4m0 0a4 4 0 018 0v12m-8 0h8" />
-        </svg>
-        <p class="mt-2 text-sm text-gray-500">Pilih file atau drag ke sini</p>
-        <label
-          class="mt-2 inline-block bg-violet-800 text-white px-4 py-2 text-sm rounded-md cursor-pointer hover:bg-violet-700">
-          Pilih File
-          <input type="file" name="proof" accept="image/*" class="hidden" required>
-        </label>
-        <p class="mt-1 text-xs text-gray-400">Format: JPG, PNG - Maks: 10MB</p>
-        </div>
-      </div>
+        <label for="proof" class="block text-sm font-medium text-gray-700 mb-2">Upload Bukti Transfer</label>
+        <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-6 bg-white relative">
+          {{-- Preview Area --}}
+          <div id="image-preview" class="mb-4 hidden">
+            <img src="#" alt="Preview" class="max-h-48 rounded-md shadow-md" />
+          </div>
 
-      @error('proof')
-      <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-    @enderror
+          {{-- Default UI --}}
+          <div class="text-center" id="default-upload-text">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M7 16V4m0 0a4 4 0 018 0v12m-8 0h8" />
+            </svg>
+            <p class="mt-2 text-sm text-gray-500">Pilih file atau drag ke sini</p>
+            <label
+              class="mt-2 inline-block bg-violet-800 text-white px-4 py-2 text-sm rounded-md cursor-pointer hover:bg-violet-700">
+              Pilih File
+              <input type="file" id="proof" name="proof" accept="image/*" class="hidden" required>
+            </label>
+            <p class="mt-1 text-xs text-gray-400">Format: JPG, PNG - Maks: 10MB</p>
+          </div>
+        </div>
+
+        @error('proof')
+        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+        @enderror
       </div>
 
       <div class="flex justify-center">
-      <button type="submit"
-        class="w-full sm:w-auto bg-violet-800 hover:bg-violet-700 text-white font-semibold px-6 py-3 rounded-lg transition">
-        📤 Upload Sekarang
-      </button>
+        <button type="submit"
+          class="w-full sm:w-auto bg-violet-800 hover:bg-violet-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+          📤 Upload Sekarang
+        </button>
       </div>
     </form>
 
     <div class="mt-6 text-center">
       <a href="{{ url('/account/order') }}" class="text-sm text-violet-700 hover:underline">⬅ Kembali ke Riwayat
-      Pesanan</a>
+        Pesanan</a>
     </div>
-    </div>
-  </section>
+  </div>
+</section>
+
+{{-- JavaScript Preview --}}
+<script>
+  const fileInput = document.getElementById('proof');
+  const previewContainer = document.getElementById('image-preview');
+  const previewImage = previewContainer.querySelector('img');
+  const defaultText = document.getElementById('default-upload-text');
+
+  fileInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        previewImage.src = e.target.result;
+        previewContainer.classList.remove('hidden');
+        defaultText.classList.add('hidden');
+      }
+
+      reader.readAsDataURL(file);
+    } else {
+      previewImage.src = "#";
+      previewContainer.classList.add('hidden');
+      defaultText.classList.remove('hidden');
+    }
+  });
+</script>
 @endsection

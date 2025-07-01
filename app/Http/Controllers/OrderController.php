@@ -59,4 +59,20 @@ class OrderController extends Controller
     {
         return view('paymentupload', compact('order'));
     }
+
+    public function processUpload(Request $request, Order $order)
+    {
+        $request->validate([
+            'proof' => 'required|image|mimes:jpg,jpeg,png|max:10240',
+        ]);
+
+        $path = $request->file('proof')->store('payment_proofs', 'public');
+
+        $order->update([
+            'payments_proof' => $path,
+            'status' => 'Diproses',
+        ]);
+
+        return redirect('/account/order/' . $order->id)->with('success', 'Bukti transfer berhasil diunggah!');
+    }
 }

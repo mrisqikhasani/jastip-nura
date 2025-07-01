@@ -3,80 +3,96 @@
 @section('content')
   @include('layouts.partials.sidebarprofile')
 
-  <section class="container flex-grow mx-auto max-w-[1200px] border-b py-5 lg:flex lg:flex-row lg:py-10">
+  <section class="container mx-auto max-w-[1200px] py-5 lg:py-10">
 
-
-    <!-- Mobile order table  -->
-    <section class="container mx-auto my-3 flex w-full flex-col gap-3 px-4 md:hidden">
-    <!-- 1 -->
-    @foreach ($orders as $order)
-
-    <div class="flex w-full border px-4 py-4">
-      <div class="ml-3 flex w-full flex-col justify-center">
-      <div class="flex items-center justify-between">
-      <p class="text-xl font-bold">Order #{{ $order->id }} </p>
-      <div class="border border-green-500 px-2 py-1 text-green-500">
-      {{ $order->status }}
+    {{-- Mobile Order Card Table --}}
+    <section class="md:hidden space-y-4 px-4">
+    @forelse ($orders as $order)
+    <div class="rounded-xl border bg-white p-4 shadow-sm">
+      <div class="flex justify-between items-center">
+      <h3 class="text-base font-semibold text-gray-800">Order #{{ $order->id }}</h3>
+      <span class="
+        text-xs font-semibold px-2 py-1 rounded-full 
+        {{ 
+        $order->status === 'completed' ? 'text-green-700 bg-green-100 border border-green-300' :
+    ($order->status === 'pending' ? 'text-yellow-700 bg-yellow-100 border border-yellow-300' :
+      ($order->status === 'cancelled' ? 'text-red-700 bg-red-100 border border-red-300' :
+      'text-gray-600 bg-gray-100 border border-gray-300')) 
+        }}">
+      {{ ucfirst($order->status) }}
+      </span>
       </div>
-      </div>
-      <p class="text-sm text-gray-400">
+
+      <p class="text-sm text-gray-500 mt-1">
       {{ \Carbon\Carbon::parse($order->order_date)->translatedFormat('d F Y') }}
       </p>
-      <p class="py-3 text-xl font-bold text-violet-900">
-      Rp{{ number_format($order->total_price, 0, ',', '.') }} </p>
-      <div class="mt-2 flex w-full items-center justify-between">
-      <div class="flex items-center justify-center">
-      <a href="{{ url('/account/order/'.$order->id) }}"
-        class="flex cursor-text items-center justify-center bg-amber-500 px-2 py-2 active:ring-gray-500">
-        View order
+
+      <p class="mt-2 text-lg font-bold text-violet-800">
+      Rp{{ number_format($order->total_price, 0, ',', '.') }}
+      </p>
+
+      <div class="mt-3">
+      <a href="{{ url('/account/order/' . $order->id) }}"
+      class="inline-block bg-violet-700 text-white px-4 py-2 text-sm rounded-md hover:bg-violet-600 transition">
+      Lihat Detail
       </a>
       </div>
-      </div>
-      </div>
     </div>
-
-    @endforeach
+    @empty
+    <div class="text-center text-sm text-gray-500">Belum ada pesanan.</div>
+    @endforelse
     </section>
-    <!-- /Mobile order table  -->
 
-    <!-- Order table  -->
-    <section class="hidden h-[600px] w-full max-w-[1200px] grid-cols-1 gap-3 px-5 pb-10 lg:grid">
-    <table class="table-fixed">
-      <thead class="h-16 bg-neutral-100">
-      <tr>
-        <th>ORDER</th>
-        <th>DATE</th>
-        <th>TOTAL</th>
-        <th>STATUS</th>
-        <th>ACTION</th>
-      </tr>
+    {{-- Desktop Table --}}
+    <section class="hidden md:block mt-10 px-5">
+    <div class="overflow-x-auto rounded-xl shadow">
+      <table class="min-w-full divide-y divide-gray-200 bg-white">
+      <thead class="bg-neutral-100 text-gray-600 uppercase text-sm">
+        <tr>
+        <th class="px-6 py-3 text-left">Order</th>
+        <th class="px-6 py-3 text-left">Tanggal</th>
+        <th class="px-6 py-3 text-left">Total</th>
+        <th class="px-6 py-3 text-left">Status</th>
+        <th class="px-6 py-3 text-left">Aksi</th>
+        </tr>
       </thead>
-      <tbody>
-
-
-      @foreach ($orders as $order)
-      <tr class="h-[100px] border-b">
-      <td class="text-center align-middle"> Order # {{ $order->id }}</td>
-      <td class="mx-auto text-center">
-      {{ \Carbon\Carbon::parse($order->order_date)->translatedFormat('d F Y') }}
-      </td>
-      <td class="text-center align-middle">Rp{{ number_format($order->total_price, 0, ',', '.') }}</td>
-
-      <td class="mx-auto text-center">
-      <span class="border-2 border-green-500 py-1 px-3 text-green-500">{{ ucfirst($order->status) }}</span>
-      </td>
-      <td class="text-center align-middle">
-      <a href="{{ url('/account/order/'.$order->id) }}" 
-      class="bg-amber-400 px-4 py-2">
-      <button class="text-center">View</button></a>
-      </td>
+      <tbody class="divide-y divide-gray-100 text-sm">
+        @forelse ($orders as $order)
+        <tr class="hover:bg-gray-50">
+        <td class="px-6 py-4 font-semibold text-gray-800">Order #{{ $order->id }}</td>
+        <td class="px-6 py-4">{{ \Carbon\Carbon::parse($order->order_date)->translatedFormat('d F Y') }}</td>
+        <td class="px-6 py-4">Rp{{ number_format($order->total_price, 0, ',', '.') }}</td>
+        <td class="px-6 py-4">
+        @php
+          $statusClass = match ($order->status) {
+            'Menunggu' => 'text-yellow-800 bg-yellow-100 border border-yellow-300',
+            'Diproses' => 'text-blue-800 bg-blue-100 border border-blue-300',
+            'Dikirim' => 'text-indigo-800 bg-indigo-100 border border-indigo-300',
+            'Selesai' => 'text-green-800 bg-green-100 border border-green-300',
+            'Cancel' => 'text-gray-600 bg-gray-100 border border-gray-300',
+            'Gagal' => 'text-red-800 bg-red-100 border border-red-300',
+            default => 'text-gray-600 bg-gray-100 border border-gray-300',
+          };
+        @endphp
+        <span class="inline-block text-xs font-medium px-2 py-1 rounded-full {{ $statusClass }}">
+          {{ ucfirst($order->status) }}
+        </span>
+        </td>
+        <td class="px-6 py-4">
+        <a href="{{ url('/account/order/' . $order->id) }}"
+        class="inline-block bg-violet-700 text-white text-xs px-4 py-2 rounded-md hover:bg-violet-600 transition">
+        View
+        </a>
+        </td>
+        </tr>
+      @empty
+      <tr>
+      <td colspan="5" class="text-center py-4 text-gray-400">Belum ada pesanan.</td>
       </tr>
-    @endforeach
-
+      @endforelse
       </tbody>
-    </table>
+      </table>
+    </div>
     </section>
-    <!-- /Order table  -->
   </section>
-
 @endsection

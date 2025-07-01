@@ -32,7 +32,7 @@
         <label class="block w-full">
         <span class="sr-only">Choose profile photo</span>
         <input type="file" name="profile_picture"
-          class="w-full border border-violet-700 text-sm outline-none file:mr-4 file:bg-violet-400 file:py-2 file:px-4 file:text-sm file:font-semibold file:border-none file:rounded" />
+          class="w-full border border-violet-700 text-sm text-gray-700 outline-none file:mr-4 file:bg-violet-400 file:py-2 file:px-4 file:text-sm file:font-semibold file:border-none file:rounded" />
         </label>
 
         @error('avatar')
