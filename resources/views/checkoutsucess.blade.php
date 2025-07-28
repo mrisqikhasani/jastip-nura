@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Jastip Nara</title>
+  <title>Jastip Nura</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -68,7 +68,7 @@
       <div class="bg-gray-100 text-left p-4 mt-4 rounded-xl text-sm md:text-base">
       <p><strong>Bank:</strong> BCA</p>
       <p><strong>No. Rekening:</strong> 1234567890</p>
-      <p><strong>Atas Nama:</strong> Jastip Nara</p>
+      <p><strong>Atas Nama:</strong> Jastip Nura</p>
       <p class="mt-2 text-red-500 text-sm">* Transfer sesuai total pesanan. Simpan bukti transfer Anda.</p>
       </div>
 

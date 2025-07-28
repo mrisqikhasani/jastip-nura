@@ -16,7 +16,7 @@
         <li><strong>Total Pembayaran:</strong>
           <span class="text-violet-800 font-semibold">Rp{{ number_format($order->total_price, 0, ',', '.') }}</span>
         </li>
-        <li><strong>Transfer ke:</strong> BCA 1234567890 a.n. PT Jastip Nara</li>
+        <li><strong>Transfer ke:</strong> BCA 1234567890 a.n. PT Jastip Nura</li>
       </ul>
     </div>
 
