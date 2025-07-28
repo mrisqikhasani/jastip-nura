@@ -19,13 +19,13 @@
     <!-- <link rel="icon" type="image/x-icon" href="{{ asset('storage/favicon.ico') }}"> -->
     <script src="https://cdn.tailwindcss.com"></script>
     @livewireStyles
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
-        body{
+        body {
             font-family: 'Poppins';
         }
     </style>
-
 </head>
 
 <body x-data="{ desktopMenuOpen: false, mobileMenuOpen: false}">

@@ -231,12 +231,19 @@
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        alert(data.message || 'Product added!');
+        Swal.fire({
+        title: "Product Berhasil Di tambahkan !",
+        text: "You clicked the button!",
+        icon: "success"
+        });
       })
       .catch(error => {
         console.error(error);
-        alert('Error adding to cart.: ', error);
+        Swal.fire({
+        title: "Gagal saat menambahkan product !",
+        text: "You clicked the button!",
+        icon: "error"
+        });
       })
       .finally(() => {
         button.disabled = false;
