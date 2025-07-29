@@ -1,6 +1,6 @@
 <header class="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5">
     <a href="index.html">
-        <img class="cursor-pointer sm:h-auto sm:w-auto" src="{{ asset('storage/logoabal2.jpg') }}" alt="company logo" />
+        <img class="cursor-pointer w-12" src="{{ asset('storage/logo.svg') }}" alt="company logo" />
     </a>
 
     <div class="md:hidden">
@@ -113,16 +113,16 @@
 <!-- Nav bar -->
 <!-- hidden on small devices -->
 
-<nav class="relative bg-violet-900">
+<nav class="relative bg-primary">
     <div class="mx-auto hidden h-12 w-full max-w-[1200px] items-center md:flex">
         
 
         <div class="mx-7 flex gap-8">
-            <a class="font-light duration-100 hover:text-yellow-400 hover:underline {{ request()->is('/') ? 'text-yellow-400 underline' : 'text-white' }}"
+            <a class="font-medium duration-100 hover:text-black {{ request()->is('/') ? 'text-black' : 'text-white' }}"
             href="{{ url('/') }}">Home</a>
-            <a class="font-light duration-100 hover:text-yellow-400 hover:underline {{ request()->is('catalog') ? 'text-yellow-400 underline' : 'text-white' }}"
+            <a class="font-medium duration-100 hover:text-black {{ request()->is('catalog') ? 'text-black' : 'text-white' }}"
             href="{{ url('/catalog') }}">Catalog</a>
-            <a class="font-light duration-100 hover:text-yellow-400 hover:underline {{ request()->is('about-us') ? 'text-yellow-400 underline' : 'text-white' }}"
+            <a class="font-medium duration-100 hover:text-black {{ request()->is('about-us') ? 'text-black' : 'text-white' }}"
             href="{{ url('/about-us') }}">About Us</a>
         </div>
 
@@ -137,10 +137,10 @@
         </div>
         @else
         <div class="ml-auto flex gap-4 px-5">
-            <a class="font-light text-white duration-100 hover:text-yellow-400 hover:underline"
+            <a class="font-medium text-white duration-100 hover:text-black"
             href="{{ url('/login') }}">Login</a>
             <span class="text-white">&#124;</span>
-            <a class="font-light text-white duration-100 hover:text-yellow-400 hover:underline" href="{{ url('/signup') }}">Sign Up</a>
+            <a class="font-medium text-white duration-100 hover:text-black" href="{{ url('/signup') }}">Sign Up</a>
         </div>
         @endif
     </div>

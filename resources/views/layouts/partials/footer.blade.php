@@ -1,73 +1,39 @@
 <!-- Desktop Footer  -->
 
-<footer class="mx-auto w-full max-w-[1200px] justify-between pb-10 flex flex-col lg:flex-row bottom-0">
-    <div class="ml-5">
-        <img class="mt-10 mb-5" src="{{ asset('storage/logoabal2.jpg') }}" alt="company logo" />
-        <p class="pl-0">
-            Lorem ipsum dolor sit amet consectetur <br />
-            adipisicing elit.
+<footer class="mx-auto w-full max-w-[1200px] justify-between pb-10 px-6 flex flex-col lg:flex-row gap-6">
+    <div class="w-full lg:w-1/3">
+        <img class="mt-10 mb-5 w-24" src="{{ asset('storage/logo.svg') }}" alt="company logo" />
+        <p class="text-sm">
+            Based in Jogja — we bring Thailand's<br/>
+            best products to your doorstep.<br/>
+            Serving Sorong, Manokwari, and even <br/>
+            the farthest corners like Merauke with 💙
         </p>
-        <div class="mt-10 flex gap-3">
-            <!-- <a href="https://github.com/bbulakh">
-                <img class="h-5 w-5 cursor-pointer" src="./assets/images/github.svg" alt="github icon" />
-            </a>
-            <a href="https://t.me/b_bulakh">
-                <img class="h-5 w-5 cursor-pointer" src="./assets/images/telegram.svg" alt="telegram icon" />
-            </a>
-            <a href="https://www.linkedin.com/in/bogdan-bulakh-393284190/">
-                <img class="h-5 w-5 cursor-pointer" src="./assets/images/linkedin.svg" alt="twitter icon" />
-            </a> -->
-        </div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="mx-5 mt-10">
-            <p class="font-medium text-gray-500">FEATURES</p>
-            <ul class="text-sm leading-8">
-                <li><a href="#">Marketing</a></li>
-                <li><a href="#">Commerce</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#">Merchendise</a></li>
-            </ul>
-        </div>
+    <div class="w-full lg:w-1/3 mt-10 lg:mt-10">
+        <p class="font-semibold text-gray-500">Content</p>
+        <ul class="text-sm leading-8">
+            <li><a href="/">Home</a></li>
+            <li><a href="/catalog">Catalog</a></li>
+            <li><a href="/about-us">About Us</a></li>
+        </ul>
+    </div>
 
-        <div class="mx-5 mt-10">
-            <p class="font-medium text-gray-500">SUPPORT</p>
-            <ul class="text-sm leading-8">
-                <li><a href="#">Pricing</a></li>
-                <li><a href="#">Docs</a></li>
-                <li><a href="#">Audition</a></li>
-                <li><a href="#">Art Status</a></li>
-            </ul>
-        </div>
-
-        <div class="mx-5 mt-10">
-            <p class="font-medium text-gray-500">DOCUMENTS</p>
-            <ul class="text-sm leading-8">
-                <li><a href="#">Terms</a></li>
-                <li><a href="#">Conditions</a></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">License</a></li>
-            </ul>
-        </div>
-
-        <div class="mx-5 mt-10">
-            <p class="font-medium text-gray-500">DELIVERY</p>
-            <ul class="text-sm leading-8">
-                <li><a href="#">List of countries</a></li>
-                <li><a href="#">Special information</a></li>
-                <li><a href="#">Restrictions</a></li>
-                <li><a href="#">Payment</a></li>
-            </ul>
-        </div>
+    <div class="w-full lg:w-1/3 mt-10 lg:mt-10">
+        <p class="font-semibold text-gray-500">Social Media</p>
+        <ul class="text-sm leading-8">
+            <li><a href="https://www.instagram.com/jastipsukasukanura/" target="_blank">Instagram</a></li>
+            <li><a href="https://wa.me/6289673217426" target="_blank">WhatsApp</a></li>
+        </ul>
     </div>
 </footer>
 <!-- /Desktop Footer  -->
 
 <!-- Payment and copyright  -->
 
-<section class="h-11 bg-amber-400">
+<section class="h-11 bg-primary text-base text-white">
     <div class="mx-auto flex max-w-[1200px] items-center justify-between px-4 pt-2">
-        <p>&copy; Jastip Nura, 2023</p>
+        <p>&copy; 2025 Jastip Nura. All Right Reserved</p>
     </div>
 </section>

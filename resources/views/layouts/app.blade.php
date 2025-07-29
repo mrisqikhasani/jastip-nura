@@ -16,11 +16,28 @@
     <link rel="stylesheet" href="assets/css/app.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <!-- <link rel="icon" type="image/x-icon" href="{{ asset('storage/favicon.ico') }}"> -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/favicon.ico') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     @livewireStyles
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#748DAE',
+                        secondary: '#555879',
+                        hitam: '1b1b1b',
+                        oren: '#f05a26',
+                        kuning: '#fbbc2a',
+                    },
+                }
+            }
+        }
+    </script>
     <style>
         body {
             font-family: 'Poppins';
