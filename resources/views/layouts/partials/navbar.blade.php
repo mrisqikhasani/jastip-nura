@@ -12,10 +12,6 @@
         </button>
     </div>
 
-    <form class="hidden h-9 w-2/5 items-center border md:flex">
-
-    </form>
-
     <div class="hidden gap-3 md:!flex"> 
         <a href="{{ url('/cart') }}" class="flex cursor-pointer flex-col items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
@@ -24,7 +20,7 @@
                     clip-rule="evenodd" />
             </svg>
 
-            <p class="text-xs">Cart</p>
+            <p class="text-xs">Keranjang</p>
         </a>
 
         <a href="{{ url('/account') }}" class="relative flex cursor-pointer flex-col items-center justify-center">
@@ -39,7 +35,7 @@
                     d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
             </svg>
 
-            <p class="text-xs">Account</p>
+            <p class="text-xs">Akun</p>
         </a>
     </div>
 </header>
@@ -49,17 +45,7 @@
 <section x-show="mobileMenuOpen" @click.outside="mobileMenuOpen = false"
     class="absolute left-0 right-0 z-50 h-screen w-full bg-white" style="display: none">
     <div class="mx-auto">
-        <div class="mx-auto flex w-full justify-center gap-3 py-4">
-            <a href="wishlist.html" class="flex cursor-pointer flex-col items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-            </svg>
-
-                <p class="text-xs">Wishlist</p>
-            </a>
-
+        <div class="mx-auto flex w-full justify-center gap-3 py-4">>
             <a href="{{ url('/cart') }}" class="{flex cursor-pointer flex-col items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
                     <path fill-rule="evenodd"
@@ -67,7 +53,7 @@
                         clip-rule="evenodd" />
                 </svg>
 
-                <p class="text-xs">Cart</p>
+                <p class="text-xs">Keranjang</p>
             </a>
 
             <a href="{{ url('/account') }}" class="relative flex cursor-pointer flex-col items-center justify-center">
@@ -83,28 +69,15 @@
                         d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>
 
-                <p class="text-xs">Account</p>
+                <p class="text-xs">Akun</p>
             </a>
         </div>
 
-        <form class="my-4 mx-5 flex h-9 items-center border">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="mx-3 h-4 w-4">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-            </svg>
-
-            <input class="hidden w-11/12 outline-none md:block" type="search" placeholder="Search" />
-
-            <button type="submit" class="ml-auto h-full bg-amber-400 px-4 hover:bg-yellow-300">
-                Search
-            </button>
-        </form>
         <ul class="text-center font-medium">
-            <li class="py-2"><a href="{{ url('/') }}">Home</a></li>
-            <li class="py-2"><a href="{{ url('/catalog') }}">Catalog</a></li>
-            <li class="py-2"><a href="about-us.html">About Us</a></li>
-            <li class="py-2"><a href="contact-us.html">Contact Us</a></li>
+            <li class="py-2"><a href="{{ url('/') }}">Beranda</a></li>
+            <li class="py-2"><a href="{{ url('/catalog') }}">Katalog</a></li>
+            <li class="py-2"><a href="about-us.html">Tentang Kami</a></li>
+            <li class="py-2"><a href="contact-us.html">Kontak Kami</a></li>
         </ul>
     </div>
 </section>
@@ -118,29 +91,29 @@
         
 
         <div class="mx-7 flex gap-8">
-            <a class="font-medium duration-100 hover:text-black {{ request()->is('/') ? 'text-black' : 'text-white' }}"
-            href="{{ url('/') }}">Home</a>
-            <a class="font-medium duration-100 hover:text-black {{ request()->is('catalog') ? 'text-black' : 'text-white' }}"
-            href="{{ url('/catalog') }}">Catalog</a>
-            <a class="font-medium duration-100 hover:text-black {{ request()->is('about-us') ? 'text-black' : 'text-white' }}"
-            href="{{ url('/about-us') }}">About Us</a>
+            <a class="font-medium duration-100 transition-all ease-in hover:text-black {{ request()->is('/') ? 'text-black' : 'text-white' }}"
+            href="{{ url('/') }}">Beranda</a>
+            <a class="font-medium duration-100 transition-all ease-in hover:text-black {{ request()->is('catalog') ? 'text-black' : 'text-white' }}"
+            href="{{ url('/catalog') }}">Katalog</a>
+            <a class="font-medium duration-100 transition-all ease-in hover:text-black {{ request()->is('about-us') ? 'text-black' : 'text-white' }}"
+            href="{{ url('/about-us') }}">Tentang Kami</a>
         </div>
 
         @if(auth()->check())
         <div class="ml-auto flex gap-4 px-5">
             <form method="POST" action="{{ url('/logout') }}">
             @csrf
-            <button type="submit" class="font-light text-white duration-100 hover:text-yellow-400 hover:underline">
-                Logout
+            <button type="submit" class="font-medium text-white duration-100 transition-all ease-in hover:text-black">
+                Keluar
             </button>
             </form>
         </div>
         @else
         <div class="ml-auto flex gap-4 px-5">
-            <a class="font-medium text-white duration-100 hover:text-black"
-            href="{{ url('/login') }}">Login</a>
+            <a class="font-medium text-white duration-100 transition-all ease-in hover:text-black"
+            href="{{ url('/login') }}">Masuk</a>
             <span class="text-white">&#124;</span>
-            <a class="font-medium text-white duration-100 hover:text-black" href="{{ url('/signup') }}">Sign Up</a>
+            <a class="font-medium text-white duration-100 transition-all ease-in hover:text-black" href="{{ url('/signup') }}">Daftar</a>
         </div>
         @endif
     </div>

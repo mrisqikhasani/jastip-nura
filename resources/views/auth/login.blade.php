@@ -5,8 +5,8 @@
     <section class="mx-auto flex-grow w-full mt-10 mb-10 max-w-[1200px] px-5">
         <div class="container mx-auto border px-10 py-10 rounded-2xl shadow-lg md:w-1/2 bg-white">
             <div class="mb-6">
-                <p class="text-4xl font-bold text-gray-800">Login</p>
-                <p class="text-gray-500">Selamat datang kembali! Silakan login ke akun Anda.</p>
+                <p class="text-4xl font-bold text-gray-800">Masuk</p>
+                <p class="text-primary mt-2">Selamat datang kembali! Silakan masuk ke akun Anda.</p>
             </div>
 
             @if ($errors->any())
@@ -29,14 +29,14 @@
                     placeholder="********" required />
 
                 <button type="submit"
-                    class="my-6 w-full bg-violet-900 hover:bg-violet-700 py-2 text-white font-semibold rounded-lg transition">
+                    class="my-6 w-full bg-secondary hover:bg-primary py-2 text-white font-medium rounded-lg duration-100 transition-all ease-in">
                     Masuk
                 </button>
             </form>
 
             <p class="text-center text-sm text-gray-600">
                 Belum punya akun?
-                <a href="{{ url('/signup') }}" class="text-violet-900 hover:underline font-medium">Daftar Sekarang</a>
+                <a href="{{ url('/signup') }}" class="text-secondary hover:underline font-medium">Daftar Sekarang</a>
             </p>
         </div>
     </section>

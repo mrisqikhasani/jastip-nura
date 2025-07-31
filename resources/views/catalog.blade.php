@@ -1,10 +1,6 @@
 @extends('layouts.app')
-
-
 @section('content')
-
   <!-- breadcrumbs  -->
-
   <nav class="mx-auto w-full mt-4 max-w-[1200px] px-5">
     <ul class="flex items-center">
     <li class="cursor-pointer">
@@ -20,8 +16,7 @@
     <li>
       <span class="mx-2 text-gray-500">&gt;</span>
     </li>
-
-    <li class="text-gray-500">Catalog</li>
+    <li class="text-gray-500">Katalog</li>
     </ul>
   </nav>
   <!-- /breadcrumbs  -->
@@ -33,7 +28,7 @@
     <div id="filters-category">
       <div class="flex border-b pb-5">
       <div class="w-full">
-        <p class="mb-3 font-medium">CATEGORIES</p>
+        <p class="mb-3 font-medium">Kategori</p>
 
         @foreach($categories as $category)
       <div class="flex w-full justify-between">
@@ -56,49 +51,28 @@
     </section>
     <!-- /sidebar  -->
 
-    <div>
+    <div class="flex-grow px-4 w-full">
     <div class="mb-5 flex items-center justify-between px-5">
-      <div class="flex gap-3">
-      <button class="flex items-center justify-center border px-6 py-2">
-        Sort by
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-        stroke="currentColor" class="mx-2 h-4 w-4">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-        </svg>
-      </button>
-
-      <button class="flex items-center justify-center border px-6 py-2 md:hidden">
-        Filters
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-        stroke="currentColor" class="mx-2 h-4 w-4">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-        </svg>
-      </button>
-      </div>
-
-      <form class="hidden h-9 flex-grow items-center border md:flex max-w-md">
+      <form class="hidden h-9 rounded-full flex-grow items-center border md:flex max-w-md">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="mx-3 h-4 w-4 text-gray-500">
         <path stroke-linecap="round" stroke-linejoin="round"
         d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
       </svg>
-      <input class="hidden w-full outline-none md:block" type="search" placeholder="Cari produk..."
+      <input class="hidden text-sm outline-none md:block" type="search" placeholder="Cari produk..."
         id="searchProduct" />
-      <button class="ml-auto h-full bg-amber-400 px-4 hover:bg-yellow-300">
+      <button class="ml-auto rounded-full h-full bg-secondary px-4 text-white font-medium text-sm hover:bg-primary">
         Cari
       </button>
       </form>
-
-
     </div>
 
     <section class="mx-auto grid max-w-[1200px] min-h-[400px] grid-cols-2 gap-3 px-5 pb-10 lg:grid-cols-3"
       id="product-wrapper">
-
-
       <!-- catalog product -->
-      <div id="not-found" class="hidden col-span-full text-center text-gray-500 py-10">
-      <p>Tidak ditemukan produk yang sesuai.</p>
+      <div id="not-found" class="hidden col-span-full text-center flex flex-col items-center justify-center text-gray-500 py-10">
+        <img src="storage/not-found.svg" class="w-80 mb-10" />
+        <p>Tidak ada produk yang sesuai.</p>
       </div>
     </section>
     </div>
@@ -136,9 +110,11 @@
     <div class="flex flex-col shadow-xl hover:shadow-2xl rounded-2xl px-4 py-4">
       <div class="relative flex">
       <input type="hidden" value=${product.id}>
-      <img class="" src="storage/${product.image}" alt="${product.name} image" />
+      <div class="aspect-square overflow-hidden rounded-xl w-full">
+        <img src="storage/${product.image}" alt="${product.name} image" class="w-full h-full object-cover" />
+      </div>
       <div class="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100">
-      <a href="/product/${product.id}" class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-amber-400">
+      <a href="/product/${product.id}" class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-white bg-secondary">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
       stroke="currentColor" class="h-4 w-4">
       <path stroke-linecap="round" stroke-linejoin="round"
@@ -147,19 +123,19 @@
       </a>
       </div>
 
-      <div class="absolute right-1 mt-3 flex items-center justify-center bg-amber-400 rounded-sm">
+      <div class="absolute rounded-xl right-2 mt-3 flex items-center justify-center bg-secondary text-white text-sm rounded-sm">
       <p class="px-2 py-2 text-sm">${product.category}</p>
       </div>
       </div>
 
       <div>
-      <p class="mt-2">${product.name.toUpperCase()}</p>
-      <p class="font-medium text-violet-900">
+      <p class="mt-2 font-semibold">${product.name}</p>
+      <p class="font-medium text-secondary text-sm">
       ${formatIDR(product.price)}
       </p>
 
       <div>
-      <button class="add-to-cart rounded-lg my-5 h-10 w-full bg-violet-900 hover:bg-violet-700 text-white" data-product-id="${product.id}">Add to cart</button>
+      <button class="add-to-cart font-medium mt-2 rounded-lg duration-100 transition-all ease-in h-10 w-full bg-secondary hover:bg-primary text-white" data-product-id="${product.id}">Tambah ke Keranjang</button>
       </div>
       </div>
     </div>

@@ -1,24 +1,23 @@
 @extends('layouts.app')
-
-
 @section('content')
   <!-- Offer image  -->
 
   <section class="bg-white">
     <div class="max-w-7xl mx-auto px-10 py-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-4">
       <div>
-        <p class="text-primary font-medium">Hello Folks!</p>
         <h1 class="text-4xl font-bold text-secondary mt-2 leading-snug">
-          Brings you an <span class="underline">Authentic Thailand Goods</span>
-          & <br/>Delivered it fast!
+          Kami hadir membawa barang-barang asli dari <span class="underline">Thailand</span>
+          & Dikirim <br/>cepat!
         </h1>
         <p class="mt-4 text-gray-700 max-w-md">
-          Aesthetic clothes, bodycare, skincare, and all things from Thailand, brought to you from Jogja ✈️ to Sorong & Manokwari.
-          <strong>No extra fees needed</strong>
+          Baju, bodycare, skincare, dan semua produk khas Thailand langsung dari Jogja ✈️ ke Sorong & Manokwari.
+          <strong>Tanpa biaya tambahan</strong>
         </p>
+        <a href="/catalog">
         <button class="mt-6 bg-secondary font-medium text-white px-8 py-3 rounded-full hover:bg-primary transition">
-          Get Started
+          Belanja Sekarang
         </button>
+        </a>
       </div>
 
       <div class="relative w-full h-auto">
@@ -27,12 +26,6 @@
       </div>
     </div>
   </section>
-
-
-
-  <!-- /Offer image  -->
-
-  <!-- Cons bages -->
 
   <section class="container mx-auto my-8 flex flex-col justify-center gap-3 lg:flex-row">
     <!-- 1 -->
@@ -43,7 +36,7 @@
     </div>
 
     <div class="ml-3 flex flex-col justify-center">
-      <h3 class="text-left text-xs font-bold lg:text-sm">Fast Delivery</h3>
+      <h3 class="text-left text-xs font-bold lg:text-sm">Dikirim cepat</h3>
       <p class="text-light text-left text-xs lg:text-sm">
       Pengiriman cepat ke seluruh Indonesia
       </p>
@@ -60,7 +53,7 @@
     <div class="ml-3 flex flex-col justify-center">
       <h3 class="text-left text-xs font-bold lg:text-sm">Murah & Asli</h3>
       <p class="text-light text-left text-xs lg:text-sm">
-      Produk 100% original Thailand
+      Produk 100% asli Thailand
       </p>
     </div>
     </div>
@@ -83,7 +76,7 @@
 
 
 
-  <p class="mx-auto mt-20 mb-5 max-w-[1200px] font-semibold text-secondary text-xl px-5">Recommended for You</p>
+  <p class="mx-auto mt-20 mb-5 max-w-[1200px] font-semibold text-secondary text-xl px-5">Rekomendasi untuk Anda</p>
 
   <!-- Recommendations -->
   <section class="mx-auto grid max-w-[1200px] grid-cols-2 gap-6 px-5 pb-10 lg:grid-cols-4">
@@ -110,8 +103,8 @@
     <div>
       <p class="mt-2 font-medium">Barang</p>
       <p class="font-medium text-secondary">
-      $45.00
-      <span class="text-sm text-gray-500 line-through">$500.00</span>
+      ${formatIDR(150000)}
+      <span class="text-sm text-gray-500 line-through">${formatIDR(200000)}</span>
       </p>
 
       <div>

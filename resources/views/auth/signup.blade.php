@@ -21,9 +21,8 @@
                 @csrf
 
                 <label for="name" class="font-medium">Nama Lengkap</label>
-                <input class="mb-3 mt-2 border px-4 py-2 rounded-lg" type="text" name="name"
+                <input class="mt-2 border px-4 py-2 rounded-lg" type="text" name="name"
                     placeholder="Contoh: Ahmad Fadli" />
-
                 <label class="mt-3 font-medium" for="email">Alamat Email</label>
                 <input class="mt-2 border px-4 py-2 rounded-lg" type="email" name="email" placeholder="email@contoh.com" />
 
@@ -38,14 +37,14 @@
                     name="confirmpassword" />
 
                 <button
-                    class="my-6 w-full bg-violet-900 py-2 text-white font-normal rounded-lg hover:bg-violet-700 transition">
+                    class="my-6 w-full bg-secondary py-2 text-white font-medium duration-100 transition-all ease-in rounded-lg hover:bg-primary transition">
                     Daftar Sekarang
                 </button>
             </form>
 
-            <p class="text-center text-sm">
+            <p class="text-gray-600 text-center text-sm">
                 Sudah punya akun?
-                <a href="{{ url('/login') }}" class="text-violet-900 font-medium hover:underline">Login di sini</a>
+                <a href="{{ url('/login') }}" class="text-secondary font-medium hover:underline">Masuk di sini</a>
             </p>
         </div>
     </section>

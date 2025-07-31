@@ -12,6 +12,7 @@ use App\Http\Controllers\CartController;
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/catalog', [ProductController::class, 'catalog']);
 Route::get('/product/{productId}', [ProductController::class, 'productDetail']);
+Route::view('/about-us', 'about-us');
 
 // Auth Controller
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
