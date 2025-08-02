@@ -52,9 +52,8 @@ class OrderResource extends Resource
                     ->options([
                         'Menunggu' => 'Menunggu',
                         'Diproses' => 'Diproses',
-                        'Dikirim' => 'Dikirim',
                         'Selesai' => 'Selesai',
-                        'Gagal' => 'Gagal',
+                        'Dibatalkan' => 'Dibatalkan',
                     ]),
 
                 TextInput::make('total_price')

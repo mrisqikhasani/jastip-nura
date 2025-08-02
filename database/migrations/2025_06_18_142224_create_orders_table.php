@@ -18,10 +18,8 @@ return new class extends Migration {
             $table->enum('status', [
                 'Menunggu',     // order dibuat, belum dibayar/diproses
                 'Diproses',     // admin sedang mengurus
-                'Dikirim',      // barang dalam pengiriman
                 'Selesai',      // diterima pelanggan
-                'Cancel',       // dibatalkan oleh user/admin
-                'Gagal'         // pembayaran gagal (jika ada sistem pembayaran otomatis)
+                'Dibatalkan',       // dibatalkan oleh admin
             ])->default('Menunggu');
             $table->date('order_date');
             $table->foreignId('shipping_address_id')->constrained('address', 'id')->nullable();

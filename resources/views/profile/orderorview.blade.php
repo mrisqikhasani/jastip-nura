@@ -114,12 +114,10 @@
         Status:
         @php
       $statusClass = match ($order->status) {
-      'Menunggu' => 'text-yellow-800',
-      'Diproses' => 'text-blue-800',
-      'Dikirim' => 'text-indigo-800',
-      'Selesai' => 'text-green-800',
-      'Cancel' => 'text-gray-600',
-      'Gagal' => 'text-red-800',
+      'Menunggu' => 'text-yellow-600',
+      'Diproses' => 'text-purple-600',
+      'Selesai' => 'text-green-600',
+      'Dibatalkan' => 'text-red-600',
       default => 'text-gray-600',
       };
       @endphp
