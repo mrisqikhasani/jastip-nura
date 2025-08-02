@@ -26,7 +26,7 @@
   <section class="container mx-auto max-w-[1200px] border-b py-5 flex flex-row lg:py-10">
     <!-- image gallery -->
     <div class="px-5">
-    <img class="w-80 rounded-lg" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
+    <img class="w-96 rounded-lg" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
     </div>
 
     <!-- description  -->
@@ -143,7 +143,8 @@
         Swal.fire({
           title: "Berhasil",
           text: "Produk berhasil ditambahkan ke keranjang!",
-          icon: "success"
+          icon: "success",
+          confirmButtonColor: "#555879"
         });
         })
         .catch(error => {

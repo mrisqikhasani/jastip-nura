@@ -44,7 +44,7 @@
         </p>
 
         <p class="mb-4 text-gray-700">
-            Butuh barang dari Chatuchak Market, Siam Paragon, atau Night Market lokal? Cukup request via Instagram atau WhatsApp, dan kami bantu carikan langsung.
+            Butuh barang dari Chatuchak Market, Siam Paragon, atau Night Market lokal? Cukup request via Instagram atau WhatsApp dan kami bantu carikan langsung.
         </p>
       </div>
     </div>

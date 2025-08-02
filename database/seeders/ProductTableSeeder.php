@@ -15,7 +15,7 @@ class ProductTableSeeder extends Seeder
                 'description' => 'Cardigan rajut dengan motif serong elegan dan kancing kristal yang memberi kesan mewah dan feminin. Cocok untuk tampilan hangat namun tetap stylish.',
                 'category' => 'atasan',
                 'size' => 'All Size (fit to M–L)',
-                'image' => '/storage/product/atasan-1.jpg',
+                'image' => 'products/atasan-1.jpg',
             ],
             [
                 'name' => 'Rok Tweed Hitam Putih Rantai',
@@ -23,7 +23,7 @@ class ProductTableSeeder extends Seeder
                 'description' => 'Rok mini berbahan tweed motif kotak dengan detail rantai emas dan pita hitam yang elegan. Cocok untuk tampilan semi-formal atau kasual chic.',
                 'category' => 'bawahan',
                 'size' => 'Lingkar pinggang ±64–72 cm, panjang rok ±40 cm',
-                'image' => '/storage/product/bawahan-1.jpg',
+                'image' => 'products/bawahan-1.jpg',
             ],
             [
                 'name' => 'Hand & Body Lotion 12 Vitamin',
@@ -31,15 +31,15 @@ class ProductTableSeeder extends Seeder
                 'description' => 'Lotion ringan dengan kandungan vitamin C dan E, cepat meresap dan cocok untuk perawatan harian.',
                 'category' => 'bodycare',
                 'size' => '100g',
-                'image' => '/storage/product/bodycare-1.jpg',
+                'image' => 'products/bodycare-1.jpg',
             ],
             [
                 'name' => 'Coconut Deep Aqua Mask',
                 'price' => 8000,
-                'description' => 'Masker wajah dengan kandungan ekstrak kelapa yang kaya akan kelembapan alami, membantu menghidrasi kulit kering dan menjaga elastisitas wajah.',
+                'description' => 'Masker wajah dengan kandungan ekstrak kelapa yang kaya akan kelembapan alami, membantu menghidrasi kulit kering dan menjaga elastisitas wajah. Cocok untuk semua jenis kulit, direkomendasikan digunakan 2–3 kali seminggu.',
                 'category' => 'skincare',
                 'size' => '30g',
-                'image' => '/storage/product/skincare-1.jpg',
+                'image' => 'products/skincare-1.jpg',
             ],
         ]);
     }

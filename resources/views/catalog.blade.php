@@ -33,7 +33,7 @@
         @foreach($categories as $category)
       <div class="flex w-full justify-between">
       <div class="flex justify-center items-center">
-        <input type="checkbox" id="{{ $category }}" value="{{ $category }}" />
+        <input type="checkbox" class="accent-secondary" id="{{ $category }}" value="{{ $category }}" />
         <p class="ml-4">{{ ucfirst($category) }}</p>
       </div>
       <div>
@@ -210,7 +210,8 @@
         Swal.fire({
         title: "Berhasil",
         text: "Produk berhasil ditambahkan ke keranjang!",
-        icon: "success"
+        icon: "success",
+        confirmButtonColor: "#555879"
         });
       })
       .catch(error => {

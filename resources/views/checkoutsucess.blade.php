@@ -52,15 +52,19 @@
         <span class="font-semibold text-gray-800">{{ Auth::user()->name }}</span>!
       </p>
 
-      @if ($order->payment_method === 'COD')
+      @if ($order->payment_method === 'cod')
       <p class="text-gray-500 text-sm md:text-base mt-2">
       Kami sedang memproses pesanan Anda. Anda dapat memantau statusnya di halaman <strong>Riwayat Pesanan</strong>.
       </p>
 
       <div class="mt-10">
-      <a href="{{ url('/account/order') }}"
-        class="bg-secondary hover:bg-primary text-white px-6 py-3 rounded-lg font-medium transition flex flex-row items-center justify-center">
-        <i class="fa-solid fa-file-invoice text-xl"></i>Lihat Riwayat Pesanan
+      <img src="{{ asset('storage/Order-successfully.svg') }}" alt="Order Success" class="w-48 h-48 mx-auto">
+      </div>
+
+      <div class="mt-10">
+      <a href="{{ url('/account/order/'.$order->id) }}"
+        class="bg-secondary hover:bg-primary text-white px-6 py-3 rounded-lg font-medium transition flex flex-row items-center justify-center gap-3">
+        <i class="fa-solid fa-file-invoice text-lg"></i>Lihat Riwayat Pesanan
       </a>
       </div>
     @else
@@ -83,7 +87,7 @@
 
       <!-- Upload Button -->
       <div class="mt-6 flex flex-col sm:flex-row sm:justify-center gap-4">
-      <a href="{{ url('/account/order'.$order->id) }}"
+      <a href="{{ url('/account/order/'.$order->id) }}"
         class="bg-secondary hover:bg-primary text-white px-6 py-3 rounded-lg font-medium transition flex items-center flex-row justify-center">
         <i class="fa-solid fa-file-invoice text-xl"></i>Lihat Riwayat Pesanan
       </a>

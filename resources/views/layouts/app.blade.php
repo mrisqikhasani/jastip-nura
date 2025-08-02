@@ -39,6 +39,10 @@
         body {
             font-family: 'Poppins';
         }
+        input[type="search"]::-webkit-search-cancel-button {
+            display: none;
+            -webkit-appearance: none;
+        }
     </style>
 </head>
 

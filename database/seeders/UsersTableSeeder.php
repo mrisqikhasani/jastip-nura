@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
                 'username' => 'adminura',
                 'password' => Hash::make('@dm1n123'),
                 'role' => 'admin', 
-                'phone_number' => '081234567890', 
+                'phone_number' => '0838555936', 
             ]);
         }
 
@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
                 'username' => 'nrsenita',
                 'password' => Hash::make('@Noor008'),
                 'role' => 'user',
-                'phone_number' => '081234567890',
+                'phone_number' => '0878555637',
             ]);
         }
     }

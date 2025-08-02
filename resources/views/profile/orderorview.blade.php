@@ -142,7 +142,7 @@
 
       <div class="py-3 text-sm">
       <p class="font-bold">Rincian Pembayaran</p>
-      @if ($order->payment_method === 'COD')
+      @if ($order->payment_method === 'cod')
       <p>Metode: Cash Of Delivery (COD)</p>
     @elseif($order->payment_method === 'bank_transfer')
       <p>Metode: Bank Transfer</p>

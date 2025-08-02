@@ -74,47 +74,37 @@
     </div>
   </section>
 
-
-
   <p class="mx-auto mt-20 mb-5 max-w-[1200px] font-semibold text-secondary text-xl px-5">Rekomendasi untuk Anda</p>
-
   <!-- Recommendations -->
-  <section class="mx-auto grid max-w-[1200px] grid-cols-2 gap-6 px-5 pb-10 lg:grid-cols-4">
-
-    @for($i = 0; $i < 4; $i++)
-    <!-- 4 -->
-    <div class="flex flex-col">
+  <section class="mx-auto grid max-w-[1200px] grid-cols-2 gap-10 px-5 pb-10 lg:grid-cols-4">
+  @foreach($recommendedProducts as $product)
+  <div class="flex flex-col">
     <div class="relative flex">
-      <img class="rounded-lg" src="storage/product-bigsofa.png" alt="sofa image" />
+      <img class="w-full aspect-square object-cover rounded-lg" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
       <div
-      class="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100">
-      <a href="product-overview.html">
-      <span class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-secondary">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-        stroke="currentColor" class="h-4 w-4 text-white">
-        <path stroke-linecap="round" stroke-linejoin="round"
-        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-      </svg>
-      </span>
-      </a>
+        class="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100">
+        <a href="{{ url('/product/' . $product->id) }}">
+          <span class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="h-6 w-6 text-white">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+          </span>
+        </a>
       </div>
     </div>
 
     <div>
-      <p class="mt-2 font-medium">Barang</p>
+      <p class="mt-2 font-medium">{{ $product->name }}</p>
       <p class="font-medium text-secondary">
-      ${formatIDR(150000)}
-      <span class="text-sm text-gray-500 line-through">${formatIDR(200000)}</span>
+        Rp{{ number_format($product->price) }} 
       </p>
-
-      <div>
-      </div>
     </div>
-    </div>
-    @endfor
-
-
+  </div>
+  @endforeach
   </section>
+
   <!-- /Recommendations -->
 @endsection
 

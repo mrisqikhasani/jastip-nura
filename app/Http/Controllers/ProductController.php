@@ -10,7 +10,8 @@ class ProductController extends Controller
     //get home
     public function index()
     {
-        return view('home');
+        $recommendedProducts = Product::inRandomOrder()->limit(4)->get();
+        return view('home', compact('recommendedProducts'));
     }
 
     public function catalog()
