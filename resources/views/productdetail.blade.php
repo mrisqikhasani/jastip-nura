@@ -42,6 +42,11 @@
       Rp{{ number_format($product->price) }} 
     </p>
 
+    <div class="mt-2 flex flex-row gap-2 items-center justify-start text-primary">
+      <i class="fa-solid fa-shirt text-xl"></i>
+      <p class="text-base font-medium">{{ $product->size }}</p>
+    </div>
+
     <p class="mt-2 text-sm leading-5 text-gray-500">
       {{ $product->description }}
     </p>

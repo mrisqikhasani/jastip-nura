@@ -10,7 +10,7 @@
     <div class="py-5">
       <div class="flex items-center">
       <img width="40px" height="40px" class="rounded-full object-cover"
-        src="{{ asset('storage/jiamge/' . $user->image) }}" alt="{{ $user->name }}" />
+        src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('storage/placeholder-img.svg') }}" alt="User avatar" />
       <div class="ml-5">
         <p class="text-sm text-gray-500">Hello,</p>
         <p class="font-bold">{{ $user->name }}</p>

@@ -22,7 +22,7 @@
 
       <h2 class="text-lg font-bold mb-4">Foto Profil</h2>
       <div class="mx-auto mb-5 flex flex-col items-center bg-gray-100 p-5 rounded-lg lg:mx-0 lg:w-1/2">
-      <img class="h-20 w-20 rounded-full mb-4" src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('images/default-avatar.png') }}" alt="User avatar" />
+      <img class="h-20 w-20 rounded-full mb-4" src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('storage/placeholder-img.svg') }}" alt="User avatar" />
 
       <form method="POST" action="{{ url('/account/profile/avatar') }}" enctype="multipart/form-data"
         class="w-full flex flex-col items-center">

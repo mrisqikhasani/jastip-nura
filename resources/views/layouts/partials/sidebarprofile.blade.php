@@ -23,7 +23,7 @@
     <section class="hidden w-[300px] flex-shrink-0 px-4 lg:block">
         <div class="border-b py-5">
             <div class="flex items-center">
-                <img width="40px" height="40px" class="rounded-full object-cover" src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('images/default-avatar.png') }}"
+                <img width="40px" height="40px" class="rounded-full object-cover" src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('storage/placeholder-img.svg') }}"
                     alt="User Profile" />
                 <div class="ml-5">
                     <p class="font-medium text-gray-500">Halo,</p>

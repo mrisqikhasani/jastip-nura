@@ -17,7 +17,8 @@ return new class extends Migration
             $table->integer('quantity')->nullable();
             $table->float('price');
             $table->text('description')->nullable();
-            $table->enum('category', ['atasan', 'skincare', 'bodycare', 'flatshoes']);
+            $table->string('size');
+            $table->enum('category', ['atasan', 'skincare', 'bodycare', 'bawahan']);
             $table->string('image')->nullable();
             $table->timestamps();
         });

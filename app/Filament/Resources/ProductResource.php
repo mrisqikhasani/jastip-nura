@@ -37,12 +37,6 @@ class ProductResource extends Resource
                     ->label('Nama')
                     ->required(),
 
-                TextInput::make('quantity')
-                    ->label('Kuantitas')
-                    ->numeric()
-                    ->default(0)
-                    ->required(),
-
                 TextInput::make('price')
                     ->label('Harga')
                     ->prefix('Rp')
@@ -55,8 +49,12 @@ class ProductResource extends Resource
                         'atasan' => 'Atasan',
                         'skincare' => 'Skincare',
                         'bodycare' => 'Bodycare',
-                        'flatshoes' => 'Flatshoes',
+                        'bawahan' => 'Bawahan',
                     ])
+                    ->required(),
+                
+                TextInput::make('size')
+                    ->label('Ukuran')
                     ->required(),
 
                 Textarea::make('description')
@@ -77,7 +75,6 @@ class ProductResource extends Resource
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->label('Nama')->searchable()->sortable(),
                 ImageColumn::make('image')->label('Foto'),
-                TextColumn::make('quantity')->label('Kuantitas')->sortable(),
                 TextColumn::make('price')
                 ->label('Harga')
                 ->sortable()
