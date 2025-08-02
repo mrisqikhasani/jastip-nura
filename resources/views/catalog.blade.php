@@ -192,7 +192,7 @@
 
       // Optional: disable button while processing
       button.disabled = true;
-      button.innerText = 'Adding...';
+      button.innerText = 'Menambahkan...';
 
       fetch("{{ url('/cart') }}", {
       method: 'POST',
@@ -208,22 +208,22 @@
       .then(response => response.json())
       .then(data => {
         Swal.fire({
-        title: "Product Berhasil Di tambahkan !",
-        text: "You clicked the button!",
+        title: "Berhasil",
+        text: "Produk berhasil ditambahkan ke keranjang!",
         icon: "success"
         });
       })
       .catch(error => {
         console.error(error);
         Swal.fire({
-        title: "Gagal saat menambahkan product !",
-        text: "You clicked the button!",
+        title: "Gagal",
+        text: "Gagal saat menambahkan produk",
         icon: "error"
         });
       })
       .finally(() => {
         button.disabled = false;
-        button.innerText = 'Add to cart';
+        button.innerText = 'Menambahkan ke keranjang';
       });
     }
     });

@@ -117,3 +117,11 @@
   </section>
   <!-- /Recommendations -->
 @endsection
+
+@section('scripts')
+<script>
+  function formatIDR(amount) {
+    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+  }
+</script>
+@endsection

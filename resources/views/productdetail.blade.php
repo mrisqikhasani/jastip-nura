@@ -23,16 +23,15 @@
   <!-- /breadcrumbs  -->
   </div>
 
-  <section class="container flex-grow mx-auto max-w-[1200px] border-b py-5 lg:grid lg:grid-cols-2 lg:py-10">
+  <section class="container mx-auto max-w-[1200px] border-b py-5 flex flex-row lg:py-10">
     <!-- image gallery -->
-    <div class="px-4">
+    <div class="px-5">
       <img class="w-80 rounded-lg" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
-    <!-- /image gallery  -->
     </div>
 
     <!-- description  -->
 
-    <div class="mx-auto">
+    <div class="ml-5">
     <h2 class="pt-3 text-3xl font-bold lg:pt-0">{{ $product->name }}</h2>
 
     <p class="font-medium mt-2">
@@ -71,7 +70,7 @@
       <input type="hidden" name="quantity" id="qtyInputHidden" value="1">
       <input type="hidden" name="product_id" value="{{ $product->id }}">
       <button
-      class="add-to-cart font-medium text-base px-3 flex h-12 rounded-lg items-center justify-center bg-secondary text-white duration-100 trasition-all ease-in hover:bg-primary"
+      class="add-to-cart font-medium text-sm px-4 flex h-12 rounded-lg items-center justify-center bg-secondary text-white duration-100 trasition-all ease-in hover:bg-primary"
       type="button" data-product-id="{{ $product->id }}">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="mr-3 h-4 w-4">
@@ -122,7 +121,7 @@
 
       // Optional: disable button while processing
       button.disabled = true;
-      button.innerText = 'Adding...';
+      button.innerText = 'Menambahkan...';
 
       fetch("{{ url('/cart') }}", {
         method: 'POST',
