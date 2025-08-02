@@ -9,7 +9,7 @@
 
             {{-- Product Image --}}
             <a href="#" class="shrink-0 md:order-1">
-              <img class="h-20 w-20" 
+              <img class="h-20 w-20 rounded-lg" 
                    src="{{ $item->product->image ? asset('storage/' . $item->product->image) : 'https://via.placeholder.com/80' }}"
                    alt="{{ $item->product->name }}" />
             </a>
@@ -66,7 +66,7 @@
     </div>
 
     {{-- Order Summary --}}
-    <div class="w-full lg:w-[300px] rounded-lg border bg-white p-6 shadow-md">
+    <div class="w-full lg:w-[300px] rounded-lg border border-gray-300 bg-white p-6">
       <h2 class="text-lg font-bold mb-4">Order Summary</h2>
 
       <div class="flex justify-between py-2">
@@ -75,7 +75,7 @@
       </div>
 
       <div class="flex justify-between py-2 border-b">
-        <span class="text-gray-500">Shipping</span>
+        <span class="text-gray-500">Pengiriman</span>
         <span class="text-green-600">Gratis</span>
       </div>
 
@@ -85,7 +85,7 @@
       </div>
 
       <button wire:click="prosesCheckout"
-              class="mt-4 w-full bg-violet-900 py-2 text-white rounded hover:bg-violet-800 transition">
+              class="mt-4 w-full bg-secondary py-2 font-medium text-white rounded-lg hover:bg-primary transition">
         Checkout
       </button>
     </div>
