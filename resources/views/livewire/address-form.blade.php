@@ -58,12 +58,10 @@
 
     @forelse ($address as $addr)
     <div class="border p-4 mb-4 rounded-lg cursor-pointer hover:bg-slate-100 hover:border-slate-300
-    @if($address_id == $addr->id)
+      @if($address_id == $addr->id)
       bg-slate-100 border-slate-300
-    @endif
-    " 
-    wire:click="fillForm({{ $addr->id }})"
-    >
+      @endif
+      " wire:click="fillForm({{ $addr->id }})">
       <p><strong>{{ $addr->receiver_name }}</strong></p>
       <p>{{ $addr->province }}, {{ $addr->city }}</p>
       <p>{{ $addr->postal_code }}</p>
@@ -75,14 +73,35 @@
       </button>
 
       <!-- Tombol DELETE -->
-      <button wire:click="delete({{ $addr->id }})" class="text-red-600 hover:underline"
-        onclick="return confirm('Yakin ingin menghapus alamat ini?')">
+      <button onclick="confirmDelete({{ $addr->id }})" class="text-red-600 hover:underline">
         Hapus
       </button>
+
       </div>
     </div>
   @empty
     <p class="text-gray-500">Belum ada alamat.</p>
   @endforelse
   </div>
+  <script>
+  function confirmDelete(id) {
+    Swal.fire({
+      title: 'Yakin ingin menghapus?',
+      text: "Data tidak bisa dikembalikan!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya, hapus!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Ini memanggil langsung method Livewire dari komponen ini
+        @this.call('deleteAddress', id); // Langsung manggil method di komponen
+      }
+    });
+  }
+</script>
+
+
 </div>

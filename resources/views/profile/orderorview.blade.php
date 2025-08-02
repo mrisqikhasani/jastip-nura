@@ -106,7 +106,11 @@
       <h2 class="font-bold text-lg text-gray-800 mb-4">Rincian Pesanan</h2>
 
       <div class="mb-3 text-sm">
-      <p>ID Pesanan: &num;{{ $order->id }}</p>
+      <p>ID Pesanan: 
+        <span class="font-semibold">
+        &num;{{ $order->id }}
+        </span>
+      </p>
       </div>
 
       <div class="border-b py-3 text-sm">
@@ -138,7 +142,11 @@
 
       <div class="py-3 text-sm">
       <p class="font-bold">Rincian Pembayaran</p>
-      <p>Metode: {{ $order->payment_method }}</p>
+      @if ($order->payment_method === 'COD')
+      <p>Metode: Cash Of Delivery (COD)</p>
+    @elseif($order->payment_method === 'bank_transfer')
+      <p>Metode: Bank Transfer</p>
+    @endif
       </div>
     </div>
 
@@ -158,9 +166,9 @@
       </div>
     @else
       <div class="text-sm text-gray-700">
-      <p class="mb-2">Bukti pembayaran telah diunggah:</p>
+      <p class="mb-2">Bukti pembayaran telah diunggah</p>
       <a href="{{ asset('storage/' . $order->payments_proofs) }}" target="_blank"
-      class="text-violet-600 hover:underline">
+      class="text-secondary hover:underline hover:text-primary">
       Lihat Bukti Pembayaran
       </a>
       </div>
