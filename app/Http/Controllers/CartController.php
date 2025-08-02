@@ -50,7 +50,10 @@ class CartController extends Controller
         }
 
         try {
-            $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
+            $cart = Cart::firstOrCreate(
+                ['user_id' => Auth::id()],
+                ['total_price' => 0] // Default value saat pertama kali dibuat
+                );
 
             $item = $cart->cartLineItems()
                 ->where('product_id', $validated['product_id'])

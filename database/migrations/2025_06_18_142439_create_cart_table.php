@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('user_id')->constrained('users','id');
-            $table->decimal('total_price', 10, 0);
+            $table->decimal('total_price', 10, 0)->nullable()->default(0);
             $table->timestamps();
         });
     }
