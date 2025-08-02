@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Storage;
 
 
 class AccountController extends Controller
@@ -77,13 +78,28 @@ class AccountController extends Controller
             'profile_picture' => 'image|max:2048',
         ]);
 
-        $avatarPath = $request->file('profile_picture')->store('profile', 'public');
+        try {
+            $user = Auth::user();
 
-        auth()->user()->update(['profile_picture' => $avatarPath]);
+            // Hapus file lama jika ada
+            if ($user->profile_picture && Storage::disk('public')->exists($user->profile_picture)) {
+                Storage::disk('public')->delete($user->profile_picture);
+            }
 
+            // Simpan file baru
+            $avatarPath = $request->file('profile_picture')->store('profile', 'public');
 
-        return back()->with('success', 'Profile updated!');
+            // Update profil user
+            $user->update([
+                'profile_picture' => $avatarPath,
+            ]);
 
+            return back()->with('success', 'Foto profil berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'upload_error' => 'Gagal memperbarui foto profil: ' . $e->getMessage(),
+            ]);
+        }
     }
 
     public function changePasswordForm()

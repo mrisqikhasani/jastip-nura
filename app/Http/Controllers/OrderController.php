@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use Illuminate\Support\Facades\Storage;
+
 
 class OrderController extends Controller
 {
@@ -46,33 +48,48 @@ class OrderController extends Controller
 
     public function checkoutOrderSuccessPage($orderId)
     {
-        if(!Auth::check()){
+        if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'Silahkan login terlebih dahulu');
         }
 
         $order = Order::find($orderId);
 
-        return view('checkoutsucess', compact('order')); 
+        return view('checkoutsucess', compact('order'));
     }
 
     public function showUploadForm(Order $order)
     {
         return view('paymentupload', compact('order'));
     }
-
     public function processUpload(Request $request, Order $order)
     {
-        $request->validate([
-            'proof' => 'required|image|mimes:jpg,jpeg,png|max:10240',
-        ]);
+        try {
+            // Validasi input
+            $request->validate([
+                'proof' => 'required|image|mimes:jpg,jpeg,png|max:10240',
+            ]);
 
-        $path = $request->file('proof')->store('payment_proofs', 'public');
+            // Hapus file lama jika ada
+            if ($order->payments_proof && Storage::disk('public')->exists($order->payments_proof)) {
+                Storage::disk('public')->delete($order->payments_proof);
+            }
 
-        $order->update([
-            'payments_proof' => $path,
-            'status' => 'Diproses',
-        ]);
+            // Simpan file baru
+            $path = $request->file('proof')->store('payment_proofs', 'public');
 
-        return redirect('/account/order/' . $order->id)->with('success', 'Bukti transfer berhasil diunggah!');
+            // Update order
+            $order->update([
+                'payments_proofs' => $path,
+                'status' => 'Diproses',
+            ]);
+
+            return redirect('/account/order/' . $order->id)
+                ->with('success', 'Bukti transfer berhasil diunggah!');
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'upload_error' => 'Gagal mengunggah bukti transfer. ' . $e->getMessage()
+            ]);
+        }
     }
+
 }

@@ -26,7 +26,7 @@
   <section class="container mx-auto max-w-[1200px] border-b py-5 flex flex-row lg:py-10">
     <!-- image gallery -->
     <div class="px-5">
-      <img class="w-80 rounded-lg" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
+    <img class="w-80 rounded-lg" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
     </div>
 
     <!-- description  -->
@@ -39,8 +39,7 @@
     </p>
 
     <p class="mt-2 text-xl font-semibold text-secondary">
-      Rp{{ number_format($product->price) }} <span
-      class="text-xl text-gray-400 line-through">{{ number_format(5000) }}</span>
+      Rp{{ number_format($product->price) }} 
     </p>
 
     <p class="mt-2 text-sm leading-5 text-gray-500">
@@ -136,12 +135,19 @@
       })
         .then(response => response.json())
         .then(data => {
-        console.log(data);
-        alert(data.message || 'Product added!');
+        Swal.fire({
+          title: "Berhasil",
+          text: "Produk berhasil ditambahkan ke keranjang!",
+          icon: "success"
+        });
         })
         .catch(error => {
         console.error(error);
-        alert('Error adding to cart.: ', error);
+        Swal.fire({
+          title: "Gagal",
+          text: "Gagal saat menambahkan produk",
+          icon: "error"
+        });
         })
         .finally(() => {
         button.disabled = false;

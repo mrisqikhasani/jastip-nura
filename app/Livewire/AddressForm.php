@@ -12,6 +12,8 @@ class AddressForm extends Component
     public $address;
     public $address_id = null;
 
+    protected $listeners = ['deleteAddress'];
+
     public $receiver_name, $phone_number, $province, $city, $postal_code, $detail;
 
     protected $rules = [
@@ -91,22 +93,23 @@ class AddressForm extends Component
         $this->refreshAddresses();
     }
 
-    public function delete($id)
-    {
-        $address = Address::find($id);
+    public function deleteAddress($id)
+{
+    $address = Address::find($id);
 
-        if ($address && $address->user_id === Auth::id()) {
-            $address->delete();
-            session()->flash('success', 'Alamat berhasil dihapus.');
+    if ($address && $address->user_id === Auth::id()) {
+        $address->delete();
+        session()->flash('success', 'Alamat berhasil dihapus.');
 
-            // If currently editing the deleted address, reset form
-            if ($this->address_id == $id) {
-                $this->resetForm();
-            }
-
-            $this->refreshAddresses();
+        // Jika alamat yang dihapus sedang diedit, reset form
+        if ($this->address_id == $id) {
+            $this->resetForm();
         }
+
+        $this->refreshAddresses();
     }
+}
+
     public function render()
     {
         return view('livewire.address-form');

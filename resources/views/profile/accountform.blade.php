@@ -32,7 +32,9 @@
         <label class="block w-full">
         <span class="sr-only">Pilih foto</span>
         <input type="file" name="profile_picture"
-          class="w-full border border-primary rounded-lg text-sm font-medium text-gray-700 outline-none file:rounded-lg file:mr-4 file:text-sm file:bg-primary file:text-white file:py-2 file:px-4 file:font-medium file:border-none" />
+          class="w-full border border-primary rounded-lg text-sm font-medium text-gray-700 outline-none file:rounded-lg file:mr-4 file:text-sm file:bg-primary file:text-white file:py-2 file:px-4 file:font-medium file:border-none" 
+          accept=".jpg, .jpeg, .png"
+          />
         </label>
 
         @error('avatar')

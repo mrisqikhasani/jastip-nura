@@ -83,11 +83,11 @@
 
       <!-- Upload Button -->
       <div class="mt-6 flex flex-col sm:flex-row sm:justify-center gap-4">
-      <a href="{{ url('/account/order') }}"
+      <a href="{{ url('/account/order'.$order->id) }}"
         class="bg-secondary hover:bg-primary text-white px-6 py-3 rounded-lg font-medium transition flex items-center flex-row justify-center">
         <i class="fa-solid fa-file-invoice text-xl"></i>Lihat Riwayat Pesanan
       </a>
-      <a href="{{url('/account') }}"
+      <a href="{{url('/payment/upload/'.$order->id) }}"
         class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition flex items-center flex-row justify-center">
         <i class="fa-solid fa-cloud-arrow-up text-xl"></i>Upload Bukti Transfer
       </a>
