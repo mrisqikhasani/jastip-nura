@@ -40,8 +40,8 @@
                             <i class="fa-solid fa-id-card text-lg"></i>
                             Manajemen Akun</a>
                         <a href="{{ url('/account/profile') }}" class="{{ request()->is('account/profile') ? 'text-primary' : 'hover:text-secondary' }}">Informasi Profil</a>
-                        <a href="{{ url('/account/address') }}"class="{{ request()->is('account/profile') ? 'text-primary' : 'hover:text-secondary'}}">Ubah Alamat</a>
-                        <a href="{{ url('/account/change-password') }}" class="{{ request()->is('account/profile') ? 'text-primary' : 'hover:text-secondary'}}">Ubah Password</a>
+                        <a href="{{ url('/account/address') }}"class="{{ request()->is('account/address') ? 'text-primary' : 'hover:text-secondary'}}">Ubah Alamat</a>
+                        <a href="{{ url('/account/change-password') }}" class="{{ request()->is('account/change-password') ? 'text-primary' : 'hover:text-secondary'}}">Ubah Password</a>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="flex w-full">
                 <div class="flex flex-col gap-2">
                     <a href="{{ url("/account/order") }}"
-                        class="flex items-center gap-2 font-medium {{ request()->is('order') ? 'text-secondary' : ' hover:text-secondary' }}">
+                        class="flex items-center gap-2 font-medium {{ request()->is('account/order') ? 'text-secondary' : ' hover:text-secondary' }}">
                         <i class="fa-solid fa-receipt text-lg"></i>
                         Riwayat Pesanan</a>
                 </div>

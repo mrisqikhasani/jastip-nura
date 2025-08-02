@@ -81,7 +81,7 @@
         <td class="px-6 py-4">
         <a href="{{ url('/account/order/' . $order->id) }}"
         class="inline-block bg-secondary text-white text-xs px-4 py-2 rounded-md hover:bg-primary transition">
-        View
+        Lihat
         </a>
         </td>
         </tr>

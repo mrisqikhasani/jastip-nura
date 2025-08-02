@@ -145,7 +145,7 @@
         })
         .finally(() => {
         button.disabled = false;
-        button.innerText = 'Add to cart';
+        button.innerText = 'Tambah ke Keranjang';
         });
       }
     });

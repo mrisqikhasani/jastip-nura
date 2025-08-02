@@ -15,7 +15,7 @@
       </a>
     </li>
     <li><span class="mx-2">&gt;</span></li>
-    <li class="text-gray-500">Cart</li>
+    <li class="text-gray-500">Keranjang</li>
     </ul>
   </nav>
   <!-- /Breadcrumbs -->
@@ -23,7 +23,7 @@
   <!-- Cart Content -->
   <div class="mx-auto mt-8 w-full max-w-[1200px] px-5">
     <!-- Title -->
-    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Shopping Cart</h2>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Keranjang Belanja</h2>
 
     <!-- Main Content -->
     <div class="flex flex-col md:flex-row gap-6">

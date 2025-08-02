@@ -94,15 +94,15 @@
 
 @else
   {{-- Keranjang Kosong --}}
-  <div class="grid place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+  <div class="grid place-items-center bg-white px-6 py-10">
     <div class="text-center">
-      <h3 class="mt-4 text-2xl font-semibold text-indigo-900 sm:text-4xl">Keranjang Kamu Masih Kosong</h3>
+      <img src="/storage/empty-cart.svg" class="w-80 mx-auto"/>
       <p class="mt-6 text-sm text-gray-500 sm:text-lg">
         Silakan tambahkan produk pilihanmu ke keranjang.
       </p>
-      <div class="mt-10 flex items-center justify-center gap-x-6">
+      <div class="mt-5 flex items-center justify-center gap-x-6">
         <a href="{{ url('/catalog') }}"
-           class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500">
+           class="rounded-lg bg-secondary px-4 py-2 text-sm font-medium text-white hover:bg-primary">
           Kunjungi Katalog
         </a>
       </div>
