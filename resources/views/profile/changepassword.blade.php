@@ -37,24 +37,24 @@
       @csrf
       @method('PUT')
       <div class="flex w-full flex-col">
-      <label class="flex" for="name">Current password<span
+      <label class="flex" for="name">Password Saat Ini<span
         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
       <input class="w-full border px-4 py-2 lg:w-1/2 rounded-lg" type="password" name='current_password' placeholder="" />
       </div>
 
       <div class="flex w-full flex-col">
-      <label class="flex" for="name">New Password<span
+      <label class="flex" for="name">Password Baru<span
         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
       <input class="w-full border px-4 py-2 lg:w-1/2 rounded-lg" type="password" name="new_password" placeholder="" />
       </div>
 
       <div class="flex flex-col">
-      <label class="flex" for="">Repeat New Password<span
+      <label class="flex" for="">Konfirmasi Password Baru<span
         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:text-red-500 after:content-['*']"></span></label>
       <input class="w-full border px-4 py-2 lg:w-1/2 rounded-lg" type="password" name="new_password_confirmation" placeholder="" />
       </div>
 
-      <button type="submit" class="mt-4 w-40 bg-violet-900 hover:bg-violet-700 px-4 py-2 text-white rounded-lg">
+      <button type="submit" class="font-medium mt-4 w-40 bg-secondary hover:bg-primary px-4 py-2 text-white rounded-lg">
       Save changes
       </button>
     </form>

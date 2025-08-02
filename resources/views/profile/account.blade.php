@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <<!-- Dashboard Content -->
+  <!-- Dashboard Content -->
     <section class="grid w-full max-w-[1200px] grid-cols-1 gap-4 px-5 pb-10 md:grid-cols-2">
 
     <!-- Personal Profile -->

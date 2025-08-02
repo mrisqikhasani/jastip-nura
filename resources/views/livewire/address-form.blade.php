@@ -18,7 +18,7 @@
         @error('receiver_name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
       </div>
       <div>
-        <label>Phone Number</label>
+        <label>Nomor Telepon</label>
         <input type="text" wire:model="phone_number" class="w-full border px-3 py-2 mt-1 rounded-lg" />
         @error('phone_number') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
       </div>
@@ -33,7 +33,7 @@
         @error('city') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
       </div>
       <div>
-        <label>Postal Code</label>
+        <label>Kode Pos</label>
         <input type="text" wire:model="postal_code" class="w-full border px-3 py-2 mt-1 rounded-lg" />
         @error('postal_code') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
       </div>
@@ -42,7 +42,7 @@
         <textarea wire:model="detail" class="w-full border px-3 py-2 mt-1 rounded-lg"></textarea>
         @error('detail') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
       </div>
-      <button type="submit" class="bg-violet-900 hover:bg-violet-700 text-white px-4 py-2 rounded">
+      <button type="submit" class="bg-secondary hover:bg-primary text-white px-4 py-2 rounded-lg">
         Simpan
       </button>
     </form>
@@ -52,12 +52,12 @@
   <div class="border p-5 shadow-md overflow-y-auto max-h-[600px] rounded-lg">
     <h2 class="text-lg font-bold mb-4">Daftar Alamat</h2>
 
-    <button wire:click="resetForm" class="mb-4 bg-violet-800 hover:bg-violet-600 text-white px-4 py-2 rounded-lg">
+    <button wire:click="resetForm" class="mb-4 bg-secondary hover:bg-primary text-white px-4 py-2 rounded-lg">
       + Tambah Alamat Baru
     </button>
 
     @forelse ($address as $addr)
-    <div class="border p-4 mb-4 rounded cursor-pointer hover:bg-slate-100 hover:border-slate-300
+    <div class="border p-4 mb-4 rounded-lg cursor-pointer hover:bg-slate-100 hover:border-slate-300
     @if($address_id == $addr->id)
       bg-slate-100 border-slate-300
     @endif
@@ -71,13 +71,13 @@
       <div class="flex space-x-4 mt-2">
       <!-- Tombol EDIT -->
       <button wire:click="fillForm({{ $addr->id }})" class="text-blue-600 hover:underline">
-        Edit
+        Ubah
       </button>
 
       <!-- Tombol DELETE -->
       <button wire:click="delete({{ $addr->id }})" class="text-red-600 hover:underline"
         onclick="return confirm('Yakin ingin menghapus alamat ini?')">
-        Delete
+        Hapus
       </button>
       </div>
     </div>

@@ -49,7 +49,7 @@
       <table class="min-w-full divide-y divide-gray-200 bg-white">
       <thead class="bg-neutral-100 text-gray-600 uppercase text-sm">
         <tr>
-        <th class="px-6 py-3 text-left">Order</th>
+        <th class="px-6 py-3 text-left">Pesanan</th>
         <th class="px-6 py-3 text-left">Tanggal</th>
         <th class="px-6 py-3 text-left">Total</th>
         <th class="px-6 py-3 text-left">Status</th>
@@ -80,7 +80,7 @@
         </td>
         <td class="px-6 py-4">
         <a href="{{ url('/account/order/' . $order->id) }}"
-        class="inline-block bg-violet-700 text-white text-xs px-4 py-2 rounded-md hover:bg-violet-600 transition">
+        class="inline-block bg-secondary text-white text-xs px-4 py-2 rounded-md hover:bg-primary transition">
         View
         </a>
         </td>
