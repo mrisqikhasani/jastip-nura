@@ -24,13 +24,15 @@ class UsersResource extends Resource
 
     // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $navigationLabel = 'Pengguna';
+    protected static ?string $modelLabel = 'Pengguna';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Name')
+                    ->label('Nama')
                     ->required(),
 
                 TextInput::make('username')
@@ -43,17 +45,17 @@ class UsersResource extends Resource
                     ->required(),
 
                 TextInput::make('phone_number')
-                    ->label('Phone Number'),
+                    ->label('Nomor Telepon'),
 
                 Select::make('role')
-                    ->label('Role')
+                    ->label('Peran')
                     ->options([
                         'user' => 'User',
                         'admin' => 'Admin',
                     ]),
 
                 FileUpload::make('profile_picture')
-                    ->label('Profile Picture')
+                    ->label('Foto Profil')
                     ->directory('user_picture')
                     ->image(),
             ]);
@@ -64,12 +66,11 @@ class UsersResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('name')->label('Name')->sortable()->searchable(),
-                ImageColumn::make('profile_picture')->label('Picture'),
+                TextColumn::make('name')->label('Nama')->sortable()->searchable(),
                 TextColumn::make('username')->label('Username')->sortable()->searchable(),
                 TextColumn::make('email')->label('Email')->sortable()->searchable(),
-                TextColumn::make('phone_number')->label('Phone'),
-                TextColumn::make('role')->label('Role')->sortable(),
+                TextColumn::make('phone_number')->label('Nomor Telepon'),
+                TextColumn::make('role')->label('Peran')->sortable(),
             ])
             ->filters([
                 //

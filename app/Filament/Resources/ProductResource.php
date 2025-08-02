@@ -25,30 +25,32 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+    protected static ?string $navigationLabel = 'Produk';
+    protected static ?string $modelLabel = 'Produk';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Product Name')
+                    ->label('Nama')
                     ->required(),
 
                 TextInput::make('quantity')
-                    ->label('Quantity Product')
+                    ->label('Kuantitas')
                     ->numeric()
                     ->default(0)
                     ->required(),
 
                 TextInput::make('price')
-                    ->label('Price')
+                    ->label('Harga')
                     ->prefix('Rp')
                     ->numeric()
                     ->required(),
 
                 Select::make('category')
-                    ->label('Category')
+                    ->label('Kategori')
                     ->options([
                         'atasan' => 'Atasan',
                         'skincare' => 'Skincare',
@@ -58,10 +60,10 @@ class ProductResource extends Resource
                     ->required(),
 
                 Textarea::make('description')
-                ->label('Description Product'),
+                ->label('Deskripsi'),
 
                 FileUpload::make('image')
-                ->label('Photo Product')
+                ->label('Foto')
                 ->directory('products')
                 ->image(),
             ]);
@@ -73,14 +75,15 @@ class ProductResource extends Resource
             ->columns([
                 //
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('name')->label('Product Name')->searchable()->sortable(),
-                ImageColumn::make('image')->label('Photo Product'),
-                TextColumn::make('quantity')->label('Quantity')->sortable(),
+                TextColumn::make('name')->label('Nama')->searchable()->sortable(),
+                ImageColumn::make('image')->label('Foto'),
+                TextColumn::make('quantity')->label('Kuantitas')->sortable(),
                 TextColumn::make('price')
+                ->label('Harga')
                 ->sortable()
                 ->formatStateUsing(fn ($state) => Str::of(Number::currency($state, 'IDR', 'id'))->replace(',00', '')),
 
-                TextColumn::make('category')->label('Category')->searchable()->sortable(),
+                TextColumn::make('category')->label('Kategori')->searchable()->sortable(),
             ])
             ->filters([
                 //

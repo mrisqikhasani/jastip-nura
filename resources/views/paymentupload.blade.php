@@ -8,15 +8,20 @@
 
     {{-- RINGKASAN PESANAN --}}
     <div class="bg-gray-100 rounded-lg p-4 mb-8">
-      <h3 class="text-lg font-semibold text-gray-700 mb-3">🧾 Ringkasan Pesanan</h3>
+      <div class="flex justify-center flex-row items-center text-center gap-2">
+        <i class="fa-solid fa-file-invoice text-xl"></i>
+        <h3 class="text-lg font-semibold text-gray-700">
+          Ringkasan Pesanan
+        </h3>
+      </div>
       <ul class="text-sm text-gray-700 space-y-2">
         <li><strong>ID Pesanan:</strong> #{{ $order->id }}</li>
         <li><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($order->order_date)->format('d M Y ') }}</li>
         <li><strong>Metode Pembayaran:</strong> {{ strtoupper($order->payment_method) }}</li>
         <li><strong>Total Pembayaran:</strong>
-          <span class="text-violet-800 font-semibold">Rp{{ number_format($order->total_price, 0, ',', '.') }}</span>
+          <span class="text-secondary font-semibold">Rp{{ number_format($order->total_price, 0, ',', '.') }}</span>
         </li>
-        <li><strong>Transfer ke:</strong> BCA 1234567890 a.n. PT Jastip Nura</li>
+        <li><strong>Transfer ke:</strong> DKI 50212345670 a.n. Jastip Nura</li>
       </ul>
     </div>
 
@@ -35,17 +40,14 @@
 
           {{-- Default UI --}}
           <div class="text-center" id="default-upload-text">
-            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M7 16V4m0 0a4 4 0 018 0v12m-8 0h8" />
-            </svg>
-            <p class="mt-2 text-sm text-gray-500">Pilih file atau drag ke sini</p>
+            <i class="fa-solid fa-cloud-arrow-up text-6xl mx-auto text-gray-400"></i>
+            <p class="mt-2 text-sm text-gray-500">Pilih file atau tarik ke sini</p>
             <label
-              class="mt-2 inline-block bg-violet-800 text-white px-4 py-2 text-sm rounded-md cursor-pointer hover:bg-violet-700">
+              class="mt-2 inline-block bg-secondary text-white px-4 py-2 text-sm rounded-lg font-medium cursor-pointer hover:bg-primary">
               Pilih File
               <input type="file" id="proof" name="proof" accept="image/*" class="hidden" required>
             </label>
-            <p class="mt-1 text-xs text-gray-400">Format: JPG, PNG - Maks: 10MB</p>
+            <p class="mt-2 text-xs text-gray-400">Format: JPG, PNG - Maks: 10MB</p>
           </div>
         </div>
 
@@ -56,14 +58,14 @@
 
       <div class="flex justify-center">
         <button type="submit"
-          class="w-full sm:w-auto bg-violet-800 hover:bg-violet-700 text-white font-semibold px-6 py-3 rounded-lg transition">
-          📤 Upload Sekarang
+          class="w-full sm:w-auto bg-secondary gap-2 hover:bg-primary text-white font-medium flex items-center flex-row justify-center px-6 py-3 rounded-lg transition">
+          <i class="fa-solid fa-cloud-arrow-up text-xl"></i>Upload Sekarang
         </button>
       </div>
     </form>
 
     <div class="mt-6 text-center">
-      <a href="{{ url('/account/order') }}" class="text-sm text-violet-700 hover:underline">⬅ Kembali ke Riwayat
+      <a href="{{ url('/account/order') }}" class="text-sm text-secondary font-semibold hover:underline">< Kembali ke Riwayat
         Pesanan</a>
     </div>
   </div>

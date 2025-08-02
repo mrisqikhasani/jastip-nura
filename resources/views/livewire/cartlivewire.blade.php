@@ -3,12 +3,12 @@
   <div class="flex-1 space-y-4">
     @if($cart && $cart->cartLineItems->count())
       @foreach ($cart->cartLineItems as $item)
-        <div class="rounded-lg border border-gray-400 bg-white p-4 shadow-sm md:p-6 mb-4">
+        <div class="rounded-lg border border-gray-300 bg-white p-4 md:p-6 mb-4">
           <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
 
             {{-- Product Image --}}
             <a href="#" class="shrink-0 md:order-1">
-              <img class="h-20 w-20"
+              <img class="h-20 w-20 rounded-lg"
                 src="{{ $item->product->image ? asset('storage/' . $item->product->image) : 'https://via.placeholder.com/80' }}"
                 alt="{{ $item->product->name }}" />
             </a>
@@ -56,17 +56,17 @@
       @endforeach
     @else
       {{-- Empty Cart State --}}
-      <div class="grid place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+      <div class="grid place-items-center bg-white px-6 py-10">
         <div class="text-center">
-          <h3 class="mt-4 text-2xl font-semibold tracking-tight text-balance text-indigo-900 sm:text-4xl">
-            Keranjang Kamu Masih Kosong
-          </h3>
-          <p class="mt-6 text-sm font-medium text-pretty text-gray-500 sm:text-xl/8">
-            Silahkan tambahkan produk pilihanmu ke keranjang.
+          <img src="/storage/empty-cart.svg" class="w-80 mx-auto"/>
+          <p class="mt-6 text-sm text-gray-500 sm:text-lg">
+            Silakan tambahkan produk pilihanmu ke keranjang.
           </p>
-          <div class="mt-10 flex items-center justify-center gap-x-6">
+          <div class="mt-5 flex items-center justify-center gap-x-6">
             <a href="{{ url('/catalog') }}"
-              class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Catalog</a>
+              class="rounded-lg bg-secondary px-4 py-2 text-sm font-medium text-white hover:bg-primary">
+              Kunjungi Katalog
+            </a>
           </div>
         </div>
       </div>
@@ -75,8 +75,8 @@
 
   {{-- Order Summary --}}
   @if ($cart && $cart->cartLineItems->count())
-    <div class="w-full lg:w-[300px] border rounded-lg p-6 shadow-md bg-white">
-      <h2 class="text-lg font-bold mb-4">Order Summary</h2>
+    <div class="w-full lg:w-[300px] rounded-lg p-6 border border-gray-300 bg-white">
+      <h2 class="text-lg font-bold mb-4">Ringkasan Pesanan</h2>
 
       <div class="flex justify-between py-2">
         <span class="text-gray-500">Subtotal</span>
@@ -94,7 +94,7 @@
       </div>
 
       <button wire:click="prosesCheckout"
-        class="mt-4 w-full bg-violet-900 py-2 text-white rounded hover:bg-violet-800 transition">
+        class="mt-4 w-full bg-secondary font-medium py-2 text-white rounded-lg hover:bg-primary transition">
         Checkout
       </button>
     </div>

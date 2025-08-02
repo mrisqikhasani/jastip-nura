@@ -1,12 +1,10 @@
 <div class="max-w-6xl mx-auto px-4 py-10">
   <h1 class="text-3xl font-bold mb-8 text-gray-800">Checkout</h1>
-
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
     <!-- 🧾 Kiri: Alamat + Metode Pembayaran -->
     <div class="lg:col-span-2 space-y-6">
-
       {{-- 📍 Address Selection --}}
-      <div class="bg-white p-6 rounded-2xl shadow-md">
+      <div class="bg-white p-6 rounded-2xl border border-gray-300">
         <h2 class="text-xl font-semibold mb-4 text-gray-700">Alamat Pengiriman</h2>
 
         @foreach($address as $add)
@@ -28,7 +26,7 @@
       </div>
 
       {{-- 💰 Payment Method --}}
-      <div class="bg-white p-6 rounded-2xl shadow-md">
+      <div class="bg-white p-6 rounded-2xl border border-gray-300">
         <h2 class="text-xl font-semibold mb-4 text-gray-700">Metode Pembayaran</h2>
 
         <div class="space-y-3">
@@ -46,7 +44,7 @@
     </div>
 
     <!-- 📦 Kanan: Ringkasan Pesanan -->
-    <div class="bg-white p-6 rounded-2xl shadow-md h-fit">
+    <div class="bg-white p-6 rounded-2xl border border-gray-300 h-fit">
       <h2 class="text-xl font-semibold mb-4 text-gray-700">Ringkasan Pesanan</h2>
 
       <div class="space-y-4 max-h-[400px] overflow-y-auto pr-1">
@@ -69,7 +67,7 @@
       </div>
 
       <div class="flex justify-between">
-        <span class="text-gray-500">Shipping</span>
+        <span class="text-gray-500">Pengiriman</span>
         <span class="text-green-600">Gratis</span>
       </div>
 
@@ -79,7 +77,7 @@
       </div>
 
       <button wire:click="placeOrder"
-        class="mt-6 w-full bg-violet-900 text-white py-3 rounded-xl hover:bg-violet-700 transition font-semibold">
+        class="mt-6 w-full bg-secondary text-white py-3 rounded-lg hover:bg-primary transition font-medium">
         Buat Pesanan
       </button>
 

@@ -65,22 +65,22 @@
         <td class="px-6 py-4">
         @php
           $statusClass = match ($order->status) {
-            'Menunggu' => 'text-yellow-800 bg-yellow-100 border border-yellow-300',
-            'Diproses' => 'text-blue-800 bg-blue-100 border border-blue-300',
-            'Dikirim' => 'text-indigo-800 bg-indigo-100 border border-indigo-300',
-            'Selesai' => 'text-green-800 bg-green-100 border border-green-300',
-            'Cancel' => 'text-gray-600 bg-gray-100 border border-gray-300',
-            'Gagal' => 'text-red-800 bg-red-100 border border-red-300',
-            default => 'text-gray-600 bg-gray-100 border border-gray-300',
+            'Menunggu' => 'text-yellow-600 bg-yellow-100',
+            'Diproses' => 'text-blue-800 bg-blue-100',
+            'Dikirim' => 'text-indigo-800 bg-indigo-100',
+            'Selesai' => 'text-green-800 bg-green-100',
+            'Cancel' => 'text-gray-600 bg-gray-100',
+            'Gagal' => 'text-red-800 bg-red-100',
+            default => 'text-gray-600 bg-gray-100',
           };
         @endphp
-        <span class="inline-block text-xs font-medium px-2 py-1 rounded-full {{ $statusClass }}">
+        <span class="inline-block text-xs font-medium px-3 py-1 rounded-lg {{ $statusClass }}">
           {{ ucfirst($order->status) }}
         </span>
         </td>
         <td class="px-6 py-4">
         <a href="{{ url('/account/order/' . $order->id) }}"
-        class="inline-block bg-secondary text-white text-xs px-4 py-2 rounded-md hover:bg-primary transition">
+        class="inline-block bg-secondary text-white font-medium text-xs px-4 py-2 rounded-lg hover:bg-primary transition">
         Lihat
         </a>
         </td>

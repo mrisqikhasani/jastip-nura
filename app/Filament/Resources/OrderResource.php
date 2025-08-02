@@ -25,7 +25,9 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
+    protected static ?string $navigationLabel = 'Pesanan';
+    protected static ?string $modelLabel = 'Pesanan';
 
     public static function form(Form $form): Form
     {
@@ -34,27 +36,29 @@ class OrderResource extends Resource
                 Select::make('user_id')
                     ->relationship('user', 'name')
                     ->searchable()
-                    ->label('Customer'),
+                    ->label('Pelanggan'),
 
                 DatePicker::make('order_date')
                     ->native(false)
                     ->displayFormat('j F Y')
-                    ->label('Order Date'),
+                    ->label('Tanggal'),
 
 
                 TextInput::make('payment_method')
-                    ->label('Payment Method'),
+                    ->label('Metode Pembayaran'),
 
                 Select::make('status')
-                    ->label('Status Order')
+                    ->label('Status Pesanan')
                     ->options([
-                        'pending' => 'Pending',
-                        'processing' => 'Processing',
-                        'completed' => 'Completed'
+                        'Menunggu' => 'Menunggu',
+                        'Diproses' => 'Diproses',
+                        'Dikirim' => 'Dikirim',
+                        'Selesai' => 'Selesai',
+                        'Gagal' => 'Gagal',
                     ]),
 
                 TextInput::make('total_price')
-                    ->label('Total Price')
+                    ->label('Total Harga')
                     ->numeric()
                     ->prefix('Rp'),
 
@@ -64,21 +68,23 @@ class OrderResource extends Resource
                     ->schema([
                         Select::make('product_id')
                             ->relationship('product', 'name')
-                            ->label('Product')
+                            ->label('Produk')
                             ->required()
                             ->searchable(),
 
                         TextInput::make('quantity')
                             ->numeric()
-                            ->required(),
+                            ->required()
+                            ->label('Kuantitas'),
 
                         TextInput::make('sub_price')
                             ->prefix('Rp')
                             ->numeric()
-                            ->required(),
+                            ->required()
+                            ->label('Harga Satuan'),
                     ])
                     ->columns(3)
-                    ->label('Orders items')
+                    ->label('Detail Pesanan')
                     ->defaultItems(1)
                     ->columnSpan('full'),
             ]);
@@ -89,16 +95,16 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('user.name')->label('User')->sortable()->searchable(),
-                TextColumn::make('total_price')->label('Total Amount')
+                TextColumn::make('user.name')->label('Pelanggan')->sortable()->searchable(),
+                TextColumn::make('total_price')->label('Total Harga')
                     ->sortable()
                     ->formatStateUsing(fn($state) => Str::of(Number::currency($state, 'IDR', 'id'))->replace(',00', '')),
 
                 TextColumn::make('order_date')
-                    ->label('Order Date')
+                    ->label('Tanggal')
                     ->date('j F Y'),
                 TextColumn::make('status')
-                ->label('Status')
+                ->label('Status Pesanan')
                 ->badge(),
             ])
             ->filters([

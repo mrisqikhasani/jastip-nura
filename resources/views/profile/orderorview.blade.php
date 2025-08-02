@@ -72,7 +72,7 @@
       </td>
       <td class="px-6 py-5">Rp {{ number_format($item->product->price, 0, ',', '.') }}</td>
       <td class="px-6 py-5 text-center">{{ $item->quantity }}</td>
-      <td class="px-6 py-5 text-violet-800 font-semibold">Rp {{ number_format($item->sub_price, 0, ',', '.') }}
+      <td class="px-6 py-5 text-secondary font-semibold">Rp {{ number_format($item->sub_price, 0, ',', '.') }}
       </td>
       </tr>
       @endforeach
@@ -86,13 +86,13 @@
 
     {{-- ORDER SUMMARY --}}
     <div class="rounded-xl border bg-white py-5 px-6 shadow-md">
-      <h2 class="font-bold text-lg text-gray-800 mb-4">ORDER SUMMARY</h2>
+      <h2 class="font-bold text-lg text-gray-800 mb-4">Ringkasan Pesanan</h2>
       <div class="flex justify-between border-b py-3 text-sm">
       <p>Subtotal</p>
       <p>Rp {{ number_format($order->total_price, 0, ',', '.') }}</p>
       </div>
       <div class="flex justify-between border-b py-3 text-sm">
-      <p>Shipping</p>
+      <p>Pengiriman</p>
       <p class="text-green-700">Gratis</p>
       </div>
       <div class="flex justify-between py-3 text-base font-bold">
@@ -102,11 +102,11 @@
     </div>
 
     {{-- ORDER INFORMATION --}}
-    <div class="rounded-xl border bg-white py-5 px-6 shadow-md">
-      <h2 class="font-bold text-lg text-gray-800 mb-4">ORDER INFORMATION</h2>
+    <div class="rounded-lg bg-white py-5 px-6 shadow-md">
+      <h2 class="font-bold text-lg text-gray-800 mb-4">Rincian Pesanan</h2>
 
       <div class="mb-3 text-sm">
-      <p>Order &num;{{ $order->id }}</p>
+      <p>ID Pesanan: &num;{{ $order->id }}</p>
       </div>
 
       <div class="border-b py-3 text-sm">
@@ -125,13 +125,13 @@
       @endphp
         <span class="font-bold {{ $statusClass }}">{{ ucfirst($order->status) }}</span>
       </p>
-      <p>Tanggal: {{ \Carbon\Carbon::parse($order->order_date)->translatedFormat('d F Y') }}</p>
+      <p>Tanggal: {{ \Carbon\Carbon::parse($order->order_date)->translatedFormat('d M Y') }}</p>
       </div>
 
       <div class="border-b py-3 text-sm">
-      <p class="font-bold">ADDRESS INFORMATION</p>
+      <p class="font-bold">Informasi Alamat</p>
       <p>Penerima: {{ $order->shippingAddress->receiver_name }}</p>
-      <p>Phone: {{ $order->shippingAddress->phone_number }}</p>
+      <p>Nomor Telepon: {{ $order->shippingAddress->phone_number }}</p>
       <p>Provinsi: {{ $order->shippingAddress->province }}</p>
       <p>Kota: {{ $order->shippingAddress->city }}</p>
       <p>Kode Pos: {{ $order->shippingAddress->postal_code }}</p>
@@ -139,7 +139,7 @@
       </div>
 
       <div class="py-3 text-sm">
-      <p class="font-bold">PAYMENT INFORMATION</p>
+      <p class="font-bold">Rincian Pembayaran</p>
       <p>Metode: {{ $order->payment_method }}</p>
       </div>
     </div>
@@ -148,13 +148,13 @@
     @if ($order->payment_method !== 'cod')
     <div class="w-full">
       <div class="rounded-xl border bg-white py-5 px-6 shadow-md">
-      <h2 class="font-bold text-lg text-gray-800 mb-4">BUKTI PEMBAYARAN</h2>
+      <h2 class="font-bold text-lg text-gray-800 mb-4">Bukti Pembayaran</h2>
 
       @if (!$order->payments_proofs)
       <div class="text-sm text-gray-600 mb-4">
       <p class="mb-2">Anda belum mengunggah bukti pembayaran untuk pesanan ini.</p>
       <a href="{{ url('/payment/upload/' . $order->id) }}"
-      class="inline-block px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-md text-sm font-medium transition">
+      class="inline-block px-4 py-2 bg-secondary hover:bg-primary text-white rounded-lg text-sm font-medium transition">
       Upload Bukti Pembayaran
       </a>
       </div>
