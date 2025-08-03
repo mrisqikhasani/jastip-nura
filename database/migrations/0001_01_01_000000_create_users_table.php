@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('password');
             $table->string('role')->default('user');
             $table->string('phone_number')->nullable();
-            $table->string('profile_picture')->nullable()->default('placeholder-img.svg');
+            $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
