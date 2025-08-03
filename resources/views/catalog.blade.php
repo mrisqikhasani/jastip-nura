@@ -70,9 +70,10 @@
     <section class="mx-auto grid max-w-[1200px] min-h-[400px] grid-cols-2 gap-3 px-5 pb-10 lg:grid-cols-3"
       id="product-wrapper">
       <!-- catalog product -->
-      <div id="not-found" class="hidden col-span-full text-center flex flex-col items-center justify-center text-gray-500 py-10">
-        <img src="storage/not-found.svg" class="w-80 mb-10" />
-        <p>Tidak ada produk yang sesuai.</p>
+      <div id="not-found"
+      class="hidden col-span-full text-center flex flex-col items-center justify-center text-gray-500 py-10">
+      <img src="storage/not-found.svg" class="w-80 mb-10" />
+      <p>Tidak ada produk yang sesuai.</p>
       </div>
     </section>
     </div>
@@ -111,7 +112,7 @@
       <div class="relative flex">
       <input type="hidden" value=${product.id}>
       <div class="aspect-square overflow-hidden rounded-xl w-full">
-        <img src="storage/${product.image}" alt="${product.name} image" class="w-full h-full object-cover" />
+      <img src="storage/${product.image}" alt="${product.name} image" class="w-full h-full object-cover" />
       </div>
       <div class="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100">
       <a href="/product/${product.id}" class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-white bg-secondary">
@@ -190,7 +191,6 @@
       const button = e.target;
       const productId = button.dataset.productId;
 
-      // Optional: disable button while processing
       button.disabled = true;
       button.innerText = 'Menambahkan...';
 
@@ -205,29 +205,51 @@
         quantity: 1
       })
       })
-      .then(response => response.json())
-      .then(data => {
+      .then(async response => {
+        const data = await response.json();
+
+        if (response.ok && data.success) {
         Swal.fire({
-        title: "Berhasil",
-        text: "Produk berhasil ditambahkan ke keranjang!",
-        icon: "success",
-        confirmButtonColor: "#555879"
+          title: "Berhasil",
+          text: data.message ?? "Produk berhasil ditambahkan ke keranjang!",
+          icon: "success",
+          confirmButtonColor: "#555879"
         });
+        } else if (response.status === 401) {
+        Swal.fire({
+          title: "Belum Login",
+          text: "Silakan login terlebih dahulu untuk menambahkan ke keranjang.",
+          icon: "warning"
+        });
+        } else if (response.status === 422) {
+        Swal.fire({
+          title: "Validasi Gagal",
+          text: data.message ?? "Periksa kembali data input.",
+          icon: "error"
+        });
+        } else {
+        Swal.fire({
+          title: "Gagal",
+          text: data.message ?? "Terjadi kesalahan saat menambahkan produk.",
+          icon: "error"
+        });
+        }
       })
       .catch(error => {
         console.error(error);
         Swal.fire({
         title: "Gagal",
-        text: "Gagal saat menambahkan produk",
+        text: "Terjadi kesalahan tak terduga.",
         icon: "error"
         });
       })
       .finally(() => {
         button.disabled = false;
-        button.innerText = 'Menambahkan ke keranjang';
+        button.innerText = 'Tambah ke keranjang';
       });
     }
     });
+
 
   </script>
 @endsection

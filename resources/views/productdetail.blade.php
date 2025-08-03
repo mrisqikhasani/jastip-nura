@@ -39,7 +39,7 @@
     </p>
 
     <p class="mt-2 text-xl font-semibold text-secondary">
-      Rp{{ number_format($product->price) }} 
+      Rp{{ number_format($product->price) }}
     </p>
 
     <div class="mt-2 flex flex-row gap-2 items-center justify-start text-primary">
@@ -138,14 +138,35 @@
         quantity: parseInt(document.getElementById('qtyInputHidden').value)
         })
       })
-        .then(response => response.json())
-        .then(data => {
-        Swal.fire({
+       .then(async response => {
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          Swal.fire({
           title: "Berhasil",
-          text: "Produk berhasil ditambahkan ke keranjang!",
+          text: data.message ?? "Produk berhasil ditambahkan ke keranjang!",
           icon: "success",
           confirmButtonColor: "#555879"
-        });
+          });
+        } else if (response.status === 401) {
+          Swal.fire({
+          title: "Belum Login",
+          text: "Silakan login terlebih dahulu untuk menambahkan ke keranjang.",
+          icon: "warning"
+          });
+        } else if (response.status === 422) {
+          Swal.fire({
+          title: "Validasi Gagal",
+          text: data.message ?? "Periksa kembali data input.",
+          icon: "error"
+          });
+        } else {
+          Swal.fire({
+          title: "Gagal",
+          text: data.message ?? "Terjadi kesalahan saat menambahkan produk.",
+          icon: "error"
+          });
+        }
         })
         .catch(error => {
         console.error(error);
