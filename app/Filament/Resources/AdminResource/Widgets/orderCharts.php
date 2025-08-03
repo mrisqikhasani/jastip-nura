@@ -25,7 +25,7 @@ class orderCharts extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Jumlah Order',
+                    'label' => 'Jumlah Pesanan',
                     'data' => $orders->pluck('total'),
                     'backgroundColor' => '#6366F1', // indigo-500
                 ],

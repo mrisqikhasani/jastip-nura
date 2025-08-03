@@ -13,8 +13,8 @@ class orderPerMonthCharts extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Card::make('Total order', Order::count())
-            ->description('Semua jumlah order')
+            Card::make('Total Pesanan', Order::count())
+            ->description('Semua jumlah pesanan')
         ];
     }
 }
