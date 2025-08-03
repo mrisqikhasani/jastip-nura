@@ -219,7 +219,8 @@
         Swal.fire({
           title: "Belum Login",
           text: "Silakan login terlebih dahulu untuk menambahkan ke keranjang.",
-          icon: "warning"
+          icon: "warning",
+          confirmButtonColor: "#555879"
         });
         } else if (response.status === 422) {
         Swal.fire({
