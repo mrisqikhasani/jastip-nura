@@ -10,19 +10,19 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users', 'id');
-            $table->decimal('total_price', 10, 0);
-            $table->string('payment_method')->nullable();
+        Schema::create('pesanan', function (Blueprint $table) {
+            $table->increments('id');
+            $table->foreignId('id_pelanggan')->constrained('users', 'id');
+            $table->decimal('total_harga', 10, 0);
+            $table->string('metode_pembayaran', 20)->nullable();
             $table->enum('status', [
                 'Menunggu',     // order dibuat, belum dibayar/diproses
                 'Diproses',     // admin sedang mengurus
                 'Selesai',      // diterima pelanggan
                 'Dibatalkan',       // dibatalkan oleh admin
             ])->default('Menunggu');
-            $table->date('order_date');
-            $table->foreignId('shipping_address_id')->constrained('address', 'id')->nullable();
+            $table->date('tanggal_pemesanan');
+            $table->foreignId('id_alamat')->constrained('address', 'id')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('pesanan');
     }
 };

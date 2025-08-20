@@ -11,11 +11,11 @@ use App\Models\User;
 class Cart extends Model
 {
     //
-    protected $table = 'carts';
+    protected $table = 'keranjang';
 
     protected $fillable = [
-        'user_id',
-        'total_price',
+        'id_pelanggan',
+        'total_harga',
     ];
 
     public function user(): BelongsTo

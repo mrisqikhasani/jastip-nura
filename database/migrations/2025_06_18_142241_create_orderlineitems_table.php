@@ -10,12 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('order_line_items', function (Blueprint $table) {
+        Schema::create('detail_pesanan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders','id');
-            $table->foreignId('product_id')->constrained('products','id');
-            $table->integer('quantity');
-            $table->decimal('sub_price');
+            $table->foreignId('id_pesanan')->constrained('orders','id');
+            $table->foreignId('id_produk')->constrained('products','id');
+            $table->integer('kuantitas');
+            $table->decimal('subtotal');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_line_items');
+        Schema::dropIfExists('detail_pesanan');
     }
 };

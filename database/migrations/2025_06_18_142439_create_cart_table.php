@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carts', function (Blueprint $table) {
-            $table->id('id');
-            $table->foreignId('user_id')->constrained('users','id');
-            $table->decimal('total_price', 10, 0)->nullable()->default(0);
+        Schema::create('keranjang', function (Blueprint $table) {
+            $table->increments('id');
+            $table->foreignId('id_pelanggan')->constrained('users','id');
+            $table->decimal('total_harga', 10, 0)->nullable()->default(0);
             $table->timestamps();
         });
     }

@@ -11,23 +11,23 @@ class UsersTableSeeder extends Seeder
     {
         if (!User::where('email', 'adminura@gmail.com')->exists()) {
             User::create([
-                'name' => 'Admin Jastip',
+                'nama_lengkap' => 'Admin Jastip',
                 'email' => 'adminura@gmail.com',
-                'username' => 'adminura',
+                'nama_pengguna' => 'adminura',
                 'password' => Hash::make('@dm1n123'),
-                'role' => 'admin', 
-                'phone_number' => '0838555936', 
+                'peran' => 'admin', 
+                'nomor_telepon' => '0838555936', 
             ]);
         }
 
         if (!User::where('email', 'nrsenita@gmail.com')->exists()) {
             User::create([
-                'name' => 'Noor Senita',
+                'nama_lengkap' => 'Noor Senita',
                 'email' => 'nrsenita@gmail.com',
-                'username' => 'nrsenita',
+                'nama_pengguna' => 'nrsenita',
                 'password' => Hash::make('@Noor008'),
-                'role' => 'user',
-                'phone_number' => '0878555637',
+                'peran' => 'pelanggan',
+                'nomor_telepon' => '0878555637',
             ]);
         }
     }

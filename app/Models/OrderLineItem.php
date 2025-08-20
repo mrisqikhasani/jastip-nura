@@ -8,13 +8,13 @@ use App\Models\Product;
 
 class OrderLineItem extends Model
 {
-    protected $table = 'order_line_items';
+    protected $table = 'detail_pesanan';
 
     protected $fillable = [
-        'order_id',
-        'product_id',
-        'quantity',
-        'sub_price',
+        'id_pesanan',
+        'id_produk',
+        'kuantitas',
+        'subtotal',
     ];
 
     public function order()

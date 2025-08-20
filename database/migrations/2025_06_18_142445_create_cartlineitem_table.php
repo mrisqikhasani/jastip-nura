@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cart_line_items', function (Blueprint $table) {
-            $table->id('id');
-            $table->foreignId('cart_id')->constrained('carts','id');
-            $table->foreignId('product_id')->constrained('products','id');
-            $table->integer('quantity');
-            $table->decimal('sub_price', 10, 2);
+        Schema::create('detail_keranjang', function (Blueprint $table) {
+            $table->increments('id');
+            $table->foreignId('id_keranjang')->constrained('carts','id');
+            $table->foreignId('id_produk')->constrained('products','id');
+            $table->integer('kuantitas');
+            $table->decimal('subtotal', 10, 2);
             $table->timestamps();
         });
     }

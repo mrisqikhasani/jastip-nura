@@ -15,7 +15,7 @@ class orderCharts extends ChartWidget
     protected function getData(): array
     {
         $orders = Order::select(
-                DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"),
+                DB::raw("DATE_FORMAT(dibuat_saat, '%Y-%m') as month"),
                 DB::raw("count(*) as total")
             )
             ->groupBy('month')

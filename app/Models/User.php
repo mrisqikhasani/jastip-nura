@@ -20,13 +20,13 @@ class User extends Authenticatable implements FilamentUser
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'username',
+        'nama_lengkap',
+        'nama_pengguna',
         'email',
         'password',
-        'role',
-        'phone_number',
-        'profile_picture',
+        'peran',
+        'nomor_telepon',
+        'foto_profil',
     ];
 
     /**

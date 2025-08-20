@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function catalog()
     {
         // Get enum values from 'category' column in 'products' table
-        $typeValueCategories = \DB::select("SHOW COLUMNS FROM products WHERE Field = 'category'")[0]->Type;
+        $typeValueCategories = \DB::select("SHOW COLUMNS FROM products WHERE Field = 'kategori'")[0]->Type;
         preg_match('/^enum\((.*)\)$/', $typeValueCategories, $matches);
 
         $categories = [];
@@ -30,9 +30,9 @@ class ProductController extends Controller
         $products = Product::all();
 
         // Optional: hitung jumlah produk per kategori
-        $categoryCounts = Product::select('category', \DB::raw('count(*) as total'))
-            ->groupBy('category')
-            ->pluck('total', 'category')
+        $categoryCounts = Product::select('kategori', \DB::raw('count(*) as total'))
+            ->groupBy('kategori')
+            ->pluck('total', 'kategori')
             ->toArray();
 
         return view('catalog', compact('products', 'categories', 'categoryCounts'));
@@ -47,7 +47,7 @@ class ProductController extends Controller
             abort(404, 'Product not found');
         }
 
-        $relatedProducts = Product::where('category', $product->category)
+        $relatedProducts = Product::where('kategori', $product->category)
             ->where('id', '!=', $product->id)
             ->limit(4)
             ->get();

@@ -57,9 +57,9 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'nama_lengkap' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|',
-            'phone_number' => 'nullable|string|max:20',
+            'nomor_telepon' => 'nullable|string|max:20',
             'password' => 'string|min:5|required_with:confirmpassword|same:confirmpassword',
             'confirmpassword' => 'required|string|min:5',
         ], [
@@ -73,11 +73,11 @@ class AuthController extends Controller
 
         try {
             $user = User::create([
-                'name' => $validated['name'],
+                'nama_lengkap' => $validated['nama_lengkap'],
                 'email' => $validated['email'],
-                'phone_number' => $validated['phone_number'] ?? null,
+                'nomor_telepon' => $validated['nomor_telepon'] ?? null,
                 'password' => Hash::make($validated['password']),
-                'role' => 'user',
+                'peran' => 'pelanggan',
             ]);
 
             Auth::login($user);

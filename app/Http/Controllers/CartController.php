@@ -17,7 +17,7 @@ class CartController extends Controller
         }
 
         $cart = Cart::with('cartLineItems.product')
-            ->where('user_id', Auth::id())
+            ->where('id_pelanggan', Auth::id())
             ->first();
 
         $cartItems = $cart ? $cart->cartLineItems : collect();
@@ -38,8 +38,8 @@ class CartController extends Controller
 
         try {
             $validated = $request->validate([
-                'product_id' => 'required|exists:products,id',
-                'quantity' => 'required|integer|min:1',
+                'id_produk' => 'required|exists:products,id',
+                'kuantitas' => 'required|integer|min:1',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
@@ -51,23 +51,23 @@ class CartController extends Controller
 
         try {
             $cart = Cart::firstOrCreate(
-                ['user_id' => Auth::id()],
-                ['total_price' => 0] // Default value saat pertama kali dibuat
+                ['id_pelanggan' => Auth::id()],
+                ['total_harga' => 0] // Default value saat pertama kali dibuat
                 );
 
             $item = $cart->cartLineItems()
-                ->where('product_id', $validated['product_id'])
+                ->where('id_produk', $validated['id_produk'])
                 ->first();
 
             if ($item) {
-                $item->increment('quantity', $validated['quantity']);
+                $item->increment('kuantitas', $validated['kuantitas']);
             } else {
                 // Calculate sub_price based on product price and quantity
-                $product = Product::findOrFail($validated['product_id']);
+                $product = Product::findOrFail($validated['id_produk']);
                 $cart->cartLineItems()->create([
-                    'product_id' => $validated['product_id'],
-                    'quantity' => $validated['quantity'],
-                    'sub_price' => $product->price * $validated['quantity'],
+                    'id_produk' => $validated['id_produk'],
+                    'kuantitas' => $validated['kuantitas'],
+                    'subtotal' => $product->price * $validated['kuantitas'],
                 ]);
             }
 
@@ -96,13 +96,13 @@ class CartController extends Controller
 
         $item = CartLineItem::with('product', 'cart')
             ->whereHas('cart', function ($query) {
-                $query->where('user_id', Auth::id());
+                $query->where('id_pelanggan', Auth::id());
             })->findOrFail($itemId);
 
         if ($validated['action'] === 'plus') {
-            $item->increment('quantity');
+            $item->increment('kuantitas');
         } else {
-            $item->update(['quantity' => max(1, $item->quantity - 1)]);
+            $item->update(['kuantitas' => max(1, $item->quantity - 1)]);
         }
 
         $newTotal = $item->product->price * $item->quantity;

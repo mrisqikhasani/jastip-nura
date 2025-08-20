@@ -21,8 +21,8 @@ class AccountController extends Controller
         $user = Auth::user();
 
         $lastOrder = Order::with(['orderLineItems.product'])
-            ->where('user_id', $user->id)
-            ->orderBy('created_at', 'desc')
+            ->where('id_pelanggan', $user->id)
+            ->orderBy('dibuat_saat', 'desc')
             ->first();
 
         $shippingAddress = $user->address()->first();
@@ -54,14 +54,14 @@ class AccountController extends Controller
         $user = Auth::user();
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'nama_lengkap' => 'required|string|max:50',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'phone_number' => 'nullable|string'
+            'nomor_telepon' => 'nullable|string'
         ]);
 
-        $user->name = $validated['name'];
+        $user->nama = $validated['nama_lengkap'];
         $user->email = $validated['email'];
-        $user->phone_number = $validated['phone_number'];
+        $user->nomor_telepon = $validated['nomor_telepon'];
 
         $user->save();
 
@@ -75,23 +75,23 @@ class AccountController extends Controller
         }
 
         $request->validate([
-            'profile_picture' => 'image|max:2048',
+            'foto_profil' => 'image|max:2048',
         ]);
 
         try {
             $user = Auth::user();
 
             // Hapus file lama jika ada
-            if ($user->profile_picture && Storage::disk('public')->exists($user->profile_picture)) {
-                Storage::disk('public')->delete($user->profile_picture);
+            if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
+                Storage::disk('public')->delete($user->foto_profil);
             }
 
             // Simpan file baru
-            $avatarPath = $request->file('profile_picture')->store('profile', 'public');
+            $avatarPath = $request->file('foto_profil')->store('profile', 'public');
 
             // Update profil user
             $user->update([
-                'profile_picture' => $avatarPath,
+                'foto_profil' => $avatarPath,
             ]);
 
             return back()->with('success', 'Foto profil berhasil diperbarui!');

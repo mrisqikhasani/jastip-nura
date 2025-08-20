@@ -11,13 +11,13 @@ use App\Models\OrderLineItem;
 class Order extends Model
 {
     protected $fillable = [
-        'user_id',
-        'total_price',
-        'payment_method',
+        'id_pelanggan',
+        'total_harga',
+        'metode_pembayaran',
         'status',
-        'order_date',
-        'shipping_address_id',
-        'payments_proofs',
+        'tanggal_pemesanan',
+        'id_alamat',
+        'bukti_pembayaran',
     ];
 
 
@@ -30,7 +30,7 @@ class Order extends Model
 
     public function shippingAddress(): BelongsTo
     {
-        return $this->belongsTo(Address::class, 'shipping_address_id');
+        return $this->belongsTo(Address::class, 'id_alamat');
     }
 
     public function orderLineItems()

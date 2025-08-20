@@ -16,8 +16,8 @@ class OrderController extends Controller
         $user = Auth::user();
 
         $orders = Order::with(['orderLineItems.product'])
-            ->where('user_id', $user->id)
-            ->orderBy('created_at', 'desc')
+            ->where('id_pelanggan', $user->id)
+            ->orderBy('dibuat_saat', 'desc')
             ->get();
 
         return view('profile.orderhistory', compact('orders', 'user'));
@@ -29,7 +29,7 @@ class OrderController extends Controller
         $user = Auth::user();
 
         $order = Order::with(['orderLineItems.product', 'shippingAddress'])
-            ->where('user_id', $user->id)
+            ->where('id_pelanggan', $user->id)
             ->where('id', $orderId)
             ->firstOrFail();
 
@@ -70,16 +70,16 @@ class OrderController extends Controller
             ]);
 
             // Hapus file lama jika ada
-            if ($order->payments_proof && Storage::disk('public')->exists($order->payments_proof)) {
-                Storage::disk('public')->delete($order->payments_proof);
+            if ($order->bukti_pembayaran && Storage::disk('public')->exists($order->bukti_pembayaran)) {
+                Storage::disk('public')->delete($order->bukti_pembayaran);
             }
 
             // Simpan file baru
-            $path = $request->file('proof')->store('payment_proofs', 'public');
+            $path = $request->file('proof')->store('bukti_pembayaran', 'public');
 
             // Update order
             $order->update([
-                'payments_proofs' => $path,
+                'bukti_pembayaran' => $path,
                 'status' => 'Diproses',
             ]);
 

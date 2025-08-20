@@ -51,7 +51,7 @@
       <p><strong>ID Pesanan:</strong> #{{ $lastOrder->id }}</p>
       <p><strong>Status:</strong> {{ ucfirst($lastOrder->status) }}</p>
       <p><strong>Total:</strong> Rp{{ number_format($lastOrder->total_price, 0, ',', '.') }}</p>
-      <p><strong>Tanggal:</strong> {{ $lastOrder->created_at->format('d M Y') }}</p>
+      <p><strong>Tanggal:</strong> {{ $lastOrder->dibuat_saat->format('d M Y') }}</p>
       </div>
     @else
       <div class="px-4 text-sm text-gray-500 italic">Anda belum memesan apapun.</div>

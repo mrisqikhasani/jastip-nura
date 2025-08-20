@@ -7,16 +7,16 @@ use App\Models\User;
 
 class Address extends Model
 {
-    protected $table = 'address';
+    protected $table = 'alamat';
 
     protected $fillable = [
-        'user_id',
-        'receiver_name',
-        'phone_number',
-        'province',
-        'city',
-        'postal_code',
-        'detail',
+        'id_pelanggan',
+        'nama_penerima',
+        'nomor_telepon',
+        'provinsi',
+        'kota',
+        'kode_pos',
+        'detail_alamat',
     ];
 
     public function user()

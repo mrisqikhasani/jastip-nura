@@ -2,7 +2,7 @@
   <!-- FORM -->
   <div class="border p-5 shadow-md rounded-lg">
     <h2 class="text-lg font-bold mb-4">
-      {{ $address_id ? 'Edit Alamat' : 'Tambah Alamat' }}
+      {{ $id_alamat ? 'Edit Alamat' : 'Tambah Alamat' }}
     </h2>
 
     @if (session()->has('success'))
@@ -15,32 +15,32 @@
       <div>
         <label>Nama Penerima</label>
         <input type="text" wire:model="receiver_name" class="w-full border px-3 py-2 mt-1 rounded-lg" />
-        @error('receiver_name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        @error('nama_penerima') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
       </div>
       <div>
         <label>Nomor Telepon</label>
         <input type="text" wire:model="phone_number" class="w-full border px-3 py-2 mt-1 rounded-lg" />
-        @error('phone_number') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        @error('nomor_telepon') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
       </div>
       <div>
         <label>Provinsi</label>
         <input type="text" wire:model="province" class="w-full border px-3 py-2 mt-1 rounded-lg" />
-        @error('province') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        @error('provinsi') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
       </div>
       <div>
         <label>Kota</label>
         <input type="text" wire:model="city" class="w-full border px-3 py-2 mt-1 rounded-lg" />
-        @error('city') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        @error('kota') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
       </div>
       <div>
         <label>Kode Pos</label>
         <input type="text" wire:model="postal_code" class="w-full border px-3 py-2 mt-1 rounded-lg" />
-        @error('postal_code') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        @error('kode_pos') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
       </div>
       <div>
         <label>Detail</label>
         <textarea wire:model="detail" class="w-full border px-3 py-2 mt-1 rounded-lg"></textarea>
-        @error('detail') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        @error('detail_alamat') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
       </div>
       <button type="submit" class="bg-secondary hover:bg-primary text-white px-4 py-2 rounded-lg">
         Simpan
@@ -62,10 +62,10 @@
       bg-slate-100 border-slate-300
       @endif
       " wire:click="fillForm({{ $addr->id }})">
-      <p><strong>{{ $addr->receiver_name }}</strong></p>
-      <p>{{ $addr->province }}, {{ $addr->city }}</p>
-      <p>{{ $addr->postal_code }}</p>
-      <p>{{ $addr->detail }}</p>
+      <p><strong>{{ $addr->nama_penerima }}</strong></p>
+      <p>{{ $addr->provinsi }}, {{ $addr->kota }}</p>
+      <p>{{ $addr->kode_pos }}</p>
+      <p>{{ $addr->detail_alamat }}</p>
       <div class="flex space-x-4 mt-2">
       <!-- Tombol EDIT -->
       <button wire:click="fillForm({{ $addr->id }})" class="text-blue-600 hover:underline">

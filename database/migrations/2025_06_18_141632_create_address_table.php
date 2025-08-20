@@ -10,15 +10,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('address', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users', 'id');
-            $table->string('receiver_name')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->string('province')->nullable();
-            $table->string('city')->nullable();
-            $table->string('postal_code')->nullable();
-            $table->string('detail')->nullable();
+        Schema::create('alamat', function (Blueprint $table) {
+            $table->increments('id');
+            $table->foreignId('id_pelanggan')->constrained('users', 'id');
+            $table->string('nama_penerima', 30)->nullable();
+            $table->string('nomor_telepon', 12)->nullable();
+            $table->string('provinsi', 20)->nullable();
+            $table->string('kota', 20)->nullable();
+            $table->char('kode_pos', 5)->nullable();
+            $table->text('detail_alamat')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('address');
+        Schema::dropIfExists('alamat');
     }
 };

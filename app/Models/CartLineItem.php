@@ -9,13 +9,13 @@ use App\Models\Product;
 
 class CartLineItem extends Model
 {
-    protected $table = 'cart_line_items';
+    protected $table = 'detail_keranjang';
 
     protected $fillable = [
-        'cart_id',
-        'product_id',
-        'quantity',
-        'sub_price',
+        'id_keranjang',
+        'id_produk',
+        'kuantitas',
+        'subtotal',
     ];
 
     public function cart(): BelongsTo
