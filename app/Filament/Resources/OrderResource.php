@@ -135,8 +135,8 @@ class OrderResource extends Resource
         ];
     }
 
-    // public static function canCreate():bool
-    // {
-    //     return false;
-    // }
+    public static function canCreate():bool
+    {
+        return false;
+    }
 }
