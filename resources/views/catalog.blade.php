@@ -30,10 +30,24 @@
       <div class="w-full">
         <p class="mb-3 font-medium">Kategori</p>
 
+        <!-- Opsi -->
+
+        <div class="flex w-full justify-between">
+        <div class="flex items-center">
+          <input type="radio" name="category" class="accent-secondary" id="all" value="all" checked />
+          <p class="ml-4">Semua</p>
+        </div>
+        <div>
+          <p class="text-gray-500">({{ array_sum($categoryCounts) }})</p>
+        </div>
+        </div>
+
+        <!-- Loop kategori -->
         @foreach($categories as $category)
       <div class="flex w-full justify-between">
-      <div class="flex justify-center items-center">
-        <input type="checkbox" class="accent-secondary" id="{{ $category }}" value="{{ $category }}" />
+      <div class="flex items-center">
+        <input type="radio" name="category" class="accent-secondary" id="{{ $category }}"
+        value="{{ $category }}" />
         <p class="ml-4">{{ ucfirst($category) }}</p>
       </div>
       <div>
@@ -89,7 +103,7 @@
 
     const productWrapper = document.getElementById('product-wrapper');
     const filtersCategory = document.getElementById('filters-category');
-    const checkboxes = filtersCategory.querySelectorAll('input[type="checkbox"]');
+    const radios = filtersCategory.querySelectorAll('input[type="radio"]');
     // const notFound = document.getElementById('not-found');
     const searchProduct = document.getElementById('searchProduct');
 
@@ -158,16 +172,14 @@
 
     function filterProducts() {
     const searchTerm = searchProduct.value.trim().toLowerCase();
-    const checkedCategories = Array.from(checkboxes)
-      .filter((check) => check.checked)
-      .map((check) => check.value);
+    const selectedCategory = filtersCategory.querySelector('input[name="category"]:checked').value;
 
     let hasVisible = false;
 
     productElements.forEach((productElement, index) => {
       const product = products[index];
       const matchesSearch = product.name.toLowerCase().includes(searchTerm);
-      const matchesCategory = checkedCategories.length === 0 || checkedCategories.includes(product.category);
+      const matchesCategory = (selectedCategory === "all" || product.category === selectedCategory);
 
       if (matchesSearch && matchesCategory) {
       productElement.classList.remove('hidden');
@@ -184,7 +196,6 @@
       notFound.classList.add('hidden');
     }
     }
-
 
     document.addEventListener('click', function (e) {
     if (e.target && e.target.classList.contains('add-to-cart')) {

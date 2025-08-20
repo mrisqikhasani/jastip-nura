@@ -29,7 +29,7 @@
     <div class="flex flex-col md:flex-row gap-6">
     <!-- Cart Table / Items -->
     <section class="w-full flex-1 overflow-x-auto">
-      @livewire('cartlivewire')
+      @livewire('cart-livewire')
     </section>
     </div>
   </div>
