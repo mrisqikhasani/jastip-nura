@@ -12,8 +12,20 @@ return new class extends Migration {
     {
         Schema::create('detail_pesanan', function (Blueprint $table) {
             $table->increments('id_detail_pesanan');
-            $table->foreignId('id_pesanan')->constrained('orders','id_pesanan');
-            $table->foreignId('id_produk')->constrained('products','id_produk');
+
+            $table->unsignedInteger('id_pesanan');
+            $table->foreign('id_pesanan')
+                ->references('id_pesanan')
+                ->on('pesanan')
+                ->cascadeOnDelete();
+
+
+            $table->unsignedInteger('id_produk');
+            $table->foreign('id_produk')
+                ->references('id_produk')
+                ->on('produk')
+                ->cascadeOnDelete();
+
             $table->integer('kuantitas');
             $table->decimal('subtotal');
             $table->timestamps();

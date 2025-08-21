@@ -12,7 +12,8 @@ return new class extends Migration {
     {
         Schema::create('alamat', function (Blueprint $table) {
             $table->increments('id_alamat');
-            $table->foreignId('id_pengguna')->constrained('users', 'id_pengguna');
+            $table->unsignedInteger('id_pengguna');
+            $table->foreign('id_pengguna')->references('id_pengguna')->on('pengguna');
             $table->string('nama_penerima', 30)->nullable();
             $table->string('nomor_telepon', 12)->nullable();
             $table->string('provinsi', 20)->nullable();

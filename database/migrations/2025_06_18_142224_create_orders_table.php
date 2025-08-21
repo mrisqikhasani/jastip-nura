@@ -12,7 +12,8 @@ return new class extends Migration {
     {
         Schema::create('pesanan', function (Blueprint $table) {
             $table->increments('id_pesanan');
-            $table->foreignId('id_pengguna')->constrained('users', 'id_pengguna');
+            $table->unsignedInteger('id_pengguna');
+            $table->foreign('id_pengguna')->references('id_pengguna')->on('pengguna');
             $table->decimal('total_harga', 10, 0);
             $table->string('metode_pembayaran', 20)->nullable();
             $table->enum('status', [
@@ -22,7 +23,8 @@ return new class extends Migration {
                 'Dibatalkan',       // dibatalkan oleh admin
             ])->default('Menunggu');
             $table->date('tanggal_pemesanan');
-            $table->foreignId('id_alamat')->constrained('address', 'id')->nullable();
+            $table->unsignedInteger('id_alamat');
+            $table->foreign('id_alamat')->references('id_alamat')->on('alamat');
             $table->timestamps();
         });
     }

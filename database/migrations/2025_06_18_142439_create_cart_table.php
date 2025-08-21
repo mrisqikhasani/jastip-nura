@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,7 +12,13 @@ return new class extends Migration
     {
         Schema::create('keranjang', function (Blueprint $table) {
             $table->increments('id_keranjang');
-            $table->foreignId('id_pengguna')->constrained('users','id_pengguna');
+
+            $table->unsignedInteger('id_pengguna');
+            $table->foreign('id_pengguna')
+                ->references('id_pengguna')
+                ->on('pengguna')
+                ->cascadeOnDelete();
+
             $table->decimal('total_harga', 10, 0)->nullable()->default(0);
             $table->timestamps();
         });
