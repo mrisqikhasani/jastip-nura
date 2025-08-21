@@ -11,6 +11,8 @@ class CartLineItem extends Model
 {
     protected $table = 'detail_keranjang';
 
+    protected $primaryKey = 'id_detail_keranjang';
+
     protected $fillable = [
         'id_keranjang',
         'id_produk',

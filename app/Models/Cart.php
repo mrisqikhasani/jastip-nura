@@ -13,6 +13,8 @@ class Cart extends Model
     //
     protected $table = 'keranjang';
 
+    protected $primaryKey = 'id_keranjang';
+
     protected $fillable = [
         'id_pengguna',
         'total_harga',

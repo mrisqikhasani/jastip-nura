@@ -2,6 +2,10 @@
 @section('content')
   <!-- Offer image  -->
 
+  @php
+  dump($recommendedProducts)
+  @endphp
+
   <section class="bg-white">
     <div class="max-w-7xl mx-auto px-10 py-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-4">
       <div>

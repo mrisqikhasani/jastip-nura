@@ -9,6 +9,8 @@ use App\Models\Product;
 class OrderLineItem extends Model
 {
     protected $table = 'detail_pesanan';
+    
+    protected $primaryKey = 'id_detail_pesanan';
 
     protected $fillable = [
         'id_pesanan',

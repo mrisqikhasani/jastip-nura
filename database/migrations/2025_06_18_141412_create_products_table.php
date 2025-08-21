@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_produk', 40);
             $table->float('harga');
             $table->text('deskripsi')->nullable();
-            $table->string('ukuran', 30);
+            $table->string('ukuran', 100);
             $table->enum('kategori', ['atasan', 'skincare', 'bodycare', 'bawahan']);
             $table->string('foto', 50)->nullable();
             $table->timestamps();

@@ -10,6 +10,10 @@ use App\Models\OrderLineItem;
 
 class Order extends Model
 {
+    protected $table = 'pesanan';
+
+    protected $primaryKey = 'id_pesanan';
+
     protected $fillable = [
         'id_pengguna',
         'total_harga',
