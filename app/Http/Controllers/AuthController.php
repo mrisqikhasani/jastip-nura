@@ -28,7 +28,7 @@ class AuthController extends Controller
             $user = Auth::user();
 
             if ($user->role === 'admin') {
-                return redirect()->intended('/admin'); // ⬅️ langsung ke panel admin
+                return redirect()->intended('/admin'); 
             }
 
             return redirect()->intended('/');
@@ -64,7 +64,7 @@ class AuthController extends Controller
             'confirmpassword' => 'required|string|min:5',
         ], [
             'password.min' => 'Password harus memiliki minimal 5 karakter',
-            'name.required' => 'Nama tidak boleh kosong',
+            'nama_lengkap.required' => 'Nama tidak boleh kosong',
             'email.required' => 'email tidak boleh kosong',
             'password.required' => 'Password tidak boleh kosong',
             'password.same' => 'Password tidak match',

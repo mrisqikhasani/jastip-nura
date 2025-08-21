@@ -21,8 +21,8 @@ class AccountController extends Controller
         $user = Auth::user();
 
         $lastOrder = Order::with(['orderLineItems.product'])
-            ->where('id_pelanggan', $user->id)
-            ->orderBy('dibuat_saat', 'desc')
+            ->where('id_pengguna', $user->id)
+            ->orderBy('dibuat_pada', 'desc')
             ->first();
 
         $shippingAddress = $user->address()->first();
@@ -59,7 +59,7 @@ class AccountController extends Controller
             'nomor_telepon' => 'nullable|string'
         ]);
 
-        $user->nama = $validated['nama_lengkap'];
+        $user->nama_lengkap = $validated['nama_lengkap'];
         $user->email = $validated['email'];
         $user->nomor_telepon = $validated['nomor_telepon'];
 

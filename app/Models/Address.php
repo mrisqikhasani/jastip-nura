@@ -10,7 +10,7 @@ class Address extends Model
     protected $table = 'alamat';
 
     protected $fillable = [
-        'id_pelanggan',
+        'id_pengguna',
         'nama_penerima',
         'nomor_telepon',
         'provinsi',

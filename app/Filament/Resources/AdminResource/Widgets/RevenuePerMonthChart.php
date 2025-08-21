@@ -13,10 +13,10 @@ class RevenuePerMonthChart extends ChartWidget
     protected function getData(): array
     {
         // Ambil pendapatan total per bulan untuk tahun ini
-        $revenue = Order::selectRaw('MONTH(order_date) as month, SUM(total_price) as total')
-            ->whereYear('order_date', now()->year)
+        $revenue = Order::selectRaw('MONTH(tanggal_pemesanan) as month, SUM(total_harga) as total')
+            ->whereYear('tanggal_pemesanan', now()->year)
             ->where('status', 'Selesai') // hanya order selesai
-            ->groupByRaw('MONTH(order_date)')
+            ->groupByRaw('MONTH(tanggal_pemesanan)')
             ->pluck('total', 'month');
 
         $labels = [];

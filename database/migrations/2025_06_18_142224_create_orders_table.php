@@ -11,8 +11,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('pesanan', function (Blueprint $table) {
-            $table->increments('id');
-            $table->foreignId('id_pelanggan')->constrained('users', 'id');
+            $table->increments('id_pesanan');
+            $table->foreignId('id_pengguna')->constrained('users', 'id_pengguna');
             $table->decimal('total_harga', 10, 0);
             $table->string('metode_pembayaran', 20)->nullable();
             $table->enum('status', [

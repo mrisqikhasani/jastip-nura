@@ -17,12 +17,12 @@ class CartController extends Controller
         }
 
         $cart = Cart::with('cartLineItems.product')
-            ->where('id_pelanggan', Auth::id())
+            ->where('id_pengguna', Auth::id())
             ->first();
 
         $cartItems = $cart ? $cart->cartLineItems : collect();
 
-        $subtotal = $cartItems->sum(fn($item) => $item->product->price * $item->quantity);
+        $subtotal = $cartItems->sum(fn($item) => $item->product->harga * $item->kuantitas);
 
         return view('cart', compact('cartItems', 'subtotal'));
     }
@@ -51,7 +51,7 @@ class CartController extends Controller
 
         try {
             $cart = Cart::firstOrCreate(
-                ['id_pelanggan' => Auth::id()],
+                ['id_pengguna' => Auth::id()],
                 ['total_harga' => 0] // Default value saat pertama kali dibuat
                 );
 
@@ -96,22 +96,22 @@ class CartController extends Controller
 
         $item = CartLineItem::with('product', 'cart')
             ->whereHas('cart', function ($query) {
-                $query->where('id_pelanggan', Auth::id());
+                $query->where('id_pengguna', Auth::id());
             })->findOrFail($itemId);
 
         if ($validated['action'] === 'plus') {
             $item->increment('kuantitas');
         } else {
-            $item->update(['kuantitas' => max(1, $item->quantity - 1)]);
+            $item->update(['kuantitas' => max(1, $item->kuantitas - 1)]);
         }
 
-        $newTotal = $item->product->price * $item->quantity;
+        $newTotal = $item->product->harga * $item->kuantitas;
 
-        $subtotal = $item->cart->cartLineItems->sum(fn($i) => $i->product->price * $i->quantity);
+        $subtotal = $item->cart->cartLineItems->sum(fn($i) => $i->product->harga * $i->kuantitas);
 
         return response()->json([
             'success' => true,
-            'newQuantity' => $item->quantity,
+            'newQuantity' => $item->kuantitas,
             'newTotal' => $newTotal,
             'subtotal' => $subtotal,
         ]);

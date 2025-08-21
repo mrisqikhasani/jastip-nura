@@ -8,7 +8,7 @@ class ProductTableSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('products')->insert([
+        DB::table('produk')->insert([
             [
                 'nama_produk' => 'Cardigan Rajut Rib Motif Serong',
                 'harga' => 150000,

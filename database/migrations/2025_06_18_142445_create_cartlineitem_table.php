@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detail_keranjang', function (Blueprint $table) {
-            $table->increments('id');
-            $table->foreignId('id_keranjang')->constrained('carts','id');
-            $table->foreignId('id_produk')->constrained('products','id');
+            $table->increments('id_detail_keranjang');
+            $table->foreignId('id_keranjang')->constrained('carts','id_keranjang');
+            $table->foreignId('id_produk')->constrained('products','id_produk');
             $table->integer('kuantitas');
             $table->decimal('subtotal', 10, 2);
             $table->timestamps();

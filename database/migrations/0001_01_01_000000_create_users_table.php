@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('pengguna', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id_pengguna');
             $table->string('nama_lengkap', 30);
             $table->string('email', 30)->unique();
             $table->string('nama_pengguna', 10)->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration {
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
-            $table->timestamp('dibuat_saat')->nullable();
+            $table->timestamp('dibuat_pada')->nullable();
         });
 
         Schema::create('sessions', function (Blueprint $table) {

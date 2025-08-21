@@ -11,8 +11,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('alamat', function (Blueprint $table) {
-            $table->increments('id');
-            $table->foreignId('id_pelanggan')->constrained('users', 'id');
+            $table->increments('id_alamat');
+            $table->foreignId('id_pengguna')->constrained('users', 'id_pengguna');
             $table->string('nama_penerima', 30)->nullable();
             $table->string('nomor_telepon', 12)->nullable();
             $table->string('provinsi', 20)->nullable();

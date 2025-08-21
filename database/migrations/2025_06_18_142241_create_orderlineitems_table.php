@@ -11,9 +11,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('detail_pesanan', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_pesanan')->constrained('orders','id');
-            $table->foreignId('id_produk')->constrained('products','id');
+            $table->increments('id_detail_pesanan');
+            $table->foreignId('id_pesanan')->constrained('orders','id_pesanan');
+            $table->foreignId('id_produk')->constrained('products','id_produk');
             $table->integer('kuantitas');
             $table->decimal('subtotal');
             $table->timestamps();

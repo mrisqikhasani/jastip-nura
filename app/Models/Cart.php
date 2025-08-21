@@ -14,7 +14,7 @@ class Cart extends Model
     protected $table = 'keranjang';
 
     protected $fillable = [
-        'id_pelanggan',
+        'id_pengguna',
         'total_harga',
     ];
 

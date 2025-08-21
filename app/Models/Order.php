@@ -11,7 +11,7 @@ use App\Models\OrderLineItem;
 class Order extends Model
 {
     protected $fillable = [
-        'id_pelanggan',
+        'id_pengguna',
         'total_harga',
         'metode_pembayaran',
         'status',
