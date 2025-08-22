@@ -27,7 +27,7 @@ class AuthController extends Controller
 
             $user = Auth::user();
 
-            if ($user->role === 'admin') {
+            if ($user->peran === 'admin') {
                 return redirect()->intended('/admin'); 
             }
 

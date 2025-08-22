@@ -59,7 +59,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function address()
     {
-       return $this->hasMany(Address::class, 'id_pengguna', 'id_pengguna');
+        return $this->hasMany(Address::class, 'id_pengguna', 'id_pengguna');
     }
 
     public function cart()
@@ -72,9 +72,24 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(Cart::class, 'id_pengguna', 'id_pengguna');
     }
 
+
+
+    // ==================================================
+    // filament
+
+    public function getFilamentName(): string
+    {
+        return $this->getAttributeValue('nama_lengkap');
+    }
+
+    public function getNameAttribute():string
+    {
+        return $this->nama_lengkap;
+    }
+
     public function canAccessPanel(\Filament\Panel $panel): bool
     {
-        return $this->role === 'admin';
+        return $this->peran === 'admin';
     }
 
 }
