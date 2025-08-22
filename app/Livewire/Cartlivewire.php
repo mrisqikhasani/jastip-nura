@@ -18,12 +18,12 @@ class CartLivewire extends Component
     public function loadCart()
     {
         $this->cart = Cart::with('cartLineItems.product')
-            ->where('user_id', auth()->id())
+            ->where('id_pengguna', auth()->id())
             ->first();
 
         if ($this->cart) {
-            $subtotal = $this->cart->cartLineItems->sum(fn($item) => $item->product->price * $item->quantity);
-            $this->cart->total_price = $subtotal;
+            $subtotal = $this->cart->cartLineItems->sum(fn($item) => $item->product->harga * $item->kuantitas);
+            $this->cart->total_harga = $subtotal;
             $this->cart->save();
         }
     }
@@ -31,7 +31,7 @@ class CartLivewire extends Component
     public function increment($lineItemId)
     {
         $lineItem = CartLineItem::findOrFail($lineItemId);
-        $lineItem->quantity += 1;
+        $lineItem->kuantitas += 1;
         $lineItem->save();
         $this->loadCart();
     }
@@ -40,8 +40,8 @@ class CartLivewire extends Component
     {
         $lineItem = CartLineItem::findOrFail($lineItemId);
 
-        if ($lineItem->quantity > 1) {
-            $lineItem->quantity -= 1;
+        if ($lineItem->kuantitas > 1) {
+            $lineItem->kuantitas -= 1;
             $lineItem->save();
         } else {
             $lineItem->delete(); 
@@ -52,8 +52,8 @@ class CartLivewire extends Component
 
     public function deleteItem($lineItemId)
     {
-        CartLineItem::where('id', $lineItemId)
-            ->whereHas('cart', fn ($q) => $q->where('user_id', auth()->id()))
+        CartLineItem::where('id_detail_keranjang', $lineItemId)
+            ->whereHas('cart', fn ($q) => $q->where('id_pengguna', auth()->id()))
             ->delete();
 
         $this->loadCart();

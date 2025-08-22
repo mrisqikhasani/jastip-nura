@@ -22,7 +22,7 @@ class AccountController extends Controller
 
         $lastOrder = Order::with(['orderLineItems.product'])
             ->where('id_pengguna', $user->id)
-            ->orderBy('dibuat_pada', 'desc')
+            ->orderBy('created_at', 'desc')
             ->first();
 
         $shippingAddress = $user->address()->first();
@@ -53,20 +53,34 @@ class AccountController extends Controller
 
         $user = Auth::user();
 
-        $validated = $request->validate([
-            'nama_lengkap' => 'required|string|max:50',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'nomor_telepon' => 'nullable|string'
-        ]);
+        try {
+            $validated = $request->validate([
+                'nama_lengkap' => 'required|string|max:50',
+                'email' => 'required|email|unique:pengguna,email,' . $user->id_pengguna . ',id_pengguna',
+                'nomor_telepon' => 'nullable|string'
+            ], [
+                // Custom message
+                'nama_lengkap.required' => 'Nama lengkap wajib diisi.',
+                'nama_lengkap.max' => 'Nama lengkap maksimal 50 karakter.',
+                'email.required' => 'Email wajib diisi.',
+                'email.email' => 'Format email tidak valid.',
+                'email.unique' => 'Email sudah terdaftar, gunakan email lain.',
+                'nomor_telepon.string' => 'Nomor telepon harus berupa teks.',
+            ]);
 
-        $user->nama_lengkap = $validated['nama_lengkap'];
-        $user->email = $validated['email'];
-        $user->nomor_telepon = $validated['nomor_telepon'];
+            $user->nama_lengkap = $validated['nama_lengkap'];
+            $user->email = $validated['email'];
+            $user->nomor_telepon = $validated['nomor_telepon'] ?? null;
 
-        $user->save();
+            $user->save();
 
-        return redirect('/account/profile')->with('success', 'Profil berhasil diperbarui.');
+            return redirect('/account/profile')->with('success', 'Profil berhasil diperbarui.');
+        } catch (\Exception $e) {
+            // Jika ada error tak terduga
+            return redirect('/account/profile')->with('error', 'Terjadi kesalahan saat memperbarui profil: ' . $e->getMessage());
+        }
     }
+
 
     public function profileAvatarUpdate(Request $request)
     {
@@ -74,12 +88,13 @@ class AccountController extends Controller
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        $request->validate([
-            'foto_profil' => 'image|max:2048',
-        ]);
-
         try {
-            $user = Auth::user();
+            // Validasi
+            $request->validate([
+                'foto_profil' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            ]);
+
+            $user = auth()->user();
 
             // Hapus file lama jika ada
             if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
@@ -87,12 +102,11 @@ class AccountController extends Controller
             }
 
             // Simpan file baru
-            $avatarPath = $request->file('foto_profil')->store('profile', 'public');
+            if ($request->hasFile('foto_profil')) {
+                $avatarPath = $request->file('foto_profil')->store('profile', 'public');
+                $user->update(['foto_profil' => $avatarPath]);
+            }
 
-            // Update profil user
-            $user->update([
-                'foto_profil' => $avatarPath,
-            ]);
 
             return back()->with('success', 'Foto profil berhasil diperbarui!');
         } catch (\Exception $e) {

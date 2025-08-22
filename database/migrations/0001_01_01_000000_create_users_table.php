@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('password', 70);
             $table->string('peran')->default('pelanggan');
             $table->string('nomor_telepon', 12)->nullable();
-            $table->string('foto_profil', 50)->nullable();
+            $table->string('foto_profil', 100)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

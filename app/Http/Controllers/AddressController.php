@@ -15,7 +15,7 @@ class AddressController extends Controller
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        $user = Auth::user()->load('alamat');
+        $user = Auth::user()->load('address');
         $addressId = $request->query('id_alamat');
         $address = $addressId ? $user->address->find($addressId) : null;
 

@@ -27,18 +27,18 @@
     @foreach ($order->orderLineItems as $item)
     <div class="flex w-full rounded-xl border bg-white px-4 py-4 shadow-sm">
       <img class="object-contain self-start rounded-md" width="90"
-      src="{{ $item->product->image ? asset('storage/' . $item->product->image) : asset('images/default-avatar.png') }}"
-      alt="{{ $item->product->name }}" />
+      src="{{ $item->product->foto ? asset('storage/' . $item->product->foto) : asset('images/default-avatar.png') }}"
+      alt="{{ $item->product->nama_produk }}" />
 
       <div class="ml-4 flex flex-col justify-between w-full">
       <div>
-      <p class="text-base font-bold text-gray-800">{{ $item->product->name }}</p>
-      <p class="text-sm text-gray-500">Kategori: {{ $item->product->category }}</p>
+      <p class="text-base font-bold text-gray-800">{{ $item->product->nama_produk }}</p>
+      <p class="text-sm text-gray-500">Kategori: {{ $item->product->kategori }}</p>
       </div>
       <div class="mt-3 text-sm text-gray-600">
-      <p>Harga: <strong>Rp {{ number_format($item->product->price, 0, ',', '.') }}</strong></p>
-      <p>Qty: <strong>{{ $item->quantity }}</strong></p>
-      <p>Total: <strong class="text-violet-800">Rp {{ number_format($item->sub_price, 0, ',', '.') }}</strong></p>
+      <p>Harga: <strong>Rp {{ number_format($item->product->harga, 0, ',', '.') }}</strong></p>
+      <p>Qty: <strong>{{ $item->kuantitas }}</strong></p>
+      <p>Total: <strong class="text-violet-800">Rp {{ number_format($item->subtotal, 0, ',', '.') }}</strong></p>
       </div>
       </div>
     </div>
@@ -62,17 +62,17 @@
       <tr class="border-t">
       <td class="px-6 py-5">
         <div class="flex items-center gap-4">
-        <img class="w-16 h-16 rounded-md object-cover" src="{{ asset('storage/' . $item->product->image) }}"
-        alt="{{ $item->product->name }}">
+        <img class="w-16 h-16 rounded-md object-cover" src="{{ asset('storage/' . $item->product->foto) }}"
+        alt="{{ $item->product->nama_produk }}">
         <div>
-        <p class="font-semibold text-gray-800">{{ $item->product->name }}</p>
-        <p class="text-sm text-gray-500">Kategori: {{ $item->product->category }}</p>
+        <p class="font-semibold text-gray-800">{{ $item->product->nama_produk }}</p>
+        <p class="text-sm text-gray-500">Kategori: {{ $item->product->kategori }}</p>
         </div>
         </div>
       </td>
-      <td class="px-6 py-5">Rp {{ number_format($item->product->price, 0, ',', '.') }}</td>
-      <td class="px-6 py-5 text-center">{{ $item->quantity }}</td>
-      <td class="px-6 py-5 text-secondary font-semibold">Rp {{ number_format($item->sub_price, 0, ',', '.') }}
+      <td class="px-6 py-5">Rp {{ number_format($item->product->harga, 0, ',', '.') }}</td>
+      <td class="px-6 py-5 text-center">{{ $item->kuantitas }}</td>
+      <td class="px-6 py-5 text-secondary font-semibold">Rp {{ number_format($item->subtotal, 0, ',', '.') }}
       </td>
       </tr>
       @endforeach
@@ -89,7 +89,7 @@
       <h2 class="font-bold text-lg text-gray-800 mb-4">Ringkasan Pesanan</h2>
       <div class="flex justify-between border-b py-3 text-sm">
       <p>Subtotal</p>
-      <p>Rp {{ number_format($order->total_price, 0, ',', '.') }}</p>
+      <p>Rp {{ number_format($order->total_harga, 0, ',', '.') }}</p>
       </div>
       <div class="flex justify-between border-b py-3 text-sm">
       <p>Pengiriman</p>
@@ -97,7 +97,7 @@
       </div>
       <div class="flex justify-between py-3 text-base font-bold">
       <p>Total</p>
-      <p>Rp {{ number_format($order->total_price, 0, ',', '.') }}</p>
+      <p>Rp {{ number_format($order->total_harga, 0, ',', '.') }}</p>
       </div>
     </div>
 
@@ -108,7 +108,7 @@
       <div class="mb-3 text-sm">
       <p>ID Pesanan: 
         <span class="font-semibold">
-        &num;{{ $order->id }}
+        &num;{{ $order->id_pesanan }}
         </span>
       </p>
       </div>
@@ -132,34 +132,34 @@
 
       <div class="border-b py-3 text-sm">
       <p class="font-bold">Informasi Alamat</p>
-      <p>Penerima: {{ $order->shippingAddress->receiver_name }}</p>
-      <p>Nomor Telepon: {{ $order->shippingAddress->phone_number }}</p>
-      <p>Provinsi: {{ $order->shippingAddress->province }}</p>
-      <p>Kota: {{ $order->shippingAddress->city }}</p>
-      <p>Kode Pos: {{ $order->shippingAddress->postal_code }}</p>
-      <p>Detail: {{ $order->shippingAddress->detail }}</p>
+      <p>Penerima: {{ $order->shippingAddress->nama_penerima }}</p>
+      <p>Nomor Telepon: {{ $order->shippingAddress->nomor_telepon }}</p>
+      <p>Provinsi: {{ $order->shippingAddress->provinsi }}</p>
+      <p>Kota: {{ $order->shippingAddress->kota }}</p>
+      <p>Kode Pos: {{ $order->shippingAddress->kode_pos }}</p>
+      <p>Detail: {{ $order->shippingAddress->detail_alamat }}</p>
       </div>
 
       <div class="py-3 text-sm">
       <p class="font-bold">Rincian Pembayaran</p>
-      @if ($order->payment_method === 'cod')
+      @if ($order->metode_pembayaran === 'cod')
       <p>Metode: Cash Of Delivery (COD)</p>
-    @elseif($order->payment_method === 'bank_transfer')
+    @elseif($order->metode_pembayaran === 'bank_transfer')
       <p>Metode: Bank Transfer</p>
     @endif
       </div>
     </div>
 
     {{-- Payment Proof Section --}}
-    @if ($order->payment_method !== 'cod')
+    @if ($order->metode_pembayaran !== 'cod')
     <div class="w-full">
       <div class="rounded-xl border bg-white py-5 px-6 shadow-md">
       <h2 class="font-bold text-lg text-gray-800 mb-4">Bukti Pembayaran</h2>
 
-      @if (!$order->payments_proofs)
+      @if (!$order->bukti_pembayaran)
       <div class="text-sm text-gray-600 mb-4">
       <p class="mb-2">Anda belum mengunggah bukti pembayaran untuk pesanan ini.</p>
-      <a href="{{ url('/payment/upload/' . $order->id) }}"
+      <a href="{{ url('/payment/upload/' . $order->id_pesanan) }}"
       class="inline-block px-4 py-2 bg-secondary hover:bg-primary text-white rounded-lg text-sm font-medium transition">
       Upload Bukti Pembayaran
       </a>
@@ -167,7 +167,7 @@
     @else
       <div class="text-sm text-gray-700">
       <p class="mb-2">Bukti pembayaran telah diunggah</p>
-      <a href="{{ asset('storage/' . $order->payments_proofs) }}" target="_blank"
+      <a href="{{ asset('storage/' . $order->bukti_pembayaran) }}" target="_blank"
       class="text-secondary hover:underline hover:text-primary">
       Lihat Bukti Pembayaran
       </a>

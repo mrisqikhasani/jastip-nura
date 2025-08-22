@@ -26,29 +26,29 @@
   <section class="container mx-auto max-w-[1200px] border-b py-5 flex flex-row lg:py-10">
     <!-- image gallery -->
     <div class="px-5">
-    <img class="w-96 rounded-lg" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
+    <img class="w-96 rounded-lg" src="{{ asset('storage/' . $product->foto) }}" alt="{{ $product->nama_produk }}" />
     </div>
 
     <!-- description  -->
 
     <div class="ml-5">
-    <h2 class="pt-3 text-3xl font-bold lg:pt-0">{{ $product->name }}</h2>
+    <h2 class="pt-3 text-3xl font-bold lg:pt-0">{{ $product->nama_produk }}</h2>
 
     <p class="font-medium mt-2">
-      Kategori: <span class="font-normal">{{ $product->category }}</span>
+      Kategori: <span class="font-normal">{{ $product->kategori }}</span>
     </p>
 
     <p class="mt-2 text-xl font-semibold text-secondary">
-      Rp{{ number_format($product->price) }}
+      Rp{{ number_format($product->harga) }}
     </p>
 
     <div class="mt-2 flex flex-row gap-2 items-center justify-start text-primary">
       <i class="fa-solid fa-shirt text-xl"></i>
-      <p class="text-base font-medium">{{ $product->size }}</p>
+      <p class="text-base font-medium">{{ $product->ukuran }}</p>
     </div>
 
     <p class="mt-2 text-sm leading-5 text-gray-500">
-      {{ $product->description }}
+      {{ $product->deskripsi }}
     </p>
 
     <div class="mt-3">
@@ -72,10 +72,10 @@
 
     <div class="add-to-cart mt-3 flex flex-row items-center gap-6">
       <input type="hidden" name="quantity" id="qtyInputHidden" value="1">
-      <input type="hidden" name="product_id" value="{{ $product->id }}">
+      <input type="hidden" name="product_id" value="{{ $product->id_produk }}">
       <button
       class="add-to-cart font-medium text-sm px-4 flex h-12 rounded-lg items-center justify-center bg-secondary text-white duration-100 trasition-all ease-in hover:bg-primary"
-      type="button" data-product-id="{{ $product->id }}">
+      type="button" data-product-id="{{ $product->id_produk }}">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="mr-3 h-4 w-4">
         <path stroke-linecap="round" stroke-linejoin="round"
@@ -134,8 +134,8 @@
         'X-CSRF-TOKEN': '{{ csrf_token() }}'
         },
         body: JSON.stringify({
-        product_id: productId,
-        quantity: parseInt(document.getElementById('qtyInputHidden').value)
+        id_produk: productId,
+        kuantitas: parseInt(document.getElementById('qtyInputHidden').value)
         })
       })
        .then(async response => {

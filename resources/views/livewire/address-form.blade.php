@@ -2,7 +2,7 @@
   <!-- FORM -->
   <div class="border p-5 shadow-md rounded-lg">
     <h2 class="text-lg font-bold mb-4">
-      {{ $id_alamat ? 'Edit Alamat' : 'Tambah Alamat' }}
+      {{ $address_id ? 'Edit Alamat' : 'Tambah Alamat' }}
     </h2>
 
     @if (session()->has('success'))
@@ -11,41 +11,43 @@
     </div>
   @endif
 
-    <form wire:submit.prevent="save" class="space-y-4">
-      <div>
-        <label>Nama Penerima</label>
-        <input type="text" wire:model="receiver_name" class="w-full border px-3 py-2 mt-1 rounded-lg" />
-        @error('nama_penerima') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-      </div>
-      <div>
-        <label>Nomor Telepon</label>
-        <input type="text" wire:model="phone_number" class="w-full border px-3 py-2 mt-1 rounded-lg" />
-        @error('nomor_telepon') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-      </div>
-      <div>
-        <label>Provinsi</label>
-        <input type="text" wire:model="province" class="w-full border px-3 py-2 mt-1 rounded-lg" />
-        @error('provinsi') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-      </div>
-      <div>
-        <label>Kota</label>
-        <input type="text" wire:model="city" class="w-full border px-3 py-2 mt-1 rounded-lg" />
-        @error('kota') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-      </div>
-      <div>
-        <label>Kode Pos</label>
-        <input type="text" wire:model="postal_code" class="w-full border px-3 py-2 mt-1 rounded-lg" />
-        @error('kode_pos') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-      </div>
-      <div>
-        <label>Detail</label>
-        <textarea wire:model="detail" class="w-full border px-3 py-2 mt-1 rounded-lg"></textarea>
-        @error('detail_alamat') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-      </div>
-      <button type="submit" class="bg-secondary hover:bg-primary text-white px-4 py-2 rounded-lg">
-        Simpan
-      </button>
-    </form>
+    <div>
+      <form wire:submit.prevent="save" class="space-y-4">
+        <div>
+          <label>Nama Penerima</label>
+          <input type="text" wire:model="nama_penerima" class="w-full border px-3 py-2 mt-1 rounded-lg" />
+          @error('nama_penerima') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        </div>
+        <div>
+          <label>Nomor Telepon</label>
+          <input type="text" wire:model="nomor_telepon" class="w-full border px-3 py-2 mt-1 rounded-lg" />
+          @error('nomor_telepon') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        </div>
+        <div>
+          <label>Provinsi</label>
+          <input type="text" wire:model="provinsi" class="w-full border px-3 py-2 mt-1 rounded-lg" />
+          @error('provinsi') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        </div>
+        <div>
+          <label>Kota</label>
+          <input type="text" wire:model="kota" class="w-full border px-3 py-2 mt-1 rounded-lg" />
+          @error('kota') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        </div>
+        <div>
+          <label>Kode Pos</label>
+          <input type="text" wire:model="kode_pos" class="w-full border px-3 py-2 mt-1 rounded-lg" />
+          @error('kode_pos') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        </div>
+        <div>
+          <label>Detail</label>
+          <textarea wire:model="detail_alamat" class="w-full border px-3 py-2 mt-1 rounded-lg"></textarea>
+          @error('detail_alamat') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+        </div>
+        <button type="submit" class="bg-secondary hover:bg-primary text-white px-4 py-2 rounded-lg">
+          Simpan
+        </button>
+      </form>
+    </div>
   </div>
 
   <!-- ADDRESS LIST -->
@@ -58,22 +60,22 @@
 
     @forelse ($address as $addr)
     <div class="border p-4 mb-4 rounded-lg cursor-pointer hover:bg-slate-100 hover:border-slate-300
-      @if($address_id == $addr->id)
+      @if($address_id == $addr->id_alamat)
       bg-slate-100 border-slate-300
-      @endif
-      " wire:click="fillForm({{ $addr->id }})">
+    @endif
+      " wire:click="fillForm({{ $addr->id_alamat }})">
       <p><strong>{{ $addr->nama_penerima }}</strong></p>
       <p>{{ $addr->provinsi }}, {{ $addr->kota }}</p>
       <p>{{ $addr->kode_pos }}</p>
       <p>{{ $addr->detail_alamat }}</p>
       <div class="flex space-x-4 mt-2">
       <!-- Tombol EDIT -->
-      <button wire:click="fillForm({{ $addr->id }})" class="text-blue-600 hover:underline">
+      <button wire:click="fillForm({{ $addr->id_alamat }})" class="text-blue-600 hover:underline">
         Ubah
       </button>
 
       <!-- Tombol DELETE -->
-      <button onclick="confirmDelete({{ $addr->id }})" class="text-red-600 hover:underline">
+      <button onclick="confirmDelete({{ $addr->id_alamat }})" class="text-red-600 hover:underline">
         Hapus
       </button>
 
@@ -84,24 +86,24 @@
   @endforelse
   </div>
   <script>
-  function confirmDelete(id) {
-    Swal.fire({
-      title: 'Yakin Ingin Menghapus?',
-      text: "Alamat tidak dapat digunakan lagi",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#555879',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Ya, hapus!',
-      cancelButtonText: 'Batal'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Ini memanggil langsung method Livewire dari komponen ini
-        @this.call('deleteAddress', id); // Langsung manggil method di komponen
-      }
-    });
-  }
-</script>
+    function confirmDelete(id) {
+      Swal.fire({
+        title: 'Yakin Ingin Menghapus?',
+        text: "Alamat tidak dapat digunakan lagi",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#555879',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Ini memanggil langsung method Livewire dari komponen ini
+          @this.call('deleteAddress', id); // Langsung manggil method di komponen
+        }
+      });
+    }
+  </script>
 
 
 </div>

@@ -9,6 +9,8 @@ class Address extends Model
 {
     protected $table = 'alamat';
 
+    protected $primaryKey = 'id_alamat';
+
     protected $fillable = [
         'id_pengguna',
         'nama_penerima',
@@ -21,6 +23,6 @@ class Address extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_pengguna', 'id_pengguna');
     }
 }

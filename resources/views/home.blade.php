@@ -1,11 +1,6 @@
 @extends('layouts.app')
 @section('content')
   <!-- Offer image  -->
-
-  @php
-  dump($recommendedProducts)
-  @endphp
-
   <section class="bg-white">
     <div class="max-w-7xl mx-auto px-10 py-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-4">
       <div>
@@ -84,10 +79,10 @@
   @foreach($recommendedProducts as $product)
   <div class="flex flex-col">
     <div class="relative flex">
-      <img class="w-full aspect-square object-cover rounded-lg" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
+      <img class="w-full aspect-square object-cover rounded-lg" src="{{ asset('storage/' . $product->foto) }}" alt="{{ $product->nama_produk }}" />
       <div
         class="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100">
-        <a href="{{ url('/product/' . $product->id) }}">
+        <a href="{{ url('/product/' . $product->id_produk) }}">
           <span class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-secondary">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="h-6 w-6 text-white">
@@ -100,9 +95,9 @@
     </div>
 
     <div>
-      <p class="mt-2 font-medium">{{ $product->name }}</p>
+      <p class="mt-2 font-medium">{{ $product->nama_produk }}</p>
       <p class="font-medium text-secondary">
-        Rp{{ number_format($product->price) }} 
+        Rp{{ number_format($product->harga) }} 
       </p>
     </div>
   </div>

@@ -22,12 +22,12 @@ class Cart extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_pengguna', 'id_pengguna');
     }
 
     public function cartLineItems(): HasMany
     {
-        return $this->hasMany(CartLineItem::class);
+        return $this->hasMany(CartLineItem::class, 'id_keranjang');
     }
 
 }

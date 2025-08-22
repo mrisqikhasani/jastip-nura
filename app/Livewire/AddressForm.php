@@ -5,24 +5,22 @@ namespace App\Livewire;
 use App\Models\Address;
 use Auth;
 use Livewire\Component;
-
 class AddressForm extends Component
 {
-
     public $address;
     public $address_id = null;
 
     protected $listeners = ['deleteAddress'];
 
-    public $receiver_name, $phone_number, $province, $city, $postal_code, $detail;
+    public $nama_penerima, $nomor_telepon, $provinsi, $kota, $kode_pos, $detail_alamat;
 
     protected $rules = [
-        'receiver_name' => 'required|string',
-        'phone_number' => 'required|string',
-        'province' => 'required|string',
-        'city' => 'required|string',
-        'postal_code' => 'required|string',
-        'detail' => 'required|string',
+        'nama_penerima' => 'required|string',
+        'nomor_telepon' => 'required|string',
+        'provinsi' => 'required|string',
+        'kota' => 'required|string',
+        'kode_pos' => 'required|string|max:5',
+        'detail_alamat' => 'required|string',
     ];
 
     public function mount()
@@ -39,14 +37,14 @@ class AddressForm extends Component
     {
         $address = $this->address->find($id);
 
-        if ($address && $address->user_id == Auth::id()) {
-            $this->address_id = $address->id;
-            $this->receiver_name = $address->receiver_name;
-            $this->phone_number = $address->phone_number;
-            $this->province = $address->province;
-            $this->city = $address->city;
-            $this->postal_code = $address->postal_code;
-            $this->detail = $address->detail;
+        if ($address && $address->id_pengguna == Auth::id()) {
+            $this->address_id = $address->id_alamat;
+            $this->nama_penerima = $address->nama_penerima;
+            $this->nomor_telepon = $address->nomor_telepon;
+            $this->provinsi = $address->provinsi;
+            $this->kota = $address->kota;
+            $this->kode_pos = $address->kode_pos;
+            $this->detail_alamat = $address->detail_alamat;
         }
     }
 
@@ -54,12 +52,12 @@ class AddressForm extends Component
     {
         $this->reset([
             'address_id',
-            'receiver_name',
-            'phone_number',
-            'province',
-            'city',
-            'postal_code',
-            'detail'
+            'nama_penerima',
+            'nomor_telepon',
+            'provinsi',
+            'kota',
+            'kode_pos',
+            'detail_alamat',
         ]);
     }
 
@@ -70,20 +68,27 @@ class AddressForm extends Component
         if ($this->address_id) {
             $address = Address::find($this->address_id);
 
-            if ($address && $address->user_id === Auth::id()) {
-                $address->update($this->only(['receiver_name', 'phone_number', 'province', 'city', 'postal_code', 'detail']));
+            if ($address && $address->id_pengguna === Auth::id()) {
+                $address->update($this->only([
+                    'nama_penerima',
+                    'nomor_telepon',
+                    'provinsi',
+                    'kota',
+                    'kode_pos',
+                    'detail_alamat'
+                ]));
                 session()->flash('success', 'Alamat berhasil diperbarui.');
             }
         } else {
             Address::create(array_merge($this->only([
-                'receiver_name',
-                'phone_number',
-                'province',
-                'city',
-                'postal_code',
-                'detail'
+                'nama_penerima',
+                'nomor_telepon',
+                'provinsi',
+                'kota',
+                'kode_pos',
+                'detail_alamat'
             ]), [
-                'user_id' => Auth::id(),
+                'id_pengguna' => Auth::id(),
             ]));
 
             session()->flash('success', 'Alamat berhasil ditambahkan.');
@@ -94,24 +99,24 @@ class AddressForm extends Component
     }
 
     public function deleteAddress($id)
-{
-    $address = Address::find($id);
+    {
+        $address = Address::find($id);
 
-    if ($address && $address->user_id === Auth::id()) {
-        $address->delete();
-        session()->flash('success', 'Alamat berhasil dihapus.');
+        if ($address && $address->id_pengguna === Auth::id()) {
+            $address->delete();
+            session()->flash('success', 'Alamat berhasil dihapus.');
 
-        // Jika alamat yang dihapus sedang diedit, reset form
-        if ($this->address_id == $id) {
-            $this->resetForm();
+            if ($this->address_id == $id) {
+                $this->resetForm();
+            }
+
+            $this->refreshAddresses();
         }
-
-        $this->refreshAddresses();
     }
-}
 
     public function render()
     {
         return view('livewire.address-form');
     }
 }
+

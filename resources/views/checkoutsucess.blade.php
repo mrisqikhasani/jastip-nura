@@ -49,7 +49,7 @@
       <!-- Headline -->
       <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mt-6">Pesanan Anda Telah Diterima</h1>
       <p class="mt-2 text-gray-600 text-sm md:text-base">Terima kasih,
-        <span class="font-semibold text-gray-800">{{ Auth::user()->name }}</span>!
+        <span class="font-semibold text-gray-800">{{ Auth::user()->nama_lengkap }}</span>!
       </p>
 
       @if ($order->payment_method === 'cod')
@@ -62,7 +62,7 @@
       </div>
 
       <div class="mt-10">
-      <a href="{{ url('/account/order/'.$order->id) }}"
+      <a href="{{ url('/account/order/'.$order->id_pesanan) }}"
         class="bg-secondary hover:bg-primary text-white px-6 py-3 rounded-lg font-medium transition flex flex-row items-center justify-center gap-3">
         <i class="fa-solid fa-file-invoice text-lg"></i>Lihat Riwayat Pesanan
       </a>
@@ -87,11 +87,11 @@
 
       <!-- Upload Button -->
       <div class="mt-6 flex flex-col sm:flex-row sm:justify-center gap-4">
-      <a href="{{ url('/account/order/'.$order->id) }}"
+      <a href="{{ url('/account/order/'.$order->id_pesanan) }}"
         class="bg-secondary hover:bg-primary text-white px-6 py-3 rounded-lg font-medium transition flex items-center flex-row justify-center">
         <i class="fa-solid fa-file-invoice text-xl"></i>Lihat Riwayat Pesanan
       </a>
-      <a href="{{url('/payment/upload/'.$order->id) }}"
+      <a href="{{url('/payment/upload/'.$order->id_pesanan) }}"
         class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition flex items-center flex-row justify-center">
         <i class="fa-solid fa-cloud-arrow-up text-xl"></i>Upload Bukti Transfer
       </a>

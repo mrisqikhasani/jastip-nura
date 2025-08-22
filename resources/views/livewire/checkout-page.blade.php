@@ -1,20 +1,39 @@
 <div class="max-w-6xl mx-auto px-4 py-10">
-  <h1 class="text-3xl font-bold mb-8 text-gray-800">Checkout</h1>
+  <h1 class="text-3xl font-bold mb-8 text-gray-800">Ubah Pesanan</h1>
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    
     <!-- 🧾 Kiri: Alamat + Metode Pembayaran -->
     <div class="lg:col-span-2 space-y-6">
+      @if ($errors->any())
+        <div class="mt-4 bg-red-100 text-red-700 text-sm p-3 rounded">
+            <ul class="list-disc ml-4">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    
+        @if (session()->has('error'))
+            <div class="mt-4 bg-red-100 text-red-700 text-sm p-3 rounded">
+                {{ session('error') }}
+            </div>
+        @endif
+
+    
       {{-- 📍 Address Selection --}}
       <div class="bg-white p-6 rounded-2xl border border-gray-300">
         <h2 class="text-xl font-semibold mb-4 text-gray-700">Alamat Pengiriman</h2>
 
         @foreach($address as $add)
       <label class="block mb-3 cursor-pointer">
-        <input type="radio" wire:model="selectedAddressId" value="{{ $add->id }}" class="hidden peer">
+        <input type="radio" wire:model="selectedAddressId" value="{{ $add->id_alamat }}" class="hidden peer">
         <div
         class="p-4 rounded-xl border border-gray-300 peer-checked:border-blue-600 peer-checked:ring-2 peer-checked:ring-blue-200 transition">
-        <p class="font-semibold text-gray-800">{{ $add->receiver_name }}</p>
+        <p class="font-semibold text-gray-800">{{ $add->nama_penerima }}</p>
         <p class="text-sm text-gray-500">
-          {{ $add->detail }}, {{ $add->city }}, {{ $add->province }} - {{ $add->postal_code }}
+          {{ $add->detail_alamat }}, {{ $add->kota }}, {{ $add->provinsi }} - {{ $add->kode_pos }}
         </p>
         </div>
       </label>
@@ -51,11 +70,11 @@
         @foreach($cart->cartLineItems as $item)
       <div class="flex justify-between border-b pb-3">
         <div>
-        <p class="font-medium text-gray-800">{{ $item->product->name }}</p>
-        <p class="text-sm text-gray-500">Qty: {{ $item->quantity }}</p>
+        <p class="font-medium text-gray-800">{{ $item->product->nama_produk }}</p>
+        <p class="text-sm text-gray-500">Qty: {{ $item->kuantitas }}</p>
         </div>
         <div class="text-right text-gray-700">
-        Rp {{ number_format($item->product->price * $item->quantity, 0, ',', '.') }}
+        Rp {{ number_format($item->product->harga * $item->kuantitas, 0, ',', '.') }}
         </div>
       </div>
     @endforeach

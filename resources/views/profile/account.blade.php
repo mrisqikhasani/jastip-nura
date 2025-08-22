@@ -10,10 +10,10 @@
     <div class="py-5">
       <div class="flex items-center">
       <img width="40px" height="40px" class="rounded-full object-cover"
-        src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('storage/placeholder-img.svg') }}" alt="User avatar" />
+        src="{{ $user->foto_profil ? asset('storage/' . $user->foto_profil) : asset('storage/placeholder-img.svg') }}" alt="User avatar" />
       <div class="ml-5">
         <p class="text-sm text-gray-500">Hello,</p>
-        <p class="font-bold">{{ $user->name }}</p>
+        <p class="font-bold">{{ $user->nama_lengkap }}</p>
       </div>
       </div>
     </div>
@@ -33,10 +33,10 @@
       <a class="text-sm text-secondary hover:underline" href="{{ url('/account/profile') }}">Ubah</a>
       </div>
       <div class="px-4 text-sm text-gray-700 space-y-2">
-      <p><strong>Nama:</strong> {{ $user->name }}</p>
-      <p><strong>Username:</strong> {{ $user->username }}</p>
+      <p><strong>Nama:</strong> {{ $user->nama_lengkap }}</p>
+      <p><strong>Username:</strong> {{ $user->nama_pengguna }}</p>
       <p><strong>Email:</strong> {{ $user->email }}</p>
-      <p><strong>Nomor Telepon:</strong> {{ $user->phone_number }}</p>
+      <p><strong>Nomor Telepon:</strong> {{ $user->nomor_telepon }}</p>
       </div>
     </div>
 
@@ -70,27 +70,27 @@
       <div class="space-y-4 text-sm text-gray-700">
       <div class="flex flex-col md:flex-row md:items-start gap-2">
         <span class="min-w-[100px] font-bold">Nama Penerima</span>
-        <span>{{ $shippingAddress->receiver_name ?? '-' }}</span>
+        <span>{{ $shippingAddress->nama_penerima ?? '-' }}</span>
       </div>
 
       <div class="flex flex-col md:flex-row md:items-start gap-2">
         <span class="min-w-[100px] font-bold">Alamat</span>
-        <span>{{ $shippingAddress->detail ?? '-' }}</span>
+        <span>{{ $shippingAddress->detail_alamat ?? '-' }}</span>
       </div>
 
       <div class="flex flex-col md:flex-row md:items-start gap-2">
         <span class="min-w-[100px] font-bold">Kota / Provinsi</span>
-        <span>{{ $shippingAddress->city ?? '-' }}, {{ $shippingAddress->province ?? '-' }}</span>
+        <span>{{ $shippingAddress->kota ?? '-' }}, {{ $shippingAddress->provinsi ?? '-' }}</span>
       </div>
 
       <div class="flex flex-col md:flex-row md:items-start gap-2">
         <span class="min-w-[100px] font-bold">Kode Pos</span>
-        <span>{{ $shippingAddress->postal_code ?? '-' }}</span>
+        <span>{{ $shippingAddress->kode_pos ?? '-' }}</span>
       </div>
 
       <div class="flex flex-col md:flex-row md:items-start gap-2">
         <span class="min-w-[100px] font-bold">Telepon</span>
-        <span>{{ $shippingAddress->phone_number ?? '-' }}</span>
+        <span>{{ $shippingAddress->nomor_telepon ?? '-' }}</span>
       </div>
       </div>
     </div>

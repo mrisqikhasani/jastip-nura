@@ -1,3 +1,4 @@
+
 <div class="flex flex-col lg:flex-row gap-6">
   {{-- Cart Items --}}
   <div class="flex-1 space-y-4">
@@ -9,21 +10,21 @@
             {{-- Product Image --}}
             <a href="#" class="shrink-0 md:order-1">
               <img class="h-20 w-20 rounded-lg"
-                src="{{ $item->product->image ? asset('storage/' . $item->product->image) : 'https://via.placeholder.com/80' }}"
-                alt="{{ $item->product->name }}" />
+                src="{{ $item->product->foto ? asset('storage/' . $item->product->foto) : 'https://via.placeholder.com/80' }}"
+                alt="{{ $item->product->nama_produk }}" />
             </a>
 
             {{-- Quantity + Total Price --}}
             <div class="flex items-center justify-between md:order-3 md:justify-end gap-4">
               <div class="flex items-center">
-                <button wire:click="decrement({{ $item->id }})" type="button"
+                <button wire:click="decrement({{ $item->id_detail_keranjang }})" type="button"
                   class="inline-flex h-6 w-6 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200">
                   <svg class="h-3 w-3 text-gray-900" fill="none" viewBox="0 0 18 2">
                     <path d="M1 1h16" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
                   </svg>
                 </button>
-                <span class="w-10 text-center text-sm font-medium text-gray-900">{{ $item->quantity }}</span>
-                <button wire:click="increment({{ $item->id }})" type="button"
+                <span class="w-10 text-center text-sm font-medium text-gray-900">{{ $item->kuantitas }}</span>
+                <button wire:click="increment({{ $item->id_detail_keranjang }})" type="button"
                   class="inline-flex h-6 w-6 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200">
                   <svg class="h-3 w-3 text-gray-900" fill="none" viewBox="0 0 18 18">
                     <path d="M9 1v16M1 9h16" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
@@ -32,17 +33,17 @@
               </div>
               <div class="text-end md:w-32">
                 <p class="text-base font-bold text-gray-900">
-                  Rp {{ number_format($item->product->price * $item->quantity) }}
+                  Rp {{ number_format($item->product->harga * $item->kuantitas) }}
                 </p>
               </div>
             </div>
 
             {{-- Product Info + Remove --}}
             <div class="w-full min-w-0 flex-1 space-y-2 md:order-2 md:max-w-md">
-              <p class="text-lg font-medium text-gray-900">{{ $item->product->name }}</p>
-              <p class="text-sm text-slate-600">Harga Satuan: Rp {{ number_format($item->product->price) }}</p>
+              <p class="text-lg font-medium text-gray-900">{{ $item->product->nama_produk }}</p>
+              <p class="text-sm text-slate-600">Harga Satuan: Rp {{ number_format($item->product->harga) }}</p>
               <div class="flex items-center gap-4">
-                <button wire:click="deleteItem({{ $item->id }})" type="button"
+                <button wire:click="deleteItem({{ $item->id_detail_keranjang }})" type="button"
                   class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
                   <svg class="me-1.5 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
@@ -80,7 +81,7 @@
 
       <div class="flex justify-between py-2">
         <span class="text-gray-500">Subtotal</span>
-        <span class="font-medium">Rp {{ number_format($cart->total_price ?? 0) }}</span>
+        <span class="font-medium">Rp {{ number_format($cart->total_harga ?? 0) }}</span>
       </div>
 
       <div class="flex justify-between py-2 border-b">
@@ -90,12 +91,12 @@
 
       <div class="flex justify-between py-2 font-semibold">
         <span class="font-semibold">Total</span>
-        <span>Rp {{ number_format($cart->total_price ?? 0) }}</span>
+        <span>Rp {{ number_format($cart->total_harga ?? 0) }}</span>
       </div>
 
       <button wire:click="prosesCheckout"
         class="mt-4 w-full bg-secondary font-medium py-2 text-white rounded-lg hover:bg-primary transition">
-        Checkout
+        Buat Pesanan
       </button>
     </div>
   @endif

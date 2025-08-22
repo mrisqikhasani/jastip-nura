@@ -22,7 +22,9 @@
 
       <h2 class="text-lg font-bold mb-4">Foto Profil</h2>
       <div class="mx-auto mb-5 flex flex-col items-center bg-gray-100 p-5 rounded-lg lg:mx-0 lg:w-1/2">
-      <img class="h-20 w-20 rounded-full mb-4" src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('storage/placeholder-img.svg') }}" alt="User avatar" />
+      <img class="h-20 w-20 rounded-full mb-4"
+        src="{{ $user->foto_profil ? asset('storage/' . $user->foto_profil) : asset('storage/placeholder-img.svg') }}"
+        alt="User avatar" />
 
       <form method="POST" action="{{ url('/account/profile/avatar') }}" enctype="multipart/form-data"
         class="w-full flex flex-col items-center">
@@ -31,20 +33,21 @@
 
         <label class="block w-full">
         <span class="sr-only">Pilih foto</span>
-        <input type="file" name="profile_picture"
-          class="w-full border border-primary rounded-lg text-sm font-medium text-gray-700 outline-none file:rounded-lg file:mr-4 file:text-sm file:bg-primary file:text-white file:py-2 file:px-4 file:font-medium file:border-none" 
-          accept=".jpg, .jpeg, .png"
-          />
+        <input type="file" name="foto_profil"
+          class="w-full border border-primary rounded-lg text-sm font-medium text-gray-700 outline-none file:rounded-lg file:mr-4 file:text-sm file:bg-primary file:text-white file:py-2 file:px-4 file:font-medium file:border-none"
+          accept=".jpg, .jpeg, .png" />
         </label>
 
-        @error('avatar')
+        @error('foto_profil')
       <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
       @enderror
 
-        <button type="submit" class="mt-6 bg-secondary px-3 py-2 text-sm text-white font-medium hover:bg-primary transition rounded-lg">
-          Simpan
+        <button type="submit"
+        class="mt-6 bg-secondary px-3 py-2 text-sm text-white font-medium hover:bg-primary transition rounded-lg">
+        Simpan
         </button>
       </form>
+
       </div>
     </div>
 
@@ -55,26 +58,39 @@
       <div class="flex w-full flex-col">
       <label class="flex" for="name">Nama<span
         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:content-['*']"></span></label>
-      <input class="w-full border px-4 py-2 lg:w-1/2 rounded-lg" type="text" name="name" value="{{ $user->name }}" />
+      <input class="w-full border px-4 py-2 lg:w-1/2 rounded-lg" type="text" name="nama_lengkap"
+        value="{{ $user->nama_lengkap }}" />
+      @error('nama_lengkap')
+      <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+    @enderror
       </div>
 
       <div class="flex w-full flex-col">
       <label class="flex" for="email">Email<span
         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:content-['*']"></span></label>
-      <input class="w-full border px-4 py-2 lg:w-1/2 rounded-lg" type="email" name="email" value="{{ $user->email }}" />
+      <input class="w-full border px-4 py-2 lg:w-1/2 rounded-lg" type="email" name="email"
+        value="{{ $user->email }}" />
+      @error('email')
+      <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+    @enderror
       </div>
 
       <div class="flex w-full flex-col">
       <label class="flex" for="name">Nomor Telepon<span
         class="block text-sm font-medium text-slate-700 after:ml-0.5 after:content-['*']"></span></label>
-      <input class="w-full border px-4 py-2 lg:w-1/2 rounded-lg" type="text" name="phone_number"
-        value="{{ $user->phone_number }}" />
+      <input class="w-full border px-4 py-2 lg:w-1/2 rounded-lg" type="text" name="nomor_telepon"
+        value="{{ $user->nomor_telepon }}" />
+      @error('nomor_telepon')
+      <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+    @enderror
       </div>
 
       <div class="flex flex-col">
 
 
-      <button class="mt-4 w-48 bg-secondary hover:bg-primary py-2 text-white rounded-lg duration-100 ease-in transition-all font-medium text-base" type="submit">
+      <button
+        class="mt-4 w-48 bg-secondary hover:bg-primary py-2 text-white rounded-lg duration-100 ease-in transition-all font-medium text-base"
+        type="submit">
         Simpan Perubahan
       </button>
       </div>

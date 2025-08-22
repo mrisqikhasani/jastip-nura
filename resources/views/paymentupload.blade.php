@@ -15,18 +15,18 @@
         </h3>
       </div>
       <ul class="text-sm text-gray-700 space-y-2">
-        <li><strong>ID Pesanan:</strong> #{{ $order->id }}</li>
-        <li><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($order->order_date)->format('d M Y ') }}</li>
-        <li><strong>Metode Pembayaran:</strong> {{ strtoupper($order->payment_method) }}</li>
+        <li><strong>ID Pesanan:</strong> #{{ $order->id_pesanan }}</li>
+        <li><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($order->tanggal_pemesanan)->format('d M Y ') }}</li>
+        <li><strong>Metode Pembayaran:</strong> {{ strtoupper($order->metode_pembayaran) }}</li>
         <li><strong>Total Pembayaran:</strong>
-          <span class="text-secondary font-semibold">Rp{{ number_format($order->total_price, 0, ',', '.') }}</span>
+          <span class="text-secondary font-semibold">Rp{{ number_format($order->total_harga, 0, ',', '.') }}</span>
         </li>
         <li><strong>Transfer ke:</strong> DKI 50212345670 a.n. Jastip Nura</li>
       </ul>
     </div>
 
     {{-- FORM UPLOAD --}}
-    <form action="{{ url("/payment/upload/{$order->id}") }}" method="POST" enctype="multipart/form-data"
+    <form action="{{ url("/payment/upload/{$order->id_pesanan}") }}" method="POST" enctype="multipart/form-data"
       class="space-y-6">
       @csrf
 

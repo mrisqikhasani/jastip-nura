@@ -124,12 +124,12 @@
     productElement.innerHTML = `
     <div class="flex flex-col shadow-xl hover:shadow-2xl rounded-2xl px-4 py-4">
       <div class="relative flex">
-      <input type="hidden" value=${product.id}>
+      <input type="hidden" value=${product.id_produk}>
       <div class="aspect-square overflow-hidden rounded-xl w-full">
-      <img src="storage/${product.image}" alt="${product.name} image" class="w-full h-full object-cover" />
+      <img src="storage/${product.foto}" alt="${product.nama_produk} image" class="w-full h-full object-cover" />
       </div>
       <div class="absolute flex h-full w-full items-center justify-center gap-3 opacity-0 duration-150 hover:opacity-100">
-      <a href="/product/${product.id}" class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-white bg-secondary">
+      <a href="/product/${product.id_produk}" class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-white bg-secondary">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
       stroke="currentColor" class="h-4 w-4">
       <path stroke-linecap="round" stroke-linejoin="round"
@@ -139,18 +139,18 @@
       </div>
 
       <div class="absolute rounded-xl right-2 mt-3 flex items-center justify-center bg-secondary text-white text-sm rounded-sm">
-      <p class="px-2 py-2 text-sm">${product.category}</p>
+      <p class="px-2 py-2 text-sm">${product.kategori}</p>
       </div>
       </div>
 
       <div>
-      <p class="mt-2 font-semibold">${product.name}</p>
+      <p class="mt-2 font-semibold">${product.nama_produk}</p>
       <p class="font-medium text-secondary text-sm">
-      ${formatIDR(product.price)}
+      ${formatIDR(product.harga)}
       </p>
 
       <div>
-      <button class="add-to-cart font-medium mt-2 rounded-lg duration-100 transition-all ease-in h-10 w-full bg-secondary hover:bg-primary text-white" data-product-id="${product.id}">Tambah ke Keranjang</button>
+      <button class="add-to-cart font-medium mt-2 rounded-lg duration-100 transition-all ease-in h-10 w-full bg-secondary hover:bg-primary text-white" data-product-id="${product.id_produk}">Tambah ke Keranjang</button>
       </div>
       </div>
     </div>
@@ -160,7 +160,7 @@
     };
 
     products.forEach((product) => {
-    if (!product.name) return;
+    if (!product.nama_produk) return;
     const productElement = createProductElement(product);
     productWrapper.appendChild(productElement);
     productElements.push(productElement);
@@ -178,8 +178,8 @@
 
     productElements.forEach((productElement, index) => {
       const product = products[index];
-      const matchesSearch = product.name.toLowerCase().includes(searchTerm);
-      const matchesCategory = (selectedCategory === "all" || product.category === selectedCategory);
+      const matchesSearch = product.nama_produk.toLowerCase().includes(searchTerm);
+      const matchesCategory = (selectedCategory === "all" || product.kategori === selectedCategory);
 
       if (matchesSearch && matchesCategory) {
       productElement.classList.remove('hidden');
@@ -212,8 +212,8 @@
         'X-CSRF-TOKEN': '{{ csrf_token() }}'
       },
       body: JSON.stringify({
-        product_id: productId,
-        quantity: 1
+        id_produk: productId,
+        kuantitas: 1
       })
       })
       .then(async response => {

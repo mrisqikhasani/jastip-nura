@@ -39,6 +39,6 @@ class Order extends Model
 
     public function orderLineItems()
     {
-        return $this->hasMany(OrderLineItem::class);
+        return $this->hasMany(OrderLineItem::class, 'id_pesanan');
     }
 }

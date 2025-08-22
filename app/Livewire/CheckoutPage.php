@@ -20,7 +20,7 @@ class CheckoutPage extends Component
     public function mount()
     {
         $this->cart = Cart::with('cartLineItems.product')
-            ->where('user_id', auth()->id())
+            ->where('id_pengguna', auth()->id())
             ->first();
 
         $this->address = auth()->user()->address;
@@ -30,47 +30,67 @@ class CheckoutPage extends Component
     public function calculateTotal()
     {
         $this->total = $this->cart->cartLineItems->sum(function ($item) {
-            return $item->product->price * $item->quantity;
+            return $item->product->harga * $item->kuantitas;
         });
     }
 
     public function placeOrder()
     {
-        $this->validate([
-            'selectedAddressId' => 'required|exists:address,id',
-            'selectedPaymentMethod' => 'required|string',
-        ]);
-
-        $order = null;
-        DB::transaction(function () use (&$order) {
-            $order = Order::create([
-                'user_id' => auth()->id(),
-                'shipping_address_id' => $this->selectedAddressId,
-                'payment_method' => $this->selectedPaymentMethod,
-                'status' => 'Menunggu',
-                'order_date' => now(),
-                'total_price' => $this->total,
+        try {
+            $this->validate([
+                'selectedAddressId' => 'required|exists:alamat,id_alamat',
+                'selectedPaymentMethod' => 'required|string',
+            ], [
+                'selectedAddressId.required' => 'Silakan pilih alamat pengiriman.',
+                'selectedAddressId.exists' => 'Alamat yang dipilih tidak valid.',
+                'selectedPaymentMethod.required' => 'Metode pembayaran wajib dipilih.',
             ]);
 
-            foreach ($this->cart->cartLineItems as $item) {
-                OrderLineItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $item->product_id,
-                    'quantity' => $item->quantity,
-                    'sub_price' => $item->product->price * $item->quantity,
-                ]);
+            if (!$this->cart || $this->cart->cartLineItems->isEmpty()) {
+                $this->addError('cart', 'Keranjang masih kosong, tidak bisa membuat pesanan.');
+                return;
             }
 
-            $this->cart->total_price = 0;
-            $this->cart->save();
+            $order = null;
+            DB::transaction(function () use (&$order) {
+                $order = Order::create([
+                    'id_pengguna' => auth()->id(),
+                    'id_alamat' => $this->selectedAddressId,
+                    'metode_pembayaran' => $this->selectedPaymentMethod,
+                    'status' => 'Menunggu',
+                    'tanggal_pemesanan' => now(),
+                    'total_harga' => $this->total,
+                ]);
 
-            // Kosongkan keranjang
-            $this->cart->cartLineItems()->delete();
-        });
+                foreach ($this->cart->cartLineItems as $item) {
+                    OrderLineItem::create([
+                        'id_pesanan' => $order->id_pesanan,
+                        'id_produk' => $item->id_produk,
+                        'kuantitas' => $item->kuantitas,
+                        'subtotal' => $item->product->harga * $item->kuantitas,
+                    ]);
+                }
 
-        session()->flash('success', 'Order berhasil dibuat!');
-        return redirect()->to("/checkout/{$order->id}/success");
+                $this->cart->total_harga = 0;
+                $this->cart->save();
+
+                // Kosongkan keranjang
+                $this->cart->cartLineItems()->delete();
+            });
+
+            session()->flash('success', 'Order berhasil dibuat!');
+            return redirect()->to("/checkout/{$order->id_pesanan}/success");
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Error validasi otomatis ditangani Livewire, bisa custom kalau mau
+            throw $e;
+        } catch (\Exception $e) {
+            // Tangani error tak terduga
+            session()->flash('error', 'Terjadi kesalahan saat membuat pesanan. Silakan coba lagi.');
+            \Log::error('Checkout Error: ' . $e->getMessage());
+            return;
+        }
     }
+
 
     public function render()
     {

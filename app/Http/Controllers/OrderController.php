@@ -16,8 +16,8 @@ class OrderController extends Controller
         $user = Auth::user();
 
         $orders = Order::with(['orderLineItems.product'])
-            ->where('id_pengguna', $user->id)
-            ->orderBy('dibuat_pada', 'desc')
+            ->where('id_pengguna', $user->id_pengguna)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('profile.orderhistory', compact('orders', 'user'));
@@ -29,7 +29,7 @@ class OrderController extends Controller
         $user = Auth::user();
 
         $order = Order::with(['orderLineItems.product', 'shippingAddress'])
-            ->where('id_pengguna', $user->id)
+            ->where('id_pengguna', $user->id_pengguna)
             ->where('id_pesanan', $orderId)
             ->firstOrFail();
 
