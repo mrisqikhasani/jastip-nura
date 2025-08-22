@@ -52,7 +52,7 @@
         <span class="font-semibold text-gray-800">{{ Auth::user()->nama_lengkap }}</span>!
       </p>
 
-      @if ($order->payment_method === 'cod')
+      @if ($order->metode_pembayaran === 'cod')
       <p class="text-gray-500 text-sm md:text-base mt-2">
       Kami sedang memproses pesanan Anda. Anda dapat memantau statusnya di halaman <strong>Riwayat Pesanan</strong>.
       </p>
