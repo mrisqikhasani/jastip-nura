@@ -13,7 +13,6 @@ class UsersTableSeeder extends Seeder
             User::create([
                 'nama_lengkap' => 'Admin Jastip',
                 'email' => 'adminura@gmail.com',
-                'nama_pengguna' => 'adminura',
                 'password' => Hash::make('@dm1n123'),
                 'peran' => 'admin', 
                 'nomor_telepon' => '0838555936', 
@@ -24,7 +23,6 @@ class UsersTableSeeder extends Seeder
             User::create([
                 'nama_lengkap' => 'Noor Senita',
                 'email' => 'nrsenita@gmail.com',
-                'nama_pengguna' => 'nrsenita',
                 'password' => Hash::make('@Noor008'),
                 'peran' => 'pelanggan',
                 'nomor_telepon' => '0878555637',

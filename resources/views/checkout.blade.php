@@ -16,7 +16,7 @@
       <span class="mx-2 text-gray-500">&gt;</span>
     </li>
 
-    <li class="text-gray-500">Checkout</li>
+    <li class="text-gray-500">Buat Pesanan</li>
     </ul>
   </nav>  
   </div>

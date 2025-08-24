@@ -33,10 +33,18 @@
       <a class="text-sm text-secondary hover:underline" href="{{ url('/account/profile') }}">Ubah</a>
       </div>
       <div class="px-4 text-sm text-gray-700 space-y-2">
-      <p><strong>Nama:</strong> {{ $user->nama_lengkap }}</p>
-      <p><strong>Username:</strong> {{ $user->nama_pengguna }}</p>
-      <p><strong>Email:</strong> {{ $user->email }}</p>
-      <p><strong>Nomor Telepon:</strong> {{ $user->nomor_telepon }}</p>
+        <div class="flex flex-col md:flex-row md:items-start gap-2">
+          <span class="min-w-[150px] font-bold">Nama Pelanggan</span>
+          <span>{{ $user->nama_lengkap ?? '-' }}</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-start gap-2">
+          <span class="min-w-[150px] font-bold">Email</span>
+          <span>{{ $user->email ?? '-' }}</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-start gap-2">
+          <span class="min-w-[150px] font-bold">Nomor Telepon</span>
+          <span>{{ $user->nomor_telepon ?? '-' }}</span>
+        </div>
       </div>
     </div>
 
@@ -48,10 +56,22 @@
       </div>
       @if($lastOrder)
       <div class="px-4 text-sm text-gray-700 space-y-2">
-      <p><strong>ID Pesanan:</strong> #{{ $lastOrder->id }}</p>
-      <p><strong>Status:</strong> {{ ucfirst($lastOrder->status) }}</p>
-      <p><strong>Total:</strong> Rp{{ number_format($lastOrder->total_price, 0, ',', '.') }}</p>
-      <p><strong>Tanggal:</strong> {{ $lastOrder->dibuat_pada->format('d M Y') }}</p>
+        <div class="flex flex-col md:flex-row md:items-start gap-2">
+          <span class="min-w-[100px] font-bold">ID Pesanan</span>
+          <span>Pesanan #{{ $lastOrder->id_pesanan ?? '-' }}</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-start gap-2">
+          <span class="min-w-[100px] font-bold">Status</span>
+          <span>{{ ucfirst($lastOrder->status) ?? '-' }}</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-start gap-2">
+          <span class="min-w-[100px] font-bold">Total</span>
+          <span>Rp{{ number_format($lastOrder->total_harga, 0, ',', '.') ?? '-' }}</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-start gap-2">
+          <span class="min-w-[100px] font-bold">Tanggal</span>
+          <span>{{ \Carbon\Carbon::parse($lastOrder->created_at)->locale('id')->isoFormat('D MMMM Y') ?? '-' }}</span>
+        </div>
       </div>
     @else
       <div class="px-4 text-sm text-gray-500 italic">Anda belum memesan apapun.</div>
@@ -61,7 +81,7 @@
     <!-- Shipping Address -->
     <div class="rounded-2xl border bg-white p-6 shadow-md md:col-span-2">
       <div class="mb-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-      <h2 class="text-lg font-semibold text-gray-800">Alamat Pengiriman</h2>
+      <h2 class="text-lg font-bold text-gray-800">Alamat Pengiriman</h2>
       <a href="{{ url('/account/address') }}" class="text-sm font-medium text-secondary hover:underline">
         Ubah
       </a>
@@ -69,27 +89,27 @@
 
       <div class="space-y-4 text-sm text-gray-700">
       <div class="flex flex-col md:flex-row md:items-start gap-2">
-        <span class="min-w-[100px] font-bold">Nama Penerima</span>
+        <span class="min-w-[150px] font-bold">Nama Penerima</span>
         <span>{{ $shippingAddress->nama_penerima ?? '-' }}</span>
       </div>
 
       <div class="flex flex-col md:flex-row md:items-start gap-2">
-        <span class="min-w-[100px] font-bold">Alamat</span>
+        <span class="min-w-[150px] font-bold">Alamat</span>
         <span>{{ $shippingAddress->detail_alamat ?? '-' }}</span>
       </div>
 
       <div class="flex flex-col md:flex-row md:items-start gap-2">
-        <span class="min-w-[100px] font-bold">Kota / Provinsi</span>
+        <span class="min-w-[150px] font-bold">Kota / Provinsi</span>
         <span>{{ $shippingAddress->kota ?? '-' }}, {{ $shippingAddress->provinsi ?? '-' }}</span>
       </div>
 
       <div class="flex flex-col md:flex-row md:items-start gap-2">
-        <span class="min-w-[100px] font-bold">Kode Pos</span>
+        <span class="min-w-[150px] font-bold">Kode Pos</span>
         <span>{{ $shippingAddress->kode_pos ?? '-' }}</span>
       </div>
 
       <div class="flex flex-col md:flex-row md:items-start gap-2">
-        <span class="min-w-[100px] font-bold">Telepon</span>
+        <span class="min-w-[150px] font-bold">Telepon</span>
         <span>{{ $shippingAddress->nomor_telepon ?? '-' }}</span>
       </div>
       </div>

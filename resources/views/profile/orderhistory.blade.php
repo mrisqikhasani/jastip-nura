@@ -10,7 +10,7 @@
     @forelse ($orders as $order)
     <div class="rounded-xl border bg-white p-4 shadow-sm">
       <div class="flex justify-between items-center">
-      <h3 class="text-base font-semibold text-gray-800">Order #{{ $order->id_pesanan }}</h3>
+      <h3 class="text-base font-semibold text-gray-800">Pesanan #{{ $order->id_pesanan }}</h3>
       <span class="
       text-xs font-semibold px-2 py-1 rounded-full 
       {{ 
@@ -24,7 +24,7 @@
       </div>
 
       <p class="text-sm text-gray-500 mt-1">
-      {{ \Carbon\Carbon::parse($order->order_date)->translatedFormat('d F Y') }}
+      {{ \Carbon\Carbon::parse($order->tanggal_pemesanan)->locale('id')->isoFormat('D MMMM Y') }}
       </p>
 
       <p class="mt-2 text-lg font-bold text-violet-800">
@@ -59,8 +59,8 @@
       <tbody class="divide-y divide-gray-100 text-sm">
         @forelse ($orders as $order)
         <tr class="hover:bg-gray-50">
-        <td class="px-6 py-4 font-semibold text-gray-800">Order #{{ $order->id_pesanan }}</td>
-        <td class="px-6 py-4">{{ \Carbon\Carbon::parse($order->order_date)->translatedFormat('d F Y') }}</td>
+        <td class="px-6 py-4 font-semibold text-gray-800">Pesanan #{{ $order->id_pesanan }}</td>
+        <td class="px-6 py-4">{{ \Carbon\Carbon::parse($order->tanggal_pemesanan)->locale('id')->isoFormat('D MMMM Y') }}</td>
         <td class="px-6 py-4">Rp{{ number_format($order->total_harga, 0, ',', '.') }}</td>
         <td class="px-6 py-4">
         @php

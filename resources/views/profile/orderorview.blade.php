@@ -102,11 +102,11 @@
     </div>
 
     {{-- ORDER INFORMATION --}}
-    <div class="rounded-lg bg-white py-5 px-6 shadow-md">
+    <div class="rounded-xl border bg-white py-5 px-6 shadow-md">
       <h2 class="font-bold text-lg text-gray-800 mb-4">Rincian Pesanan</h2>
 
       <div class="mb-3 text-sm">
-      <p>ID Pesanan: 
+      <p>ID Pesanan: Pesanan
         <span class="font-semibold">
         &num;{{ $order->id_pesanan }}
         </span>
@@ -127,7 +127,7 @@
       @endphp
         <span class="font-bold {{ $statusClass }}">{{ ucfirst($order->status) }}</span>
       </p>
-      <p>Tanggal: {{ \Carbon\Carbon::parse($order->order_date)->translatedFormat('d M Y') }}</p>
+      <p>Tanggal: {{ \Carbon\Carbon::parse($order->tanggal_pemesanan)->locale('id')->isoFormat('D MMMM Y') }}</p>
       </div>
 
       <div class="border-b py-3 text-sm">
@@ -145,7 +145,7 @@
       @if ($order->metode_pembayaran === 'cod')
       <p>Metode: Cash Of Delivery (COD)</p>
     @elseif($order->metode_pembayaran === 'bank_transfer')
-      <p>Metode: Bank Transfer</p>
+      <p>Metode: Transfer Bank</p>
     @endif
       </div>
     </div>
@@ -161,7 +161,7 @@
       <p class="mb-2">Anda belum mengunggah bukti pembayaran untuk pesanan ini.</p>
       <a href="{{ url('/payment/upload/' . $order->id_pesanan) }}"
       class="inline-block px-4 py-2 bg-secondary hover:bg-primary text-white rounded-lg text-sm font-medium transition">
-      Upload Bukti Pembayaran
+      Unggah Bukti Pembayaran
       </a>
       </div>
     @else

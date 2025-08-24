@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->increments('id_pengguna');
             $table->string('nama_lengkap', 30);
             $table->string('email', 30)->unique();
-            $table->string('nama_pengguna', 10)->nullable();
             $table->string('password', 70);
             $table->string('peran')->default('pelanggan');
             $table->string('nomor_telepon', 12)->nullable();
@@ -26,7 +25,7 @@ return new class extends Migration {
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
-            $table->timestamp('dibuat_pada')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
 
         Schema::create('sessions', function (Blueprint $table) {

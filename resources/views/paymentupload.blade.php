@@ -4,20 +4,31 @@
 <section class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
   <div class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8">
 
-    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Upload Bukti Transfer</h2>
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Unggah Bukti Transfer</h2>
 
     {{-- RINGKASAN PESANAN --}}
     <div class="bg-gray-100 rounded-lg p-4 mb-8">
-      <div class="flex justify-center flex-row items-center text-center gap-2">
-        <i class="fa-solid fa-file-invoice text-xl"></i>
+      <div class="flex justify-center flex-row items-center text-center gap-2 mb-3">
+        <i class="fa-solid fa-file-invoice text-xl text-gray-700"></i>
         <h3 class="text-lg font-semibold text-gray-700">
           Ringkasan Pesanan
         </h3>
       </div>
       <ul class="text-sm text-gray-700 space-y-2">
-        <li><strong>ID Pesanan:</strong> #{{ $order->id_pesanan }}</li>
-        <li><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($order->tanggal_pemesanan)->format('d M Y ') }}</li>
-        <li><strong>Metode Pembayaran:</strong> {{ strtoupper($order->metode_pembayaran) }}</li>
+        <li><strong>ID Pesanan:</strong> Pesanan #{{ $order->id_pesanan }}</li>
+        <li><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($order->tanggal_pemesanan)->locale('id')->isoFormat('D MMMM Y') }}</li>
+        <li><strong>Metode Pembayaran:</strong> 
+            @switch($order->metode_pembayaran)
+                @case('bank_transfer')
+                    Transfer Bank
+                    @break
+                @case('cod')
+                    Bayar di Tempat
+                    @break
+                @default
+                    {{ ucfirst($order->metode_pembayaran) }}
+            @endswitch
+        </li>
         <li><strong>Total Pembayaran:</strong>
           <span class="text-secondary font-semibold">Rp{{ number_format($order->total_harga, 0, ',', '.') }}</span>
         </li>
@@ -31,11 +42,11 @@
       @csrf
 
       <div>
-        <label for="proof" class="block text-sm font-medium text-gray-700 mb-2">Upload Bukti Transfer</label>
+        <label for="proof" class="block text-sm font-medium text-gray-700 mb-2">Unggah Bukti Transfer</label>
         <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-6 bg-white relative">
           {{-- Preview Area --}}
           <div id="image-preview" class="mb-4 hidden">
-            <img src="#" alt="Preview" class="max-h-48 rounded-md shadow-md" />
+            <img src="#" alt="Preview" class="max-h-48 rounded-md shadow-md border" />
           </div>
 
           {{-- Default UI --}}

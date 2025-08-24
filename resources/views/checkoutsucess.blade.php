@@ -93,7 +93,7 @@
       </a>
       <a href="{{url('/payment/upload/'.$order->id_pesanan) }}"
         class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition flex items-center flex-row justify-center">
-        <i class="fa-solid fa-cloud-arrow-up text-xl"></i>Upload Bukti Transfer
+        <i class="fa-solid fa-cloud-arrow-up text-xl"></i>Unggah Bukti Transfer
       </a>
       </div>
     @endif

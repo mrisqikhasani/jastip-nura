@@ -55,9 +55,9 @@
             @foreach ($addresses as $addr)
                 <div class="border p-4 mb-4 rounded">
                     <p><strong>{{ $addr->receiver_name }}</strong></p>
+                    <p>{{ $addr->detail }}</p>
                     <p>{{ $addr->province }}, {{ $addr->city }}</p>
                     <p>{{ $addr->postal_code }}</p>
-                    <p>{{ $addr->detail }}</p>
                     <div class="flex justify-between mt-2">
                         <button wire:click="edit({{ $addr->id }})" class="text-blue-600 text-sm">Edit</button>
                         <button wire:click="delete({{ $addr->id }})" class="text-red-600 text-sm"

@@ -43,10 +43,6 @@ class OrderResource extends Resource
                     ->displayFormat('j F Y')
                     ->label('Tanggal'),
 
-
-                // TextInput::make('bukti_pembayaran')
-                //     ->label('Metode Pembayaran'),
-
                 Select::make('status')
                     ->label('Status Pesanan')
                     ->options([
@@ -93,7 +89,7 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id_pengguna')->label('Id')->sortable(),
+                TextColumn::make('id_pesanan')->label('ID Pesanan')->sortable(),
                 TextColumn::make('user.nama_lengkap')->label('Pelanggan')->sortable()->searchable(),
                 TextColumn::make('total_harga')->label('Total Harga')
                     ->sortable()

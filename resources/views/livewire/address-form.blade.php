@@ -65,9 +65,9 @@
     @endif
       " wire:click="fillForm({{ $addr->id_alamat }})">
       <p><strong>{{ $addr->nama_penerima }}</strong></p>
+      <p>{{ $addr->detail_alamat }}</p>
       <p>{{ $addr->provinsi }}, {{ $addr->kota }}</p>
       <p>{{ $addr->kode_pos }}</p>
-      <p>{{ $addr->detail_alamat }}</p>
       <div class="flex space-x-4 mt-2">
       <!-- Tombol EDIT -->
       <button wire:click="fillForm({{ $addr->id_alamat }})" class="text-blue-600 hover:underline">

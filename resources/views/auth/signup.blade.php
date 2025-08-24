@@ -21,13 +21,13 @@
                 @csrf
 
                 <label for="name" class="font-medium">Nama Lengkap</label>
-                <input class="mt-2 border px-4 py-2 rounded-lg" type="text" name="name"
+                <input class="mt-2 border px-4 py-2 rounded-lg" type="text" name="nama_lengkap"
                     placeholder="Contoh: Ahmad Fadli" />
                 <label class="mt-3 font-medium" for="email">Alamat Email</label>
                 <input class="mt-2 border px-4 py-2 rounded-lg" type="email" name="email" placeholder="email@contoh.com" />
 
                 <label class="mt-3 font-medium" for="phone_number">Nomor Telepon</label>
-                <input class="mt-2 border px-4 py-2 rounded-lg" type="text" name="phone_number" placeholder="08xxxxxxxxxx" />
+                <input class="mt-2 border px-4 py-2 rounded-lg" type="text" name="nomor_telepon" placeholder="08xxxxxxxxxx" />
 
                 <label class="mt-5 font-medium" for="password">Kata Sandi</label>
                 <input class="mt-2 border px-4 py-2 rounded-lg" type="password" placeholder="********" name="password" />
@@ -37,7 +37,7 @@
                     name="confirmpassword" />
 
                 <button
-                    class="my-6 w-full bg-secondary py-2 text-white font-medium duration-100 transition-all ease-in rounded-lg hover:bg-primary transition">
+                    class="my-6 w-full bg-secondary py-2 text-white font-medium duration-100 transition-all ease-in rounded-lg hover:bg-primary">
                     Daftar Sekarang
                 </button>
             </form>

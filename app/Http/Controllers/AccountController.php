@@ -21,7 +21,7 @@ class AccountController extends Controller
         $user = Auth::user();
 
         $lastOrder = Order::with(['orderLineItems.product'])
-            ->where('id_pengguna', $user->id)
+            ->where('id_pengguna', $user->id_pengguna)
             ->orderBy('created_at', 'desc')
             ->first();
 

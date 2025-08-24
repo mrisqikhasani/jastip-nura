@@ -15,7 +15,7 @@ class orderCharts extends ChartWidget
     protected function getData(): array
     {
         $orders = Order::select(
-                DB::raw("DATE_FORMAT(dibuat_pada, '%Y-%m') as month"),
+                DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"),
                 DB::raw("count(*) as total")
             )
             ->groupBy('month')
@@ -27,7 +27,7 @@ class orderCharts extends ChartWidget
                 [
                     'label' => 'Jumlah Pesanan',
                     'data' => $orders->pluck('total'),
-                    'backgroundColor' => '#6366F1', // indigo-500
+                    'backgroundColor' => '#555879', // indigo-500
                 ],
             ],
             'labels' => $orders->pluck('month'),

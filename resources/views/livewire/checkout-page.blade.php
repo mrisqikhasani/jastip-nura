@@ -1,5 +1,5 @@
 <div class="max-w-6xl mx-auto px-4 py-10">
-  <h1 class="text-3xl font-bold mb-8 text-gray-800">Ubah Pesanan</h1>
+  <h1 class="text-3xl font-bold mb-8 text-gray-800">Buat Pesanan</h1>
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
     
@@ -41,6 +41,12 @@
 
         @if($address->isEmpty())
       <p class="text-sm text-red-500">Belum ada alamat. Tambahkan terlebih dahulu.</p>
+      <div class="mt-5 flex items-center justify-center gap-x-6">
+        <a href="{{ url('/account/address') }}"
+          class="rounded-lg bg-secondary px-4 py-2 text-sm font-medium text-white hover:bg-primary">
+          Tambahkan Alamat
+        </a>
+      </div>
     @endif
       </div>
 

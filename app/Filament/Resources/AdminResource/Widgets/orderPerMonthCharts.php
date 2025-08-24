@@ -7,7 +7,6 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\StatsOverviewWidget\Card;
 
-
 class orderPerMonthCharts extends BaseWidget
 {
     protected function getStats(): array

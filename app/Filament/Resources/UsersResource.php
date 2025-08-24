@@ -35,10 +35,6 @@ class UsersResource extends Resource
                     ->label('Nama')
                     ->required(),
 
-                TextInput::make('nama_pengguna')
-                    ->label('Username')
-                    ->required(),
-
                 TextInput::make('email')
                     ->label('Email')
                     ->email()
@@ -50,7 +46,7 @@ class UsersResource extends Resource
                 Select::make('peran')
                     ->label('Peran')
                     ->options([
-                        'user' => 'User',
+                        'pelanggan' => 'Pelanggan',
                         'admin' => 'Admin',
                     ]),
 
@@ -65,9 +61,8 @@ class UsersResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id_pengguna')->sortable(),
-                TextColumn::make('nama_lengkap')->label('Nama')->sortable()->searchable(),
-                TextColumn::make('nama_pengguna')->label('Username')->sortable()->searchable(),
+                TextColumn::make('id_pengguna')->label('ID Pengguna')->sortable(),
+                TextColumn::make('nama_lengkap')->label('Nama Pengguna')->sortable()->searchable(),
                 TextColumn::make('email')->label('Email')->sortable()->searchable(),
                 TextColumn::make('nomor_telepon')->label('Nomor Telepon'),
                 TextColumn::make('peran')->label('Peran')->sortable(),

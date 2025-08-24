@@ -17,7 +17,7 @@
       <span class="mx-2 text-gray-500">&gt;</span>
     </li>
 
-    <li class="text-gray-500">{{ $product->name }}</li>
+    <li class="text-gray-500">{{ $product->nama_produk }}</li>
     </ul>
   </nav>
   <!-- /breadcrumbs  -->

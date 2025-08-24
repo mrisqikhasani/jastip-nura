@@ -34,7 +34,7 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 TextInput::make('nama_produk')
-                    ->label('Nama')
+                    ->label('Nama Produk')
                     ->required(),
 
                 TextInput::make('harga')
@@ -53,7 +53,7 @@ class ProductResource extends Resource
                     ])
                     ->required(),
                 
-                TextInput::make('size')
+                TextInput::make('ukuran')
                     ->label('Ukuran')
                     ->required(),
 
@@ -72,8 +72,8 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('id_produk')->sortable(),
-                TextColumn::make('nama_produk')->label('Nama')->searchable()->sortable(),
+                TextColumn::make('id_produk')->label('ID Produk')->sortable(),
+                TextColumn::make('nama_produk')->label('Nama Produk')->searchable()->sortable(),
                 ImageColumn::make('foto')->label('Foto'),
                 TextColumn::make(name: 'harga')
                 ->label('Harga')
