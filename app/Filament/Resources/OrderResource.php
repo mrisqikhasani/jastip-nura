@@ -33,19 +33,19 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('user_id')
-                    ->relationship('user', 'name')
+                Select::make('id_pelanggan')
+                    ->relationship('user', 'nama_lengkap')
                     ->searchable()
                     ->label('Pelanggan'),
 
-                DatePicker::make('order_date')
+                DatePicker::make('tanggal_pemesanan')
                     ->native(false)
                     ->displayFormat('j F Y')
                     ->label('Tanggal'),
 
 
-                TextInput::make('payment_method')
-                    ->label('Metode Pembayaran'),
+                // TextInput::make('bukti_pembayaran')
+                //     ->label('Metode Pembayaran'),
 
                 Select::make('status')
                     ->label('Status Pesanan')
@@ -56,7 +56,7 @@ class OrderResource extends Resource
                         'Dibatalkan' => 'Dibatalkan',
                     ]),
 
-                TextInput::make('total_price')
+                TextInput::make('total_harga')
                     ->label('Total Harga')
                     ->numeric()
                     ->prefix('Rp'),
@@ -65,18 +65,18 @@ class OrderResource extends Resource
                 Repeater::make('orderLineItems')
                     ->relationship()
                     ->schema([
-                        Select::make('product_id')
-                            ->relationship('product', 'name')
+                        Select::make('id_produk')
+                            ->relationship('product', 'nama_produk')
                             ->label('Produk')
                             ->required()
                             ->searchable(),
 
-                        TextInput::make('quantity')
+                        TextInput::make('kuantitas')
                             ->numeric()
                             ->required()
                             ->label('Kuantitas'),
 
-                        TextInput::make('sub_price')
+                        TextInput::make('subtotal')
                             ->prefix('Rp')
                             ->numeric()
                             ->required()
@@ -93,13 +93,13 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->sortable(),
-                TextColumn::make('user.name')->label('Pelanggan')->sortable()->searchable(),
-                TextColumn::make('total_price')->label('Total Harga')
+                TextColumn::make('id_pengguna')->label('Id')->sortable(),
+                TextColumn::make('user.nama_lengkap')->label('Pelanggan')->sortable()->searchable(),
+                TextColumn::make('total_harga')->label('Total Harga')
                     ->sortable()
                     ->formatStateUsing(fn($state) => Str::of(Number::currency($state, 'IDR', 'id'))->replace(',00', '')),
 
-                TextColumn::make('order_date')
+                TextColumn::make('tanggal_pemesanan')
                     ->label('Tanggal')
                     ->date('j F Y'),
                 TextColumn::make('status')

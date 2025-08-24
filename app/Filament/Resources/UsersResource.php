@@ -31,11 +31,11 @@ class UsersResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
+                TextInput::make('nama_lengkap')
                     ->label('Nama')
                     ->required(),
 
-                TextInput::make('username')
+                TextInput::make('nama_pengguna')
                     ->label('Username')
                     ->required(),
 
@@ -44,17 +44,17 @@ class UsersResource extends Resource
                     ->email()
                     ->required(),
 
-                TextInput::make('phone_number')
+                TextInput::make('nomor_telepon')
                     ->label('Nomor Telepon'),
 
-                Select::make('role')
+                Select::make('peran')
                     ->label('Peran')
                     ->options([
                         'user' => 'User',
                         'admin' => 'Admin',
                     ]),
 
-                FileUpload::make('profile_picture')
+                FileUpload::make('foto_profil')
                     ->label('Foto Profil')
                     ->directory('user_picture')
                     ->image(),
@@ -65,12 +65,12 @@ class UsersResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->sortable(),
-                TextColumn::make('name')->label('Nama')->sortable()->searchable(),
-                TextColumn::make('username')->label('Username')->sortable()->searchable(),
+                TextColumn::make('id_pengguna')->sortable(),
+                TextColumn::make('nama_lengkap')->label('Nama')->sortable()->searchable(),
+                TextColumn::make('nama_pengguna')->label('Username')->sortable()->searchable(),
                 TextColumn::make('email')->label('Email')->sortable()->searchable(),
-                TextColumn::make('phone_number')->label('Nomor Telepon'),
-                TextColumn::make('role')->label('Peran')->sortable(),
+                TextColumn::make('nomor_telepon')->label('Nomor Telepon'),
+                TextColumn::make('peran')->label('Peran')->sortable(),
             ])
             ->filters([
                 //

@@ -33,17 +33,17 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
+                TextInput::make('nama_produk')
                     ->label('Nama')
                     ->required(),
 
-                TextInput::make('price')
+                TextInput::make('harga')
                     ->label('Harga')
                     ->prefix('Rp')
                     ->numeric()
                     ->required(),
 
-                Select::make('category')
+                Select::make('kategori')
                     ->label('Kategori')
                     ->options([
                         'atasan' => 'Atasan',
@@ -57,10 +57,10 @@ class ProductResource extends Resource
                     ->label('Ukuran')
                     ->required(),
 
-                Textarea::make('description')
+                Textarea::make('deskripsi')
                 ->label('Deskripsi'),
 
-                FileUpload::make('image')
+                FileUpload::make('foto')
                 ->label('Foto')
                 ->directory('products')
                 ->image(),
@@ -72,15 +72,15 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('id')->sortable(),
-                TextColumn::make('name')->label('Nama')->searchable()->sortable(),
-                ImageColumn::make('image')->label('Foto'),
-                TextColumn::make('price')
+                TextColumn::make('id_produk')->sortable(),
+                TextColumn::make('nama_produk')->label('Nama')->searchable()->sortable(),
+                ImageColumn::make('foto')->label('Foto'),
+                TextColumn::make(name: 'harga')
                 ->label('Harga')
                 ->sortable()
                 ->formatStateUsing(fn ($state) => Str::of(Number::currency($state, 'IDR', 'id'))->replace(',00', '')),
 
-                TextColumn::make('category')->label('Kategori')->searchable()->sortable(),
+                TextColumn::make('kategori')->label('Kategori')->searchable()->sortable(),
             ])
             ->filters([
                 //
