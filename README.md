@@ -6,7 +6,7 @@
 
 # 🛍️ Jastip Nura
 
-<img src="https://raw.githubusercontent.com/mrisqikhasani/jastip-nura/main/public/preview.png" alt="Jastip Nura Web App" />
+<img src="https://raw.githubusercontent.com/mrisqikhasani/jastip-nura/refs/heads/main/storage/app/public/jastipnura.png" alt="Jastip Nura Web App" />
 
 **Jastip Nura** is a Laravel-based e-commerce website that provides **personal shopper (jastip) services from Thailand**, delivering products across Indonesia — including **Papua** and **Yogyakarta**. The platform focuses on affordable and trendy **women’s products**, offering a smooth shopping experience from browsing to checkout.
 
