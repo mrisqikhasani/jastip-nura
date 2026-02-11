@@ -91,6 +91,13 @@ All products are offered with **competitive and varied pricing**.
 
 ---
 
+## 👤 User
+
+- **Admin:** adminura@gmail.com @dm1n123
+- **User 1:** nrsenita@gmail.com @Noor008
+
+---
+
 ## 🚀 Getting Started
 
 To run this project locally, please follow the step-by-step tutorial provided in the Notion documentation below:
